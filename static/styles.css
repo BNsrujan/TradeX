@@ -1,0 +1,1008 @@
+* {
+  font-family: sans-serif;
+}
+.active-button {
+  button.active {
+    background-color: #aac9eb; /* Blue background */
+    color: white; /* White text */
+    border: 1px solid #0056b3; /* Optional darker blue border */
+  }
+}
+/* Style for the active state of the button */
+button.active {
+  background-color:hsl(228, 69%, 69%); /* Blue background */
+  color: white; /* White text */
+  border: 1px solid #0056b3; /* Optional darker blue border */
+}
+
+.active-button {
+  background-color: #8C9EE8 !important; 
+  color: rgb(0, 0, 0) !important;
+}
+
+.dropdown.disabled {
+  pointer-events: none!important; 
+  opacity: 0.6!important; 
+}
+
+
+body {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  position: relative;
+}
+
+#tvchart {
+  width: 95%;
+  max-height: 92%;
+  height: 92%;
+  margin-right: 1rem;
+  position: relative;
+  margin-top: 10px;
+}
+
+/* #parallel-channel-btn.active {
+  background-color: #d7dde5; /* Or any color you prefer *
+  color: rgb(19, 17, 17);
+}
+
+#trlines-btn.active {
+  background-color: #93b6f2; /* Or any color you prefer 
+  color: rgb(19, 17, 17);
+} */
+
+#hover-info {
+  position: absolute;
+  width: 600px;
+  font-size: 12px;
+  color: #db0e0e;
+  top: 50px;
+  left: 60px;
+  background-color: rgba(252, 243, 243, 0.592);
+  padding: 10px;
+  pointer-events: none;
+  z-index: 1000;
+}
+.spinner {
+  display: none;
+  z-index: 10;
+  position: absolute;
+  top: 40%;
+  right: 50%;
+  width: 44px;
+  height: 44px;
+  animation: spinner-y0fdc1 2s infinite ease;
+  transform-style: preserve-3d;
+}
+.spinner > div {
+  background-color: rgba(0, 77, 255, 0.2);
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  border: 2px solid #153d9b;
+}
+.spinner div:nth-of-type(1) {
+  transform: translateZ(-22px) rotateY(180deg);
+}
+.spinner div:nth-of-type(2) {
+  transform: rotateY(-270deg) translateX(50%);
+  transform-origin: top right;
+}
+.spinner div:nth-of-type(3) {
+  transform: rotateY(270deg) translateX(-50%);
+  transform-origin: center left;
+}
+.spinner div:nth-of-type(4) {
+  transform: rotateX(90deg) translateY(-50%);
+  transform-origin: top center;
+}
+.spinner div:nth-of-type(5) {
+  transform: rotateX(-90deg) translateY(50%);
+  transform-origin: bottom center;
+}
+.spinner div:nth-of-type(6) {
+  transform: translateZ(22px);
+}
+@keyframes spinner-y0fdc1 {
+  0% {
+    transform: rotate(45deg) rotateX(-25deg) rotateY(25deg);
+  }
+  50% {
+    transform: rotate(45deg) rotateX(-385deg) rotateY(25deg);
+  }
+  100% {
+    transform: rotate(45deg) rotateX(-385deg) rotateY(385deg);
+  }
+}
+#control-panel {
+  width: 11vw; /* Use viewport width for responsiveness */
+  max-width: 300px; /* Set a reasonable max width */
+  min-width: 350px; /* Ensure the minimum width */
+  overflow-y: auto; /* Enable vertical scrolling if content overflows */
+  /* Prevent horizontal scrolling */
+  background-color: #eff4f0; /* Updated background color */
+  max-height: 300px;
+  height: 300px; /* Limit the height */
+  padding: 20px 0; /* Adjusted padding */
+  margin-top: 160px;
+  /* Margin from the top */
+  border: 1px solid #f9f2f2; /* Border color */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow */
+}
+#control-panel-2 {
+  margin-top: 1px; /* Adds space between the two control panels */
+}
+
+#control-panel h3 {
+  z-index: 9;
+  margin-left: 20px;
+  margin-top: 0;
+  font-size: 1.2em;
+  color: #333;
+}
+
+#stock-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#stock-table th,
+#stock-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px outset rgb(241, 241, 241);
+}
+
+.stock-row {
+  cursor: pointer;
+}
+
+.stock-row.selected {
+  background-color: #d2eaff;
+}
+
+.stock-row.selected td {
+  border: none;
+}
+
+.form-group {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.form-group select,
+.form-group button,
+.form-group input[type="checkbox"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group select:focus,
+.form-group button:focus,
+.form-group input[type="checkbox"]:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+  outline: none;
+}
+
+.form-group input[type="checkbox"] {
+  width: auto;
+  margin-right: 10px;
+}
+
+.form-group .checkbox-label {
+  display: inline-block;
+  margin-left: 5px;
+  color: #555;
+}
+
+#update-chart {
+  width: 100%;
+  background-color: #007bff;
+  padding: 10px 15px;
+  color: rgb(255, 255, 255);
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+#update-chart:hover {
+  background-color: #247ddd;
+  box-shadow: 0 4px 8px rgba(9, 255, 0, 0.3);
+}
+.update-btn-div {
+  margin-top: 2rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Smaller Toggle Switch Styles */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+  width: 40px;
+  height: 20px;
+}
+
+.toggle-input {
+  display: none;
+}
+
+.toggle-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: #ccc;
+  cursor: pointer;
+  transition: background-color 0.4s ease;
+}
+
+.toggle-label:before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.4s ease;
+}
+
+.toggle-input:checked + .toggle-label {
+  background-color: #247ddd;
+}
+
+.toggle-input:checked + .toggle-label:before {
+  transform: translateX(20px);
+}
+
+.svg-box {
+  width: 20px; /* Outer box width */
+  height: 20px; /* Outer box height */
+  border: 2px solid black; /* Add a border around the box */
+  display: flex; /* Centering the SVG inside the box */
+  align-items: center;
+  justify-content: center;
+  padding: 5px; /* Optional padding */
+}
+#refresh-button {
+  background-color: #fbfafa;
+  border: 1px solid #f9f6f7;
+  border-radius: 50%; /* Round button */
+  padding: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(44, 43, 43, 0.1); /* Subtle shadow */
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+#topBar {
+  display: flex;
+  height: 50px;
+  width: 100vw;
+  max-width: 100vw;
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border-bottom: 2px solid #f1f1f1;
+  /* padding: 0 10px;
+    padding-left: 3rem; */
+}
+
+.top-bar-left,
+.top-bar-right {
+  display: flex;
+  height: 100%;
+}
+
+.top-bar-left {
+  padding: 0 3rem;
+}
+
+.top-bar-button {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0 20px;
+  position: relative;
+}
+
+#search-button {
+  padding-left: 15px;
+}
+
+.top-bar-fullscren {
+  padding: 0 20px;
+}
+
+.top-bar-button:hover,
+.top-bar-select:hover,
+.dropdown-header:hover {
+  background-color: #ececec;
+}
+.custom-select-container {
+  display: inline-block;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  position: relative;
+  width: 100px; /* Adjust the width as needed */
+}
+
+.selected-option {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.options-list {
+  position: absolute;
+  top: 45px; /* Adjust based on the height of your select box */
+  left: 0;
+  width: 100%;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  z-index: 10;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.top-bar-select {
+  padding: 5px;
+  border: 2px solid #000; /* Square box border */
+  border-radius: 0; /* Remove any default rounded corners */
+  background-color: #f9f9f9;
+  width: 50px; /* Adjust width if necessary */
+  font-size: 16px;
+  text-align: center;
+  appearance: none;
+  -webkit-appearance: none; /*Remove default arrow in Chrome and Safari */
+  -moz-appearance: none; /* Center the text inside the box */
+}
+
+.top-bar-select option {
+  padding: 5px;
+  border: none;
+  background-color: #fff;
+}
+
+.top-bar-select option[selected] {
+  border: 1px solid #000; /* Add a border to the selected option */
+  background-color: #f0f0f0;
+}
+
+/* .top-bar-select {
+    height: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 16px;
+    position: relative;
+    padding: 0 20px;
+    appearance: none;  Remove default arrow in Firefox
+    -webkit-appearance: none;  Remove default arrow in Chrome and Safari 
+    -moz-appearance: none;  Remove default arrow in Firefox 
+  } */
+
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+  width: 200px; /* Adjust width as needed */
+  cursor: pointer;
+  height: 100%;
+  transform: translateX(20px);
+}
+
+.dropdown-header {
+  background: linear-gradient(
+    135deg,
+    hsl(210, 29%, 92%),
+    hsl(240, 4%, 91%)
+  ); /* Smooth gradient */
+  color: #020202; /* Text color */
+
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+
+  max-width: 80px;
+  min-width: 80px; /* Set a fixed width for the oval */
+  padding: 10px 10px; /* Match padding with .option */
+
+  height: 20px;
+  max-height: 20px; /* Same height as .option */
+  /* Control vertical alignment */
+
+  border-radius: 20px; /* Creates the oval shape */
+  cursor: pointer;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 1vw;
+  margin-left: 2px;
+  margin-right: 3px;
+  justify-content: center; /* Center the text horizontally */
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  width: 250px;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  box-shadow: 0px 8px 16px 0px rgba(247, 244, 244, 0.2);
+  z-index: 1;
+  max-height: 300px;
+  overflow-y: hidden;
+  padding: 0px;
+  color: #070707;
+  margin-top: 20px;
+  text-size-adjust: 1px;
+  margin-right: 25px;
+  flex-direction: column;
+}
+.option {
+  padding: 10px 10px;
+  padding-left: 35px;
+
+  cursor: pointer;
+  position: relative; /* Ensure relative positioning for absolute check mark */
+  display: inline-flex;
+
+  background: linear-gradient(
+    135deg,
+    hsl(210, 35%, 63%),
+    hsl(260, 78%, 80%)
+  ); /* Smooth gradient */
+  color: #060707; /* Background color */
+  text-shadow: rgb(185, 105, 225); /* Text color */
+
+  border-radius: 20px; /* Creates oval shape */
+  text-align: center;
+  font-family: "Times New Roman", Times, serif; /* Choose a font family */
+  font-size: 1.01vw;
+  flex-direction: row;
+  white-space: nowrap;
+  margin-left: 3px;
+  /* Adjust font size */
+  /* Make the text bold */
+  /* Adds spacing between letters */
+  /* Converts text to uppercase */
+}
+
+.icon-container {
+  display: -moz-inline-box; /* Shrinks the container to fit the button */
+
+  margin: 0;
+  padding: 0;
+  padding-right: 0px;
+  /* Ensures no extra padding or margin */
+}
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: inline;
+}
+
+#num-sr-lines {
+  width: 25px;
+  margin-right: 10px;
+  margin-left: 0px; /* Space between the first input and label */
+}
+.date-container {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden;
+
+  flex-direction: column; /* Stacks the date input and error message vertically */
+  margin-left: 0px; /* Space between the number input and the date input */
+}
+#sr-date {
+  width: 80px; /* Adjust width as per your requirement */
+  margin-left: 2px;
+  /* Space between the label and second input */
+}
+.number-container {
+  display: flex;
+  justify-content: flex-start; /* Moves the number input to the right */
+  margin-bottom: 10px; /* Space between the number input and the label */
+}
+.patterns-row {
+  display: flex;
+  justify-content: flex-start;
+  gap: 15px; /* Space between each pattern */
+  margin-top: 0px;
+  margin-bottom: 0px; /* Ensure they wrap if the screen is small */
+  align-items: center;
+  transform: translateX(-50px);
+}
+
+.custom-dropdown {
+  margin-bottom: 3px;
+  padding-bottom: 0px; /* Adjust this to reduce space between dropdown and patterns */
+}
+
+#dropdown-content {
+  margin-bottom: 1px; /* Reduce the space between S&R Zones and patterns */
+}
+
+.option:hover {
+  background-color: #f1f1f1;
+}
+
+/*.option.selected:before {
+    content: '';
+    position: absolute;
+    left: 10px; /* Adjust as needed to align the check mark */
+/* top: 50%; /* Adjust as needed to vertically center the check mark */
+/*transform: translateY(-50%);
+    width: 16px; /* Adjust width and height as needed */
+/*height: 16px;
+    background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath d="M 20.292969 5.2929688 L 9 16.585938 L 4.7070312 12.292969 L 3.2929688 13.707031 L 9 19.414062 L 21.707031 6.7070312 L 20.292969 5.2929688 z"%3E%3C/path%3E%3C/svg%3E');
+    background-size: cover; /* Adjust to fit your SVG size 
+  }*/
+.option.selected:before {
+  content: "";
+  position: absolute;
+  left: 10px; /* Adjust as needed to align the check mark */
+  top: 50%; /* Adjust as needed to vertically center the check mark */
+  transform: translateY(-50%);
+  width: 16px; /* Adjust width and height as needed */
+  height: 16px;
+  background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath d="M 20.292969 5.2929688 L 9 16.585938 L 4.7070312 12.292969 L 3.2929688 13.707031 L 9 19.414062 L 21.707031 6.7070312 L 20.292969 5.2929688 z"%3E%3C/path%3E%3C/svg%3E');
+  background-size: cover; /* Adjust to fit your SVG size */
+}
+.tick-mark {
+  color: black !important; /* Use !important to force black color */
+  font-size: 16px; /* You can adjust this size as needed */
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fefefe;
+}
+
+/* .popup-content {
+  background-color: #faf4f4;
+  margin: 10% auto;
+  padding: 15px;
+  border: 1px solid #f6f0f0;
+  width: 75%;
+  max-width: 320px;
+  height: 85%;
+
+} */
+
+#search-results {
+  margin-top: 10px;
+}
+
+.pop-up-search-group {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between the search input and the calendar */
+}
+
+.input {
+  flex: 1; /* Allow the search input to take up available space */
+}
+
+.calendar-input {
+  padding: 8px 12px; /* Add padding inside the input */
+  border: 1px solid #ccc; /* Border color */
+  border-radius: 4px; /* Rounded corners */
+  background-color: #f9f9f9; /* Light background color */
+  color: #333; /* Text color */
+  font-size: 14px; /* Font size */
+  transition: border-color 0.3s ease-in-out; /* Smooth transition for hover/focus */
+}
+
+.input {
+  width: 100%;
+  height: 40px;
+  line-height: 28px;
+  padding: 0 1rem;
+  padding-left: 2.5rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  outline: none;
+  background-color: #f3f3f4;
+  color: #0d0c22;
+  transition: 0.3s ease;
+}
+
+.input::placeholder {
+  color: #9e9ea7;
+}
+
+.input:focus,
+input:hover {
+  outline: none;
+  border-color: rgba(0, 48, 73, 0.4);
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgb(0 48 73 / 10%);
+}
+
+.icon {
+  position: absolute;
+  left: 1rem;
+  fill: #9e9ea7;
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  /* #tvchart {
+    max-height: 90%;
+  } */
+
+  .top-bar-left,
+  .top-bar-right {
+    padding-left: 0;
+  }
+
+  .top-bar-button,
+  .top-bar-select,
+  .custom-dropdown {
+    margin-bottom: 10px;
+  }
+
+  #hover-info {
+    width: 90%;
+    left: 0;
+    transform: translateX(0);
+  }
+
+  #control-panel {
+    max-height: 40%;
+    width: 100%;
+    margin-top: 0;
+  }
+
+  #control-panel h3 {
+    display: none;
+  }
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+}
+
+.header-container h3 {
+  margin: 0;
+  margin-right: 10px;
+  flex-grow: 1; /* Makes the h3 take up available space */
+}
+
+.add-button {
+  font-size: 20px;
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: rgb(20, 20, 211); /* Button background color */
+  color: rgb(214, 214, 214); /* Button text color */
+  border: none; /* Remove border */
+  border-radius: 5px;
+  margin-right: 180px; /* Adjust this margin as needed */
+}
+
+#search-popup {
+  display: none; /* Hide the popup by default */
+  position: fixed; /* Position it over the entire screen */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the popup */
+  background-color: white; /* Background color of the popup */
+  padding: 20px; /* Padding inside the popup */
+  border: 1px solid #0d0e0d; /* Optional: border for visibility */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Optional: shadow for depth */
+  z-index: 1000; /* Ensure it's on top of other content */
+  max-width: 400px; /* Optional: limit the width */
+  width: 100%;
+  max-height: 550px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  border-radius: 17px; /* Make sure it scales */
+}
+
+.stock-item {
+  display: flex;
+  justify-content: space-between; /* Align stock name to the left and button to the right */
+  align-items: center;
+  padding: 5px;
+  border-bottom: none;
+}
+
+.add-stock-button,
+.remove-stock-button {
+  background-color: #007bff; /* Blue background for add button */
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Style for remove stock button (ðŸ—‘) */
+.remove-stock-button {
+  background-color: #dc3545; /* Red background for remove button */
+}
+.close-button {
+  color: #141313;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#stock-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#stock-table th,
+#stock-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#stock-table td {
+  text-align: center;
+}
+
+.delete-button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: red;
+  font-size: 14px; /* Adjust size as needed */
+  display: none; /* Hide the button by default */
+}
+
+/* Show the delete button when hovering over the row */
+tr:hover .delete-button {
+  display: inline; /* Show the delete button on row hover */
+}
+
+/* Optional: Adjust button size and appearance */
+.delete-button i {
+  font-size: 1em; /* Adjust icon size */
+}
+
+/* Optional: Add some padding to the button */
+.delete-button {
+  padding: 0;
+}
+#search-popup .close-button {
+  position: absolute; /* Position the close button */
+  top: 10px;
+  right: 10px;
+  cursor: pointer; /* Cursor indicates it's clickable */
+}
+#search-results {
+  max-height: 480px; /* Limit height to create a scrollable area */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+/* Styling for the S&R Zones dropdown */
+.option.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: rgb(23, 22, 22);
+  border: 1px solid #ddd;
+  padding: 10px;
+  width: 0px; /* Adjust the width as needed */
+  z-index: 1000;
+}
+
+.option.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  width: 375px;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  box-shadow: 0px 8px 16px 0px rgba(247, 244, 244, 0.2);
+  z-index: 1;
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 0px;
+  color: #070707;
+  margin-top: 20px;
+  text-size-adjust: 2px;
+  margin-right: 25px;
+}
+.custom-dropdown {
+  display: block;
+  margin-left: 20px;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  /* Vertically align the inputs */
+  gap: 10px; /* Gap between number input and date input */
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 2px; /* Gap between label and input field */
+}
+
+.input-group label {
+  white-space: nowrap; /* Prevent the label from wrapping to the next line */
+}
+
+.error-container {
+  margin-top: 5px; /* Adds some space between the input line and error message */
+}
+
+#sr-error-msg {
+  display: block;
+  color: red;
+}
+
+#control-panel {
+  height: 50%; /* Adjust this percentage to change the height */
+  overflow-y: auto;
+  background-color: #f5f5f5;
+  border-bottom: 2px solid #ddd;
+  resize: vertical;
+  padding: 10px;
+}
+
+.dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.trend-line-btn {
+  background-color: hsl(0, 0%, 80%);
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 5px; /* Add space below Trend Lines button */
+}
+
+.dropdown .content {
+  display: none;
+  position: absolute;
+  background-color: hsl(0, 0%, 95%);
+  min-width: 150px;
+  box-shadow: 2px 2px 5px hsla(0, 0%, 0%, 0.8);
+  z-index: 1;
+  padding-top: 15px; /* Add space at the beginning inside the dropdown */
+}
+
+.dropdown:hover .content {
+  display: block;
+}
+
+.trend-line-btn:hover {
+  background-color: hsl(0, 0%, 70%);
+}
+
+.dropdown .content button {
+  display: block;
+  color: black;
+  text-decoration: none;
+  padding: 10px 15px;
+  background-color: rgb(255, 255, 255); /* Updated to RGB */
+  border: none;
+  width: 100%;
+  text-align: left;
+}
+
+.dropdown .content button:hover {
+  background-color: hsl(0, 0%, 90%);
+}
+
+.checked::after {
+  content: " âœ”";
+  float: right;
+  color: rgb(0, 0, 0);
+}
+
+.dropdown .content button:last-child {
+  border-bottom: none;
+}
+
+.dropdown .content button.active {
+  background-color: hsl(228, 67%, 73%); /* Change color when clicked */
+}
+
+.clear-date-btn {
+  position: absolute;
+  left: 90px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: red;
+}
+
+.line-length {
+  font-size: 12px;
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+  padding: 2px 4px;
+  border-radius: 4px;
+  pointer-events: none; /* Prevent interaction */
+}
+
+
+
+/* Add margin to create space between the interval dropdown and SR Zones button */
+#interval-select {
+  margin-right: 30px; /* Adjust value as needed for more or less spacing */
+}
+
+/* Style for SR Zones to ensure separation */
+#srzones {
+  margin-left: 30px; /* Add left margin if needed for further spacing */
+}

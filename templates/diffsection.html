@@ -1,0 +1,2101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crypto Trading</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script
+  src="https://kit.fontawesome.com/c44dbc2ee4.js"
+  crossorigin="anonymous"
+></script>
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+  rel="stylesheet"
+/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+  <style>
+        
+    
+
+    <- its the design for the rotating card ->
+    @import url('https://fonts.cdnfonts.com/css/ica-rubrik-black');
+@import url('https://fonts.cdnfonts.com/css/poppins');
+
+.banner{
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    top: -50px; /* Adjust this value to control how much it moves up */
+    z-index: 2; /* Ensure it stays above other elements */
+    
+}
+
+
+.banner {
+  margin-top: -50px;
+
+}
+
+
+.banner .slider{
+    position: absolute;
+    width: 100px;
+    height: 150px;
+    top: 30%;
+    right: calc(50% - 500px);
+    transform-style: preserve-3d;
+    animation: autoRun 50s linear infinite;
+    z-index: 2;
+    will-change: transform;
+
+}
+@keyframes autoRun {
+  from {
+      transform: perspective(1200px) rotateX(-16deg) rotateY(0deg);
+  }
+  to {
+      transform: perspective(1200px) rotateX(-16deg) rotateY(360deg);
+  }
+}
+
+
+.banner .slider .item{
+    position: absolute;
+    inset: 0 0 0 0;
+    transform: 
+        rotateY(calc( (var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+        translateZ(300px);
+}
+.banner .slider .item img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.banner .content{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1400px, 100vw);
+    height: max-content;
+    padding-bottom: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+}
+.banner .content h1{
+    font-family: 'ICA Rubrik';
+    font-size: 16em;
+    line-height: 1em;
+    color: #25283B;
+    position: relative;
+}
+.banner .content h1::after{
+    position: absolute;
+    inset: 0 0 0 0;
+    content: attr(data-content);
+    z-index: 2;
+    -webkit-text-stroke: 2px #d2d2d2;
+    color: transparent;
+}
+.banner .content .author{
+    font-family: Poppins;
+    text-align: right;
+    max-width: 200px;
+}
+.banner .content h2{
+    font-size: 3em;
+}
+.banner .content .model{
+    background-image: url(images/model.png);
+    width: 100%;
+    height: 75vh;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-size: auto 130%;
+    background-repeat: no-repeat;
+    background-position: top center;
+    z-index: 1;
+}
+
+
+
+
+@media screen and (max-width: 1023px) {
+    .banner .slider{
+        width: 1600px;
+        height: 200px;
+        top: 60%;
+        left: calc(50% - 80px);
+        will-change: transform;
+
+    }
+
+
+    .banner .slider .item{
+        transform: 
+            rotateY(calc( (var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+            translateZ(300px);
+    }
+    .banner .content h1{
+        text-align: center;
+        width: 100%;
+        text-shadow: 0 10px 20px #000;
+        font-size: 7em;
+    }
+    .banner .content .author{
+        color: #fff;
+        padding: 20px;
+        text-shadow: 0 10px 20px #000;
+        z-index: 2;
+        max-width: unset;
+        width: 100%;
+        text-align: center;
+        padding: 0 30px;
+    }
+}
+@media screen and (max-width: 767px) {
+
+
+.banner {
+  transform: translateY(-800px); /* Moves the banner up */
+  margin-top: -600px;
+
+}
+
+  .banner .slider {
+    width: 100px;
+    height: 150px;
+    left: calc(50% - 50px);
+    animation: autoRun 30s cubic-bezier(0.42, 0, 0.58, 1) infinite; /* Smoother easing */
+}
+
+.banner .slider .item {
+    transform: 
+        rotateY(calc( (var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+        translateZ(200px); /* Reduce Z-depth */
+}
+    .banner .content h1{
+        font-size: 10em;
+        margin-bottom:1000px;
+    }
+} 
+
+
+
+</style>
+
+
+
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      color: var(--text-color);
+      position: relative;
+      background: var(--bg-color);
+      margin: 0;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    :root {
+      --bg-color: linear-gradient(135deg, #000000, #1a1a2e, #0f0f17); /* Deadly Dark */
+      --text-color: #e0e0e0; /* Smooth, readable contrast */
+      --secondary-bg: #121222; /* Deep Dark Blue, perfectly aligned */
+      --button-bg: #3d0066; /* Dark, Elegant Purple */
+      --button-hover: #290046; /* Deeper Purple for Hover Effect */
+      --5-color: #00d1ff; /* Neon Cyan, Cyber Edge */
+      --2-color: #008f11; /* Matrix Green */
+      --small-color: #0a0a14; /* Ultra-dark Navy */
+      --line-color: rgba(200, 200, 255, 0.1); /* Minimal, sleek lines */
+      --menu-bg:linear-gradient(135deg, #000000, #1a1a2e, #0f0f17)
+      --hover-color: #6e00a8; /* Rich Deep Purple */
+      --hedtext-color: #a8a8c5; /* Soft Muted Silver */
+      --texthover-color: #ffcc00; /* Cyber Gold */
+      --hero-text: transparent;
+      --smart-div: linear-gradient(135deg, #ffffff, #e6e6e6);
+      --premium-btn:linear-gradient(135deg, #007BFF, #D400FF);
+      --register-color:rgb(247, 248, 248);
+    }
+    
+
+    .light-mode {
+      --bg-color: linear-gradient(135deg, #ffffff, #f6f8fc, #dde6ff, #c2dbff); /* Liquid Crystal Gradient */
+      --text-color: #0a0a0a; /* Deep Charcoal Black for Max Contrast */
+      --secondary-bg: #dbe8ff; /* Frosted Ice Blue */
+      --button-bg: linear-gradient(90deg, #ff007f, #ff4d00, #ffbf00); /* Fiery Neon Pink to Orange */
+      --button-hover: linear-gradient(90deg, #cc0066, #cc3c00, #cc9900); /* Deep Neon Burn */
+      --5-color: #00eaff; /* Electric Cyan */
+      --2-color: #00cc44; /* Hyper Green */
+      --small-color: #e0f7ff; /* Super Light Aqua */
+      --line-color: rgba(10, 10, 50, 0.12); /* Soft Shadows */
+      --menu-bg: linear-gradient(135deg, #ffffff, #f6f8fc, #dde6ff, #c2dbff); /* Glass-Like Transparency */
+      --hover-color: #ff00ff; /* Pure Neon Magenta */
+      --hedtext-color: #2b2b6f; /* Deep Space Blue */
+      --texthover-color: #ff5500; /* Cyber Orange Glow */
+      --hero-text: #2b2b6f;
+      --smart-div: linear-gradient(135deg,rgb(148, 167, 185), #1a252f);
+      --premium-btn:linear-gradient(135deg,rgb(11, 93, 180),rgb(19, 3, 22));
+      --register-color:rgb(40, 48, 48);
+
+
+
+    }
+    
+
+    section {
+      padding: 100px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .hero-section {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--bg-color);
+      border-bottom-left-radius: 50% 20vh;
+      border-bottom-right-radius: 50% 20vh;
+      overflow: visible;
+      z-index: 1;
+    }
+
+    /* TEXT CONTAINER */
+  .hero-content {
+    position: absolute;
+    left: 5%;  /* Adjust this for proper placement */
+    top: 20%;
+    max-width: 50%;
+    padding: 20px 40px;
+    background: transparent;
+    border-radius: 10px;
+    box-shadow:linear-gradient(135deg, #000000, #1a1a2e, #0f0f17); /* Deadly Dark */
+        margin-top: -30px; /* Compensate for banner movement */
+    
+}
+
+/* HEADLINE */
+.hero-content h1 {
+    font-size: 2.5em;
+    font-weight: bold;
+    background: var(--smart-div); /* Dual White Gradient */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 5px rgba(38, 210, 253, 0.2); /* Light Glow */
+}
+
+/* SUBTEXT */
+.hero-content p {
+    font-size: 1.2em;
+    background: linear-gradient(135deg, #f5f5f5, #dcdcdc); /* Slightly Darker White Gradient */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 1px 1px 4px rgba(192, 234, 245, 0.15);    margin-top: 10px;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1024px) { /* Tablets */
+    .hero-content {
+        max-width: 70%;
+        left: 10%;
+        top: 35%;
+    }
+    .hero-content h1 {
+        font-size: 2em;
+    }
+    .hero-content p {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 768px) { /* Mobile */
+    .hero-content {
+        max-width: 90%;
+        left: 5%;
+        top: 40%;
+        padding: 15px 20px;
+    }
+    .hero-content h1 {
+        font-size: 1.8em;
+    }
+    .hero-content p {
+        font-size: 0.9em;
+    }
+}
+
+    .hero-section h1 {
+      font-size: 4rem;
+      font-weight: bold;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .hero-section h5 {
+      font-size: 1.5rem;
+      font-weight: normal;
+      margin-top: 20px;
+      color: var(--5-color);
+      animation: glow 1.5s infinite alternate;
+    }
+
+    .hero-section h2 {
+      color: var(--2-color);
+      animation: glow 1.5s infinite alternate;
+    }
+
+    .hero-section small {
+      color: var(--small-color);
+      animation: glow 1.5s infinite alternate;
+    }
+
+    @keyframes glow {
+      0% {
+        text-shadow: 0 0 5px rgba(202, 49, 248, 0.5), 0 0 10px rgba(255, 255, 255, 0.5);
+      }
+      100% {
+        text-shadow: 0 0 15px rgb(226, 38, 243), 0 0 30px rgba(255, 255, 255, 1);
+      }
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .about-section {
+      background: var(--secondary-bg);
+      color: var(--text-color);
+      border-top-left-radius: 50% 20vh;
+      border-top-right-radius: 50% 20vh;
+      padding: 50px 20px;
+      transition: background 0.3s ease;
+    }
+
+    .contact-section {
+      background: var(--secondary-bg);
+      color: var(--text-color);
+      padding: 50px 20px;
+      transition: background 0.3s ease;
+    }
+
+    .about-section h2,
+    .contact-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .about-section p,
+    .contact-section p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .contact-section form {
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    .contact-section input,
+    .contact-section textarea {
+      width: 90%;
+      max-width: 500px;
+      margin: 10px auto;
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      display: block;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .contact-section input:focus,
+    .contact-section textarea:focus {
+      box-shadow: 0 0 10px var(--button-bg);
+    }
+
+    .contact-section button {
+      padding: 10px 20px;
+      background-color: var(--button-bg);
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .contact-section button:hover {
+      background-color: var(--button-hover);
+      transform: scale(1.05);
+    }
+
+    /* Toggle Button */
+    .toggle-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 10px;
+      width: 70px;
+      height: 30px;
+      border-radius: 20px;
+      background-color: #333;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      position: relative;
+    }
+
+    .toggle-btn .sun,
+    .toggle-btn .moon {
+      font-size: 18px;
+      transition: opacity 0.3s ease;
+    }
+
+    .toggle-btn .moon {
+      position: absolute;
+      left: 5px;
+    }
+
+    .toggle-btn .sun {
+      position: absolute;
+      right: 5px;
+    }
+
+    .light-mode .toggle-btn {
+      background-color: #f5c60d;
+    }
+
+    .light-mode .toggle-btn .sun {
+      opacity: 1;
+    }
+
+    .light-mode .toggle-btn .moon {
+      opacity: 0;
+    }
+
+    /* Header */
+    .main-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: var(--bg-color);
+      color: var(--text-color);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+      transition: transform 0.5s ease-in-out;
+    }
+
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+
+    @media (max-width: 768px) {
+      .hero-section h1 {
+        font-size: 2.5rem;
+      }
+
+      .about-section h2,
+      .contact-section h2 {
+        font-size: 2rem;
+      }
+
+      .about-section p,
+      .contact-section p {
+        font-size: 1rem;
+      }
+
+      .contact-section input,
+      .contact-section textarea {
+        width: 95%;
+      }
+
+      .toggle-btn {
+        margin-left: 0;
+      }
+    }
+
+
+    @media (max-width: 480px) {
+      .hero-section h1 {
+        font-size: 2rem;
+      }
+
+      .about-section h2,
+      .contact-section h2 {
+        font-size: 1.8rem;
+      }
+
+      .contact-section p {
+        font-size: 0.9rem;
+      }
+
+      .contact-section input,
+      .contact-section textarea {
+        width: 100%;
+        font-size: 0.9rem;
+      }
+    }
+
+
+
+  
+</style>
+
+
+<style>
+    /* Header Container */
+    .main-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 5%;
+        background: var(--menu-bg);
+        position: relative;
+    }
+
+    /* Logo Grouping */
+    .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        z-index: 1001;
+    }
+
+    .logo img {
+        height: 80px;
+        transition: transform 0.3s ease;
+    }
+
+    .company-name {
+        font-family: 'ICA Rubrik', sans-serif;
+        font-size: 1.5rem;
+        color: var(--hedtext-color);
+        white-space: nowrap;
+    }
+
+    /* Desktop Navigation */
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        margin-left: auto; /* Push menu to right */
+        z-index: 1001;
+    }
+
+    .nav-links li {
+        list-style: none;
+        position: relative;
+        padding: 0.5rem 0;
+    }
+
+    .nav-links > li > a {
+        color: var(--register-color);
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        position: relative;
+        padding: 0.5rem 1rem;
+    }
+
+    .nav-links > li > a:hover {
+        color: var(--texthover-color);
+        transform: translateY(-2px);
+    }
+
+    /* Submenu Styling */
+    .submenu {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--menu-bg);
+        border-radius: 8px;
+        padding: 1rem;
+        min-width: 200px;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .nav-links li:hover .submenu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(5px);
+    }
+
+    .submenu li {
+        padding: 0.5rem 0;
+    }
+
+    .submenu a {
+        color: var(--hedtext-color);
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        display: block;
+        transition: all 0.3s ease;
+    }
+
+    .submenu a:hover {
+        background: rgba(255,255,255,0.05);
+        transform: translateX(5px);
+    }
+
+    /* Add/Update these styles */
+    .hamburger {
+        display: none;
+        cursor: pointer;
+        margin-left: auto;
+        z-index: 1002; /* Increased z-index */
+        background: transparent;
+        border: none;
+        padding: 15px;
+    }
+
+    .hamburger div {
+        width: 27px;
+        height: 3px;
+        background: var(--hedtext-color);
+        margin: 5px;
+        transition: all 0.3s ease;
+    }
+
+    @media screen and (max-width: 768px) {
+        .hamburger {
+            display: block;
+            position: relative;
+
+        }
+
+        .nav-links {
+            position: fixed;
+            right: -100%;
+            top: 0;
+            height: 100vh;
+            background: var(--menu-bg);
+            flex-direction: column;
+            width: 70%;
+            padding: 80px 30px 30px;
+            transition: right 0.3s ease;
+            align-items: flex-start;
+            gap: 15px;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .nav-links.active {
+            right: 0;
+        }
+
+        .nav-links li {
+            width: 100%;
+            padding: 0;
+            display: block;
+            opacity: 1;
+            transform: none;
+            transition: none;
+        }
+    
+        .nav-links.active li {
+            opacity: 1;
+            transform: translateX(0);
+            transition-delay: calc(0.1s * var(--i));
+        }
+
+        .nav-links a {
+            width: 100%;
+            padding: 12px 15px;
+            display: block;
+            font-size: 1.1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links li.active .submenu {
+            display: block;
+        }
+    
+        .submenu li {
+            margin: 5px 0;
+        }
+        .submenu {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            box-shadow: none;
+            margin-top: 5px;
+            display: none;
+            padding-left: 15px;
+            animation: none;
+        }
+
+        .hamburger.active {
+            position: fixed;
+            right: 20px;
+        }
+
+        .submenu a {
+            padding: 10px 15px;
+            font-size: 0.95rem;
+            background: transparent !important;
+        }
+    
+        .submenu a:hover {
+            transform: none !important;
+            padding-left: 20px;
+        }
+
+        .nav-links li:hover .submenu,
+        .nav-links li:focus-within .submenu {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        .nav-links li:hover .submenu {
+            display: block;
+            transform: none;
+        }
+        /* Hamburger Animation */
+        .hamburger div {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    
+        .hamburger.active .line1 {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+    
+        .hamburger.active .line2 {
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+    
+        .hamburger.active .line3 {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+    }
+
+    .mobile-menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        backdrop-filter: blur(5px);
+        z-index: 999;
+        display: none;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Login/Register Special Button */
+    .login-register {
+        background: var(--button-bg);
+        border-radius: 25px;
+        padding: 0.5rem 1.5rem !important;
+        color: #fff !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .login-register:hover {
+        background: var(--button-hover);
+        transform: scale(1.05) !important;
+    }
+
+
+    /*  button styling */
+  
+
+    .premium-button {
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: rgba(242, 245, 242, 0.88);
+      text-transform: uppercase;
+      padding: 14px 32px;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      background: var(--premium-btn);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0px 4px 20px rgba(212, 0, 255, 0.4);
+  }
+
+  .premium-button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      clip-path: polygon(0% 0%, 40% 0%, 15% 100%, 0% 100%);
+      transition: all 0.3s ease-in-out;
+  }
+
+  .premium-button:hover::before {
+      clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+
+  .premium-button:hover {
+      box-shadow: 0px 6px 25px rgba(212, 0, 255, 0.6);
+      transform: translateY(-3px);
+  }
+
+  
+
+  
+  .premium-button:hover::after {
+      left: 100%;
+  }
+
+
+  .close-btn {
+    pointer-events: auto; /* Ensures the element is clickable */
+    z-index: 10; /* Makes sure it’s on top of other elements */
+    text-decoration: none; /*
+ }
+  
+
+ .newpre{
+  color:  rgba(251, 246, 252, 0.6) !important;
+ }
+ 
+  
+  </style>
+</head>
+<body>
+  <header class="main-header">
+    <div class="mobile-menu-overlay"></div>
+
+      <div class="logo"><img src="/static/assets/img/logo.png" alt="Logo" /></div>
+      <div class="company-name">
+        <span>SpurzeeTechnologies</span>
+      </div>
+      <button class="toggle-btn" id="toggleTheme">
+        <span class="sun">&#9728;</span>
+        <span class="moon">&#9790;</span>
+      </button>
+      
+        <div class="logo-text"><br></div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a>
+                <ul class="submenu">
+                    <li><a href="#">Sub Home 1</a></li>
+                    <li><a href="#">Sub Home 2</a></li>
+                </ul>
+            </li>
+            <li><a href="#">About</a>
+                <ul class="submenu">
+                    <li><a href="#">Our Team</a></li>
+                    <li><a href="#">Company History</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Psychology</a>
+                <ul class="submenu">
+                    <li><a href="#">Mindset</a></li>
+                    <li><a href="#">Mental Health</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Services</a>
+                <ul class="submenu">
+                    <li><a href="#">Web Design</a></li>
+                    <li><a href="#">SEO</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="{{ url_for('auth.login') }}" class="premium-button" class="newpre">LOGIN/REGISTER</a></li>
+        </ul>
+        <div class="hamburger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+  </header>
+
+  <section class="hero-section">
+    <div class="banner" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="500" data-aos-easing="ease-in-out">
+      <div class="slider"  style="--quantity: {{ preclose_prices|length }}">
+        {% for stock, details in preclose_prices.items() %}
+        <div class="item" style="--position: {{ loop.index }}">
+          <h5>{{ stock }}</h5>
+          <a href="{{ url_for('auth.login') }}" class="text-decoration-none">
+            <i class="bi bi-graph-up fs-3"></i>
+          </a>
+          <p>Preclose</p>
+          <h2 class="text-success">{{ details['Close'] }}</h2>
+          <small class="text-muted">Date: {{ details['Date'] }}</small>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="hero-content">
+      <h1 data-aos="fade-left" data-aos-duration="2000" data-aos-delay="500" data-aos-easing="ease-in-out">
+        Smart Trading Begins with Smarter Learning.
+      </h1>
+      <p data-aos="fade-right" data-aos-duration="1000" data-aos-delay="800" data-aos-easing="ease-in-out">
+        Empower yourself with the right knowledge, the right tools, and the right strategy.
+      </p>
+
+      <!-- Added the Login/Register link without changing design close-btn-->
+      <a class="close-btn premium-button" href="{{ url_for('auth.login') }}">
+        get started for free
+     </a>
+    
+    <canvas id="background"></canvas>
+  </section>
+
+  <!--adding our server-->
+
+<section>
+      <div class="services" id="services">
+        <div class="container">
+          <h1 class="sub-title">our <span>Services</span></h1>
+          <div class="services-list">
+            <div>
+              <i
+                class="fa-regular fa-lightbulb fa-beat"
+                style="color: #00eeff"
+              ></i>
+              <h2>Free Trading Tools</h2>
+              <p>
+                "Use our free tools, such as stock screeners, volatility
+                calculators, and trend analyzers, to sharpen your trading
+                decisions and analyze market trends with confidence."
+              </p>
+              <a href="{{ url_for('auth.login') }}" class="read"
+                >Try Tools Now</a
+              >
+            </div>
+            <div>
+              <i
+                class="fa-solid fa-chart-line fa-beat"
+                style="color: #00eeff"
+              ></i>
+              <h2>Daily Market Insights</h2>
+              <p>
+                "Stay ahead of the markets with our expert analysis and
+                insights. We break down market trends, news, and strategies to
+                help you trade smarter every day."!
+              </p>
+              <a href="/analysis" class="read">View Insights</a>
+            </div>
+            <div>
+              <i class="fa-solid fa-book fa-beat" style="color: #00eeff"></i>
+              <h2>Trading Basics for Beginners</h2>
+              <p>
+                "Learn key concepts like candlestick patterns, price movements,
+                and risk management strategies. Build your trading knowledge
+                step by step with easy-to-understand explanations."
+              </p>
+              <a href="/analysis" class="read">learn more</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h1 class="sub-title">Market <span>Action</span></h1>
+
+    <!-- Market Action Table -->
+    <section class="name3">
+      <div class="container my-5">
+        <div class="table-container">
+          <table class="table table-bordered custom-table">
+            <!-- Table Header -->
+            <thead class="sticky-header">
+              <tr>
+                <th>Symbol Name</th>
+                <th>Inside Bar</th>
+                <th>Double Top/Bottom</th>
+                <th>Head and Shoulders</th>
+                <th>V Shape</th>
+              </tr>
+            </thead>
+            <!-- Table Body -->
+            <tbody id="marketData">
+              <script>
+                const stockPatterns = {{ stock_patterns | tojson | safe }}; // Convert Python dictionary to JavaScript
+                const stockNames = {{ stock_names | tojson | safe }}; // Get stock names from Python to JavaScript
+                const loginUrl = "{{ url_for('auth.login') }}"; // URL for the login route
+
+                // Function to clean up and capitalize stock name
+                function cleanAndCapitalizeStockName(stockName) {
+                    const cleanedName = stockName
+                        .replace("NSE:", "")
+                        .replace("-INDEX", "")
+                        .replace("MCX:", "")
+                        .replace("-EQ", "")
+                        .replace(/"/g, "")
+                        .replace(/,/g, "")
+                        .toUpperCase(); // Convert to uppercase
+
+                    return cleanedName; // Return the fully capitalized name
+                }
+
+                // Function to create the stock symbol link with the login URL
+                function createStockLink(stockName, counts) {
+                      const capitalizedStockName = cleanAndCapitalizeStockName(stockName); // Clean and capitalize the stock name
+
+                      // Extract patterns with counts greater than 0
+                      const patternsWithCounts = Object.entries(counts)
+                          .filter(([pattern, count]) => count > 0) // Only include patterns with count > 0
+                          .map(([pattern]) => pattern.replace(' Count', '')); // Remove " Count" suffix for cleaner names
+
+                      // Build the query string with the symbol and patterns
+                      const queryParams = new URLSearchParams({
+                        // Return actual stock symbol with NSE n all included
+                          symbol: stockName,
+                          patterns: patternsWithCounts.join(',') // Join patterns into a comma-separated string
+                      });
+
+                      // Return the link with the query string
+                      return `<a href="${loginUrl}?${queryParams.toString()}">${capitalizedStockName}</a>`;
+                  }
+
+                // Function to populate market data
+                function populateMarketData() {
+                      const marketData = document.getElementById('marketData');
+                      marketData.innerHTML = '';
+
+                      stockNames.forEach(stockName => {
+                          const capitalizedStockName = cleanAndCapitalizeStockName(stockName); // Clean and capitalize the stock name
+                          const counts = stockPatterns[stockName];
+
+                          // Only add rows for stocks that have at least one count greater than zero
+                          if (Object.values(counts).some(count => count > 0)) {
+                              const row = `<tr>
+                                <td>${createStockLink(stockName, counts)}</td> <!-- Use link for stock symbol -->
+                                <td>${counts['Inside Bar Count']}</td>
+                                <td>${counts['Double Patterns Count']}</td>
+                                <td>${counts['Head and Shoulders Count']}</td>
+                                <td>${counts['V Shape Count']}</td>
+                              </tr>`;
+                              marketData.insertAdjacentHTML('beforeend', row);
+                          }
+                      });
+                  }
+
+                // Initial call to populate market data
+                populateMarketData();
+              </script>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+
+    <style>
+      /* table styling */
+
+/* Center the table */
+.table-responsive {
+  margin: 0 auto; /* Ensures the table is centered horizontally */
+  display: block;
+  max-width: 80%; /* Limits the table width for better design */
+}
+
+/* Custom Table Styles */
+.custom-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Header Styling */
+.custom-table thead {
+  background: #007bff;
+  color: white;
+}
+
+/* Row Hover Effect */
+.custom-table tbody tr:hover {
+  background-color: #f2f2f2;
+  transition: background-color 0.3s ease;
+}
+
+/* Alternate Row Coloring */
+.custom-table tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+/* Cell Padding and Font */
+.custom-table td,
+.custom-table th {
+  padding: 15px;
+  vertical-align: middle;
+  font-size: 1rem;
+  color: #031720;
+}
+
+/* Responsive Table */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Success and Danger Colors for Market Data */
+.text-success {
+  color: #28a745 !important;
+  font-weight: bold;
+}
+
+.text-danger {
+  color: #dc3545 !important;
+  font-weight: bold;
+}
+
+.text-warning {
+  color: #ffc107 !important;
+  font-weight: bold;
+}
+
+/* Footer */
+footer {
+  background-color: #fff;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .navbar-brand span {
+    font-size: 1.5rem;
+  }
+
+  .custom-table {
+    font-size: 0.9rem;
+  }
+
+  .tab-buttons {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+section.market-action-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Align elements vertically */
+  padding: 50px 0; /* Adjust padding as needed */
+  margin-top: -200px; /* Add some margin above the section */
+  margin-bottom: -300px;
+}
+
+.table-container {
+  width: 100%; /* Adjust this percentage to control table width */
+  max-width: 1200px; /* Set a max-width to avoid it becoming too wide */
+  margin: 0 auto; /* Auto margin to center the table */
+}
+
+table {
+  width: 100%; /* Ensure the table takes full available width inside its container */
+  border-collapse: collapse; /* Remove space between borders of cells */
+}
+
+/* total space inside the cells */
+.table td {
+  text-align: center; /* Center text in each cell */
+  padding: 15px; /* Add padding for better spacing */
+}
+.table th{
+  padding:30px;
+  text-align: center;
+}
+
+.table-bordered {
+  border: 1px solid #dee2e6; /* Set border color */
+}
+
+.custom-table {
+  background-color: #f8f9fa; /* Set a background color for the table */
+}
+
+.table-primary {
+  background-color: #007bff; /* Set the background color for the table header */
+  color: white; /* White text color for the header */
+}
+
+
+
+
+
+
+/* Container for the table with scrollable body */
+      .table-container {
+          max-height: 400px; /* Set a maximum height for the scrollable container */
+          overflow-y: auto;  /* Enable vertical scrolling */
+          display: block;    /* Ensure the container behaves like a block-level element */
+          width: 100%;
+          margin-top:-100px;
+          margin-bottom:-20px;
+      }
+
+      /* Sticky header style */
+      .sticky-header {
+          position: sticky !important;  /* Enable sticky behavior */
+          top: 0;  /* Pin the header to the top of its container */
+          background-color: #007bff !important; /* Blue background color for header */
+          z-index: 1 !important;  /* Ensure the header stays on top of the table content */
+          box-shadow: 0 2px 5px rgba(0,0,0,0.1);  /* Optional shadow for aesthetics */
+      }
+
+      /* Sticky header cells */
+      .sticky-header th {
+          position: sticky !important;  /* Ensure the cells are also sticky */
+          top: 0 !important;
+          background-color: #007bff; /* Blue background for header cells */
+          color:black;e text color for better contrast */
+          z-index: 2;  /* Higher z-index to keep the header cells above the table body */
+      }
+
+      /* Adjust table body so it fills the available space */
+      tbody {
+          display: block;
+          max-height: 300px;  /* Adjust height as necessary */
+          overflow-y: auto;  /* Enable scrolling for table rows */
+      }
+
+      /* Adjust table rows and make sure they align with the sticky header */
+      tr {
+          display: table;
+          width: 100%;
+          table-layout: fixed;  /* Ensure equal width for all columns */
+      }
+
+      /* Make sure the table body aligns with header columns */
+      .table {
+          width: 100%;
+          table-layout: fixed;
+      }
+
+      th, td {
+          padding: 0px 2px; /* Extremely minimal padding */
+          text-align: left;
+          word-wrap: break-word; /* Ensure text doesn't overflow */
+          line-height: 0.9; /* Minimized line height for tighter spacing */
+      }
+
+      /* Alternating row colors: Cyan and White */
+      tbody tr:nth-child(odd) {
+          background-color:rgb(71, 98, 214); /* Cyan color for odd rows */
+      }
+
+      tbody tr:nth-child(even) {
+          background-color:rgb(242, 233, 247); /* White color for even rows */
+      }
+
+      /* Hover effect with lift (elevate the row on hover) */
+      tbody tr:hover {
+          background-color:rgb(23, 9, 71); /* Lighter cyan color on hover */
+          cursor: pointer; /* Change cursor to pointer on hover */
+          transform: translateY(-5px); /* "Lift" the row upwards */
+          box-shadow: 0 4px 10px rgba(233, 13, 13, 0.9); /* Add shadow for the "lift" effect */
+          transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition */
+      }
+
+      /* Mobile-Specific Adjustments */
+      @media (max-width: 768px) {
+          .table-container {
+              max-height: 500px;
+              width: 96vw; /* Ensure the table stretches across the screen */
+              margin-right:-180px;
+              margin-left:8px;
+          }
+  
+          .sticky-header th {
+              background-color: #007bff;
+              color: white;
+              z-index: 2;
+              text-align: left;
+              padding: 8px;
+              font-size:0.7rem;
+  
+          }
+  
+          .my-5{
+              margin-left:-90px
+          }
+          .custom-table {
+              width: 100%;
+              margin-left:0px
+          }
+  
+          
+  
+          tbody tr {
+              border-bottom: 1px solid #ddd;
+  
+          }
+          td{
+              font-size: 0.7rem !important; /* Reduced font size for rows */
+              padding: 3px 5px !important; /* Minimal padding to reduce row height */
+              line-height: 2 !important; /* Tighten line height */
+          }
+        }
+
+    </style>
+    <!-- our services-->
+    
+    <section class="name2">
+        <div id="portfolio" id="project">
+          <div class="main-text">
+            <h2>Latest <span>features</span></h2>
+  
+            <div class="portfolio-content">
+              <div class="row">
+                <img src="/static/assets/img/srzones.png" alt="" />
+                <div class="layer">
+                  <h5>SR Zones</h5>
+                  <p>
+                    "SR Zones are key levels where prices reverse or consolidate, helping traders identify entry and exit points."                </p>
+                  <a href="{{ url_for('auth.login') }}"
+                    ><i class="fa-solid fa-up-right-from-square fa-beat"></i
+                  ></a>
+                </div>
+              </div>
+              <div class="row">
+                <img src="/static/assets/img/trendlines.png" alt="" />
+                <div class="layer">
+                  <h5>Trendlines</h5>
+                  <p>
+                    "Trendlines highlight the market trend by connecting key price points, showing uptrends and downtrends, and helping predict price movements."
+                  </p>
+                  <a href="{{ url_for('auth.login') }}"
+                    ><i class="fa-solid fa-up-right-from-square fa-beat"></i
+                  ></a>
+                </div>
+              </div>
+              <div class="row">
+                <img src="/static/assets/img/morningstar.png" alt="" />
+                <div class="layer">
+                  <h5>Morning and Evening Star</h5>
+                  <p>
+                    Morning Star signals a bullish reversal after a downtrend, while Evening Star indicates a bearish reversal after an uptrend."
+                  </p>
+                  <a href="{{ url_for('auth.login') }}"
+                    ><i class="fa-solid fa-up-right-from-square fa-beat"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <style>
+        /* For mobile screens: Align items side by side and reduce size */
+@media (max-width: 768px) {
+  .portfolio-content {
+    justify-content: center;
+  }
+  
+  /* Make the rows smaller and align them side by side */
+  .portfolio-content .row {
+    flex: 1 1 45%; /* Adjust this percentage based on how small you want each item */
+    margin-bottom: 10px; /* reduce the space between items */
+  }
+
+  /* Optional: Reduce font size for smaller screens */
+  .portfolio-content .row .layer h5 {
+    font-size: 16px; /* Reduce font size */
+  }
+
+  .portfolio-content .row .layer p {
+    font-size: 14px; /* Reduce description font size */
+  }
+
+  /* Optional: Ensure the icon is appropriately sized */
+  .portfolio-content .row .layer a {
+    font-size: 20px; /* Adjust as needed */
+
+
+  }
+  /* Ensure the section is responsive */
+  .portfolio-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 15px; /* minimal gap between the items */
+  }
+  
+  /* Ensure each row takes up 33% on larger screens */
+  .portfolio-content .row {
+    flex: 1 1 30%; /* On large screens, each takes up around 30% width */
+    position: relative;
+    margin-bottom: 15px; /* space between rows */
+  }
+  
+  .portfolio-content .row img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* For very small mobile screens: Adjust to make it more compact */
+@media (max-width: 480px) {
+  .portfolio-content .row {
+    flex: 1 1 100%; /* Make items stack on top of each other */
+    margin-bottom: 5px; /* smaller gap */
+  }
+
+  /* Further reduce text size for very small screens */
+  .portfolio-content .row .layer h5 {
+    font-size: 14px;
+  }
+
+  .portfolio-content .row .layer p {
+    font-size: 12px;
+  }
+}
+
+#portfolio {
+    width: 100%;
+    margin: 0 40px;
+    margin-top: -200px;
+  }
+  .main-text h2 {
+    font-size: 50px;
+    line-height: 1;
+    text-align: center;
+  }
+  .main-text h2 span {
+    color: #0ef;
+    font-size: 50px;
+  }
+  .portfolio-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+    grid-gap: 50px;
+    margin-top: 50px;
+  }
+  .row {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .row img {
+    width: 100%;
+    height: 500px;
+    border-radius: 8px;
+    display: block;
+    transition: transform 0.5s;
+  }
+  .layer {
+    width: 100%;
+    height: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.1), #0ef);
+    position: absolute;
+    border-radius: 8px;
+    left: 0;
+    bottom: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 40px;
+    transition: height 0.5s;
+  }
+  .layer h5 {
+    color: #000;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  .layer p {
+    color: #000;
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+  .layer i {
+    color: #ff004f;
+    margin-top: 20px;
+    font-size: 16px;
+    background-color: #fff;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+  }
+  .row:hover img {
+    transform: scale(1.1);
+  }
+  .row:hover .layer {
+    height: 100%;
+  }
+
+      </style>
+  
+
+  <section class="about-section"  data-aos="fade-up" data-aos-duration="2000" data-aos-delay="500" data-aos-easing="ease-in-out">
+    <h2>About Us</h2>
+    <p>
+      Welcome to Spurzee Technologies! We specialize in innovative solutions for cryptocurrency trading, data visualization, and cutting-edge software development. Our mission is to empower businesses and individuals with tools for success in the digital era.
+    </p>
+  </section>
+
+  <section class="contact-section" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="500" data-aos-easing="ease-in-out">
+    <h2>Contact Us</h2>
+    <p>
+      Got questions or want to get in touch? Fill out the form below, and we’ll get back to you shortly.
+    </p>
+    <form data-aos="fade-up" data-aos-duration="2000" data-aos-delay="500" data-aos-easing="ease-in-out">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <style>
+    #services {
+        color: aliceblue;
+        font-size: 20px;
+        line-height: 1.4;
+        margin-bottom: 4rem;
+      }
+      .sub-title {
+        text-align: center;
+        font-size: 60px;
+        padding-bottom: 70px;
+      }
+      .sub-title span {
+        color: #0ef;
+      }
+      .container {
+        padding: 90px;
+      }
+      .services-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(259px, 1fr));
+        grid-gap: 40px;
+        margin-top: 30px;
+      }
+      .services-list div {
+        background-color: transparent;
+        padding: 40px;
+        font-size: 13px;
+        font-weight: 13px;
+        border-radius: 20px;
+        border-right: 10px;
+        transition: background 0.5s, transform 0.5s;
+        box-shadow: 1px 1px 20px #012290f7, 1px 1px 40px #0053b8f7;
+      }
+      .services-list div i {
+        font-size: 50px;
+        margin-bottom: 30px;
+      }
+      .services-list div h2 {
+        font-size: 30px;
+        font-weight: 500;
+        margin-bottom: 15px;
+      }
+      .services-list div a {
+        text-decoration: none;
+        color: #000000;
+        font-size: 12px;
+        margin-top: 30px;
+        display: inline-block;
+      }
+      .read {
+        display: inline-block; 
+        text-decoration: none; 
+        color: white; 
+        padding: 12px 40px; /* Cylindrical shape */
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 40px; /* Ensures pill shape */
+        background-color: #00eeff; 
+        border: none;
+        transition: 0.3s ease-in-out;
+        animation: slideTop 1s ease forwards;
+        animation-delay: 2s;
+        box-shadow: 0 0 5px #0ef, 0 0 25px #0ef;
+        cursor: pointer; /* Makes it clear it's clickable */
+        text-align: center;
+    }
+    
+    /* Hover Effect */
+    .read:hover {
+        box-shadow: 0 0 10px cyan, 0 0 30px cyan, 0 0 50px cyan;
+        transform: translateY(-3px); /* Adds a slight lift effect */
+    }
+    
+    /* 🔥 Make it responsive for all devices */
+    @media (max-width: 1024px) { /* Tablets */
+        .read {
+            padding: 10px 30px;
+            font-size: 15px;
+        }
+    }
+    
+    @media (max-width: 768px) { /* Mobile devices */
+        .read {
+            padding: 8px 25px;
+            font-size: 14px;
+        }
+    }
+    
+    @media (max-width: 480px) { /* Smaller mobile screens */
+        .read {
+            padding: 7px 20px;
+            font-size: 13px;
+        }
+    }
+    
+      .services-list div:hover {
+        transform: translateY(-10px);
+      }
+      
+      section {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .container1 {
+        width: 600px;
+        height: 500px;
+        padding: 75px 90px;
+        margin-left: 120px;
+      }
+      .heading1 {
+        text-align: center;
+        text-decoration: underline;
+        text-underline-offset: 10px;
+        text-decoration-thickness: 5px;
+        margin-bottom: 50px;
+      }
+      .bar {
+        font-size: 23px;
+      }
+      .Technical-bars .bar {
+        margin-top: 40px 0;
+      }
+      .Technical-bars .bar:first-child {
+        margin-top: 0;
+      }
+      .Technical-bars .bar:last-child {
+        margin-bottom: 0;
+      }
+      .Technical-bars .bar .info {
+        margin-bottom: 5px;
+      }
+      .Technical-bars .bar .info span {
+        font-size: 17px;
+        font-weight: 500;
+        animation: showText 0.5s 1s linear forwards;
+        opacity: 0;
+      }
+      .Technical-bars .bar .progress-line {
+        position: relative;
+        border-radius: 10px;
+        width: 100%;
+        height: 5px;
+        background-color: #000000;
+        animation: animate 1s cubic-bezier(1, 0, 0.5, 1) forwards;
+        transform: scaleX(0);
+        transform-origin: left;
+      }
+      @keyframes animate {
+        100% {
+          transform: scaleX(1);
+        }
+      }
+      .Technical-bars .bar .progress-line span {
+        height: 100%;
+        background-color: #0ef;
+        position: absolute;
+        border-radius: 10px;
+        animation: animate 1s 1s cubic-bezier(1, 0, 0.5, 1) forwards;
+        transform: scaleX(0);
+        transform-origin: left;
+      }
+      .progress-line.html span {
+        width: 90%;
+      }
+      .progress-line.css span {
+        width: 65%;
+      }
+      .progress-line.javascript span {
+        width: 75%;
+      }
+      .progress-line.python span {
+        width: 50%;
+      }
+      .progress-line.react span {
+        width: 80%;
+      }
+      .progress-line span::after {
+        position: absolute;
+        padding: 1px 8px;
+        background-color: #000;
+        color: #fff;
+        font-size: 12px;
+        border-radius: 3px;
+        top: -28px;
+        right: -28px;
+        animation: showText 0.5s 1s linear forwards;
+        opacity: 0;
+      }
+      .progress-line.html span::after {
+        content: "90%";
+      }
+      .progress-line.css span::after {
+        content: "85%";
+      }
+      .progress-line.javascript span::after {
+        content: "95%";
+      }
+      .progress-line.python span::after {
+        content: "80%";
+      }
+      .progress-line.react span::after {
+        content: "90%";
+      }
+      .progress-line span::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border: 7px solid transparent;
+        border-bottom-width: 0px;
+        border-right-width: 0px;
+        border-top-color: #000;
+        top: -10px;
+        right: 0;
+        animation: showText 0.5s 1s linear forwards;
+        opacity: 0;
+      }
+      @keyframes showText {
+        100% {
+          opacity: 1;
+        }
+      }
+      
+      .radial-bars {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-items: flex-start;
+      }
+      .radial-bars .radial-bar {
+        width: 50%;
+        height: 170px;
+        margin-bottom: 10px;
+        position: relative;
+      }
+      .radial-bars .radial-bar svg {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-90deg);
+        width: 120px;
+        height: 160px;
+      }
+      .radial-bars .radial-bar .progress-bar {
+        stroke-width: 10;
+        stop-color: black;
+        fill: transparent;
+        stroke-dasharray: 502;
+        stroke-dashoffset: 502;
+        stroke-linecap: round;
+        animation: animate-bar 1s linear forwards;
+      }
+      @keyframes animate-bar {
+        100% {
+          stroke-dashoffset: -1;
+        }
+      }
+      .path {
+        stroke-width: 10;
+        stroke: #0ef;
+        fill: transparent;
+        stroke-dasharray: 502;
+        stroke-dashoffset: 502;
+        stroke-linecap: round;
+      }
+      .path-1 {
+        animation: animate-path1 1s 1s linear forwards;
+      }
+      .path-2 {
+        animation: animate-path2 1s 1s linear forwards;
+      }
+      .path-3 {
+        animation: animate-path3 1s 1s linear forwards;
+      }
+      .path-4 {
+        animation: animate-path4 1s 1s linear forwards;
+      }
+      
+      @keyframes animate-path1 {
+        100% {
+          stroke-dashoffset: 90%;
+        }
+      }
+      @keyframes animate-path2 {
+        100% {
+          stroke-dashoffset: 50%;
+        }
+      }
+      @keyframes animate-path3 {
+        100% {
+          stroke-dashoffset: 70%;
+        }
+      }
+      @keyframes animate-path4 {
+        100% {
+          stroke-dashoffset: 100%;
+        }
+      }
+
+      
+  </style>
+
+
+  <script>
+    // Theme Toggle Logic
+    const toggleBtn = document.getElementById("toggleTheme");
+    const body = document.body;
+
+    // Check localStorage for theme preference
+    if (localStorage.getItem("theme") === "light-mode") {
+      body.classList.add("light-mode");
+    }
+
+    toggleBtn.addEventListener("click", () => {
+      body.classList.toggle("light-mode");
+      localStorage.setItem("theme", body.classList.contains("light-mode") ? "light-mode" : "dark-mode");
+    });
+
+    // Interactive Background
+    const canvas = document.getElementById("background");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = [];
+    let maxParticles = window.innerWidth < 768 ? 20 : 50;
+
+    class Particle {
+      constructor(x, y, size, color) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.color = color;
+        this.speedX = (Math.random() * 2 - 1) * 0.5;
+        this.speedY = (Math.random() * 2 - 1) * 0.5;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (this.x <= 0 || this.x >= canvas.width) this.speedX *= -1;
+        if (this.y <= 0 || this.y >= canvas.height) this.speedY *= -1;
+
+        for (let i = 0; i < particles.length; i++) {
+          const dx = particles[i].x - this.x;
+          const dy = particles[i].y - this.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          if (distance < 150) {
+            ctx.beginPath();
+            ctx.moveTo(this.x, this.y);
+            ctx.lineTo(particles[i].x, particles[i].y);
+            ctx.strokeStyle = getComputedStyle(document.body).getPropertyValue("--line-color");
+            ctx.globalAlpha = 0.2;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+            ctx.globalAlpha = 1;
+          }
+        }
+      }
+    }
+
+    function initParticles() {
+      particles.length = 0;
+      const particleColor = getComputedStyle(document.body).getPropertyValue("--text-color");
+      for (let i = 0; i < maxParticles; i++) {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        const size = Math.random() * 3 + 1;
+        particles.push(new Particle(x, y, size, particleColor));
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((particle) => {
+        particle.draw();
+        particle.update();
+      });
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      maxParticles = window.innerWidth < 768 ? 20 : 50;
+      initParticles();
+    });
+
+    initParticles();
+    animate();
+// Update mobile menu handling
+const handleMobileMenu = () => {
+    const hamburger = document.querySelector(".hamburger");
+    const navLinks = document.querySelector(".nav-links");
+    const overlay = document.querySelector(".mobile-menu-overlay");
+    const menuItems = document.querySelectorAll(".nav-links > li");
+
+    hamburger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        hamburger.classList.toggle("active");
+        navLinks.classList.toggle("active");
+        overlay.style.display = navLinks.classList.contains("active") ? "block" : "none";
+    });
+
+    // Handle menu items with submenus
+    document.querySelectorAll('.nav-links > li').forEach(item => {
+        const link = item.querySelector('a');
+        const submenu = item.querySelector('.submenu');
+
+        if(submenu) {
+            link.addEventListener('click', (e) => {
+                if(window.innerWidth <= 768) {
+                    e.preventDefault();
+                    item.classList.toggle('active');
+                    submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+                }
+            });
+        }
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if(window.innerWidth <= 768) {
+            if(!e.target.closest('.nav-links') && !e.target.closest('.hamburger')) {
+                hamburger.classList.remove("active");
+                navLinks.classList.remove("active");
+                overlay.style.display = "none";
+                document.querySelectorAll('.submenu').forEach(sub => sub.style.display = 'none');
+            }
+        }
+    });
+}
+
+// Initialize mobile menu
+handleMobileMenu();
+
+    // Header Scroll Logic
+    const header = document.querySelector(".main-header");
+    let lastScrollY = 0;
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > lastScrollY) {
+        header.classList.add("hide");
+      } else {
+        header.classList.remove("hide");
+      }
+      lastScrollY = window.scrollY;
+    });
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+      if (window.innerWidth < 768) {
+          document.documentElement.style.setProperty('--speed', '35s'); // Slower on mobile
+      }
+  });
+
+
+
+    AOS.init();
+
+
+
+
+  </script>
+
+    
+</body>
+</html>

@@ -1,0 +1,2366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpurzeeTechnologies</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script
+  src="https://kit.fontawesome.com/c44dbc2ee4.js"
+  crossorigin="anonymous"
+></script>
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+  rel="stylesheet"
+/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+  <style>
+        
+    
+
+    <- its the design for the rotating card ->
+    @import url('https://fonts.cdnfonts.com/css/ica-rubrik-black');
+@import url('https://fonts.cdnfonts.com/css/poppins');
+
+@import url('https://fonts.cdnfonts.com/css/ica-rubrik-black');
+@import url('https://fonts.cdnfonts.com/css/poppins');
+
+
+
+/* Featured Stock Card */
+.featured-stock {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.stock-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+
+
+
+.stock-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+/* Stock Matrix Grid */
+.stock-matrix {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.stock-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transition: transform 0.2s ease;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.stock-card:hover {
+  transform: translateY(-5px);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.stock-chart {
+  color: #28a745;
+  transition: transform 0.2s ease;
+}
+
+.stock-chart:hover {
+  transform: scale(1.15);
+}
+
+.stock-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #25283B;
+  margin: 0.5rem 0;
+}
+
+/* CTA Section */
+.stock-cta {
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem 2rem;
+  border-radius: 2rem;
+  background: #25283B;
+  color: white;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.cta-button:hover {
+  transform: scale(1.05);
+  color: white;
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+
+  .stock-matrix {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.premium-button {
+  /* Add your button styles here */
+}
+
+#background {
+  /* Canvas styling */
+}
+
+
+
+</style>
+
+
+
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      color: var(--text-color);
+      position: relative;
+      background: var(--bg-color);
+      margin: 0;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    :root {
+      --bg-color: linear-gradient(135deg, #000000, #1a1a2e, #0f0f17); /* Deadly Dark */
+      --text-color:rgb(224, 224, 224); /* Smooth, readable contrast */
+      --secondary-bg: #121222; /* Deep Dark Blue, perfectly aligned */
+      --button-bg: #3d0066; /* Dark, Elegant Purple */
+      --button-hover: #290046; /* Deeper Purple for Hover Effect */
+      --5-color: #00d1ff; /* Neon Cyan, Cyber Edge */
+      --2-color: #008f11; /* Matrix Green */
+      --small-color: #0a0a14; /* Ultra-dark Navy */
+      --line-color: rgba(200, 200, 255, 0.1); /* Minimal, sleek lines */
+      --menu-bg: linear-gradient(135deg, #000000, #1a1a2e, #0f0f17);
+      --hover-color: #6e00a8; /* Rich Deep Purple */
+      --hedtext-color: #a8a8c5; /* Soft Muted Silver */
+      --texthover-color:rgb(24, 3, 29); /* Cyber Gold */
+      --hero-text: transparent;
+      --smart-div: linear-gradient(135deg, #ffffff, #e6e6e6);
+      --premium-btn:linear-gradient(135deg, #007BFF, #D400FF);
+      --register-color:rgb(247, 248, 248);
+      --main-text-color:rgb(48, 5, 56);
+      --accent-color: #4ea1f3;
+      --shadow-color: rgba(0, 0, 0, 0.5);
+      --accent-color: #4ea1f3;
+      --table-header-bg: #284b63;    /* Deep dark grey for dark theme */
+      --table-header-text:rgb(247, 245, 248);  /* Amber text to catch attention */
+        --table-border-color: #444;
+        --table-hover:rgb(174, 27, 233);
+        --table-firstline:rgb(11, 6, 37);
+        --table-secondline:rgb(38, 44, 56);
+        --table-rowhover:rgb(47, 61, 58);
+        --empower-div:rgb(217, 240, 243);
+        --symbol-text:rgb(241, 236, 236)
+
+
+     
+    }
+    
+
+    .light-mode {
+      --bg-color: linear-gradient(135deg, #ffffff, #f6f8fc, #dde6ff, #c2dbff); /* Liquid Crystal Gradient */
+      --text-color: #0a0a0a; /* Deep Charcoal Black for Max Contrast */
+      --secondary-bg: #dbe8ff; /* Frosted Ice Blue */
+      --button-bg: linear-gradient(90deg, #ff007f, #ff4d00, #ffbf00); /* Fiery Neon Pink to Orange */
+      --button-hover: linear-gradient(90deg, #cc0066, #cc3c00, #cc9900); /* Deep Neon Burn */
+      --5-color: #00eaff; /* Electric Cyan */
+      --2-color: #00cc44; /* Hyper Green */
+      --small-color: #e0f7ff; /* Super Light Aqua */
+      --line-color: rgba(10, 10, 50, 0.12); /* Soft Shadows */
+      --menu-bg: linear-gradient(135deg, #ffffff, #f6f8fc, #dde6ff, #c2dbff); /* Glass-Like Transparency */
+      --hover-color: #ff00ff; /* Pure Neon Magenta */
+      --hedtext-color:rgb(5, 5, 27); /* Deep Space Blue */
+      --texthover-color:rgb(8, 8, 8); /* Cyber Orange Glow */
+      --hero-text: #2b2b6f;
+      --smart-div: linear-gradient(135deg,rgb(86, 93, 100),rgb(26, 46, 65));
+      --premium-btn:linear-gradient(135deg,rgb(11, 93, 180),rgb(114, 40, 128));
+      --register-color:rgb(7, 7, 8);
+      --accent-color: #007bff;
+      --shadow-color: rgba(0, 0, 0, 0.1);
+      --accent-color: #007bff;
+      --table-header-bg:rgb(162, 146, 253);    /* Rich blue for light theme */
+      --table-header-text:rgb(12, 5, 12);  /* White text */
+      --table-border-color: #ccc;
+      --table-hover:rgb(154, 225, 243);
+      --table-firstline:rgb(217, 241, 236);
+      --table-secondline:rgb(121, 113, 113);
+      --table-rowhover:rgb(148, 206, 177);
+      --empower-div:rgb(42, 79, 83);
+      --symbol-text:rgb(8, 2, 31)
+
+
+
+    }
+    
+
+    section {
+      padding: 100px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .hero-section {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--bg-color);
+      border-bottom-left-radius: 50% 20vh;
+      border-bottom-right-radius: 50% 20vh;
+      overflow: visible;
+      z-index: 1;
+    }
+
+    /* TEXT CONTAINER */
+  .hero-content {
+    position: absolute;
+    left: 5%;  /* Adjust this for proper placement */
+    top: 20%;
+    max-width: 50%;
+    padding: 20px 40px;
+    background: transparent;
+    border-radius: 10px;
+    box-shadow:linear-gradient(135deg, #000000, #1a1a2e, #0f0f17); /* Deadly Dark */
+        margin-top: -30px; /* Compensate for banner movement */
+    
+}
+
+/* HEADLINE */
+.hero-content h1 {
+    font-size: 2.5em;
+    font-weight: bold;
+    background: var(--smart-div); /* Dual White Gradient */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 5px rgba(38, 210, 253, 0.2); /* Light Glow */
+}
+
+/* SUBTEXT */
+.hero-content p {
+    font-size: 1.2em;
+    background: var(--empower-div); /* Slightly Darker White Gradient */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 1px 1px 4px rgba(192, 234, 245, 0.15);    margin-top: 10px;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1024px) { /* Tablets */
+    .hero-content {
+        max-width: 70%;
+        left: 10%;
+        top: 35%;
+    }
+    .hero-content h1 {
+        font-size: 2em;
+    }
+    .hero-content p {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 768px) { /* Mobile */
+    .hero-content {
+        max-width: 90%;
+        left: 5%;
+        top: 40%;
+        padding: 15px 20px;
+    }
+    .hero-content h1 {
+        font-size: 1.8em;
+    }
+    .hero-content p {
+        font-size: 0.9em;
+    }
+}
+
+    .hero-section h1 {
+      font-size: 4rem;
+      font-weight: bold;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .hero-section h5 {
+      font-size: 2.5rem;
+      font-weight: normal;
+      margin-top: 20px;
+      color: var(--5-color);
+      animation: glow 1.5s infinite alternate;
+    }
+
+    .hero-section h2 {
+      color: var(--2-color);
+      animation: glow 1.5s infinite alternate;
+      font-size: 1.5rem;
+
+    }
+
+    .hero-section p {
+      font-size: 1rem;
+
+    }
+
+    .hero-section small {
+      color: var(--small-color);
+      animation: glow 1.5s infinite alternate;
+      font-size: 1rem;
+
+    }
+
+    @keyframes glow {
+      0% {
+        text-shadow: 0 0 5px rgba(202, 49, 248, 0.5), 0 0 10px rgba(255, 255, 255, 0.5);
+      }
+      100% {
+        text-shadow: 0 0 15px rgb(226, 38, 243), 0 0 30px rgba(255, 255, 255, 1);
+      }
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .about-section {
+      background: var(--secondary-bg);
+      color: var(--text-color);
+      border-top-left-radius: 50% 20vh;
+      border-top-right-radius: 50% 20vh;
+      padding: 50px 20px;
+      transition: background 0.3s ease;
+    }
+
+    .contact-section {
+      background: var(--secondary-bg);
+      color: var(--text-color);
+      padding: 50px 20px;
+      transition: background 0.3s ease;
+    }
+
+    .about-section h2,
+    .contact-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .about-section p,
+    .contact-section p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .contact-section form {
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    .contact-section input,
+    .contact-section textarea {
+      width: 90%;
+      max-width: 500px;
+      margin: 10px auto;
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      display: block;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .contact-section input:focus,
+    .contact-section textarea:focus {
+      box-shadow: 0 0 10px var(--button-bg);
+    }
+
+    .contact-section button {
+      padding: 10px 20px;
+      background-color: var(--button-bg);
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .contact-section button:hover {
+      background-color: var(--button-hover);
+      transform: scale(1.05);
+    }
+
+    /* Toggle Button */
+    .toggle-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 10px;
+      width: 70px;
+      height: 30px;
+      border-radius: 20px;
+      background-color: #333;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      position: relative;
+    }
+
+    .toggle-btn .sun,
+    .toggle-btn .moon {
+      font-size: 18px;
+      transition: opacity 0.3s ease;
+    }
+
+    .toggle-btn .moon {
+      position: absolute;
+      left: 5px;
+    }
+
+    .toggle-btn .sun {
+      position: absolute;
+      right: 5px;
+    }
+
+    .light-mode .toggle-btn {
+      background-color: #f5c60d;
+    }
+
+    .light-mode .toggle-btn .sun {
+      opacity: 1;
+    }
+
+    .light-mode .toggle-btn .moon {
+      opacity: 0;
+    }
+
+    /* Header */
+    .main-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      color: var(--text-color);
+      transition: transform 0.5s ease-in-out;
+    }
+
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+
+    @media (max-width: 768px) {
+      .hero-section h1 {
+        font-size: 2.5rem;
+      }
+
+      .about-section h2,
+      .contact-section h2 {
+        font-size: 2rem;
+      }
+
+      .about-section p,
+      .contact-section p {
+        font-size: 1rem;
+      }
+
+      .contact-section input,
+      .contact-section textarea {
+        width: 95%;
+      }
+
+      .toggle-btn {
+        margin-left: 0;
+      }
+    }
+
+
+    @media (max-width: 480px) {
+      .hero-section h1 {
+        font-size: 2rem;
+      }
+
+      .about-section h2,
+      .contact-section h2 {
+        font-size: 1.8rem;
+      }
+
+      .contact-section p {
+        font-size: 0.9rem;
+      }
+
+      .contact-section input,
+      .contact-section textarea {
+        width: 100%;
+        font-size: 0.9rem;
+      }
+    }
+
+
+
+  
+</style>
+
+
+<style>
+    /* Header Container */
+    .main-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 5%;
+        background: var(--menu-bg);
+        position: relative;
+    }
+
+    /* Logo Grouping */
+    .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        z-index: 1001;
+    }
+
+    .logo img {
+        height: 80px;
+        transition: transform 0.3s ease;
+    }
+
+    .company-name {
+        font-family: 'ICA Rubrik', sans-serif;
+        font-size: 1.5rem;
+        color: var(--hedtext-color);
+        white-space: nowrap;
+    }
+
+    /* Desktop Navigation */
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        margin-left: auto; /* Push menu to right */
+        z-index: 1001;
+    }
+
+    .nav-links li {
+        list-style: none;
+        position: relative;
+        padding: 0.5rem 0;
+    }
+
+    .nav-links > li > a {
+        color: var(--register-color);
+        font-weight: 500;
+        display: inline-block;
+
+        text-decoration: none;
+        transition: background-color 0.5s ease;
+        position: relative;
+        padding: 5px 12px;
+        border-radius: 50px;    /* Rounded corners for an oval shape */
+
+
+        
+    }
+
+    
+
+    .nav-links > li > a:hover {
+        color: var(--texthover-color);
+        transform: translateY(-2px);
+        background-color: rgba(146, 182, 218, 0.88);
+
+    }
+
+    /* Submenu Styling */
+    .submenu {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--menu-bg);
+        border-radius: 8px;
+        padding: 1rem;
+        min-width: 200px;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .nav-links li:hover .submenu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(5px);
+    }
+
+    .submenu li {
+        padding: 0.5rem 0;
+    }
+
+    .submenu a {
+        color: var(--hedtext-color);
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        display: block;
+        transition: all 0.3s ease;
+    }
+
+    .submenu a:hover {
+        background: rgba(255,255,255,0.05);
+        transform: translateX(5px);
+    }
+
+    /* Add/Update these styles */
+    .hamburger {
+        display: none;
+        cursor: pointer;
+        margin-left: auto;
+        z-index: 1002; /* Increased z-index */
+        background: transparent;
+        border: none;
+        padding: 15px;
+    }
+
+    .hamburger div {
+        width: 27px;
+        height: 3px;
+        background: var(--hedtext-color);
+        margin: 5px;
+        transition: all 0.3s ease;
+    }
+
+    @media screen and (max-width: 768px) {
+        .hamburger {
+            display: block;
+            position: relative;
+
+        }
+
+        .nav-links {
+            position: fixed;
+            right: -100%;
+            top: 0;
+            height: 100vh;
+            background: var(--menu-bg);
+            flex-direction: column;
+            width: 70%;
+            padding: 80px 30px 30px;
+            transition: right 0.3s ease;
+            align-items: flex-start;
+            gap: 15px;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .nav-links.active {
+            right: 0;
+        }
+
+        .nav-links li {
+            width: 100%;
+            padding: 0;
+            display: block;
+            opacity: 1;
+            transform: none;
+            transition: none;
+        }
+    
+        .nav-links.active li {
+            opacity: 1;
+            transform: translateX(0);
+            transition-delay: calc(0.1s * var(--i));
+        }
+
+        .nav-links a {
+            width: 100%;
+            padding: 12px 15px;
+            display: block;
+            font-size: 1.1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links li.active .submenu {
+            display: block;
+        }
+    
+        .submenu li {
+            margin: 5px 0;
+        }
+        .submenu {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            box-shadow: none;
+            margin-top: 5px;
+            display: none;
+            padding-left: 15px;
+            animation: none;
+        }
+
+        .hamburger.active {
+            position: fixed;
+            right: 20px;
+        }
+
+        .submenu a {
+            padding: 10px 15px;
+            font-size: 0.95rem;
+            background: transparent !important;
+        }
+    
+        .submenu a:hover {
+            transform: none !important;
+            padding-left: 20px;
+        }
+
+        .nav-links li:hover .submenu,
+        .nav-links li:focus-within .submenu {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        .nav-links li:hover .submenu {
+            display: block;
+            transform: none;
+        }
+        /* Hamburger Animation */
+        .hamburger div {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    
+        .hamburger.active .line1 {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+    
+        .hamburger.active .line2 {
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+    
+        .hamburger.active .line3 {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+    }
+
+    .mobile-menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        backdrop-filter: blur(5px);
+        z-index: 999;
+        display: none;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+
+
+
+    /*  button styling */
+  
+
+    .premium-button {
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: rgba(242, 245, 242, 0.88);
+      text-transform: uppercase;
+      padding: 14px 32px;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      background: var(--premium-btn);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0px 4px 20px rgba(208, 103, 230, 0.8);
+  }
+
+  .premium-button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      clip-path: polygon(0% 0%, 40% 0%, 15% 100%, 0% 100%);
+      transition: all 0.3s ease-in-out;
+  }
+
+  .premium-button:hover::before {
+      clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+
+  .premium-button:hover {
+      box-shadow: 0px 6px 25px rgba(212, 0, 255, 0.6);
+      transform: translateY(-3px);
+  }
+
+  
+
+  
+  .premium-button:hover::after {
+      left: 100%;
+  }
+
+
+  .close-btn {
+    pointer-events: auto; /* Ensures the element is clickable */
+    z-index: 10; /* Makes sure it’s on top of other elements */
+    text-decoration: none; /*
+ }
+  
+
+ .newpre{
+  color:  rgba(251, 246, 252, 0.6) !important;
+ }
+ 
+  
+  </style>
+</head>
+<body>
+  <header class="main-header">
+    <div class="mobile-menu-overlay"></div>
+
+      <div class="logo"  data-aos="fade-left" data-aos-duration="2000" data-aos-delay="500" data-aos-easing="ease-in-out"><img src="/static/assets/img/logo.png" alt="Logo" /></div>
+      <div class="company-name">
+        <span  data-aos="fade-right" data-aos-duration="1000" data-aos-delay="500" data-aos-easing="ease-in-out">SpurzeeTechnologies</span>
+      </div>
+      <button class="toggle-btn" id="toggleTheme"   data-aos="fade-down" data-aos-duration="2000" data-aos-delay="1000" data-aos-easing="ease-in-out">
+        <span class="sun">&#9728;</span>
+        <span class="moon">&#9790;</span>
+      </button>
+      
+        <div class="logo-text" ><br></div>
+        <ul class="nav-links">
+
+            <li><a href="/aboutus"   data-aos="fade-up" data-aos-duration="2000" data-aos-delay="500" data-aos-easing="ease-in-out">About Us</a>
+               
+            </li>
+            <li><a href="#"  data-aos="fade-down" data-aos-duration="2000" data-aos-delay="500" data-aos-easing="ease-in-out">Learn</a>
+                <ul class="submenu">
+                    <li><a href="/Riskmanagement" >Risk Management</a></li>
+                    <li><a href="/educationresorce">Market Education</a></li>
+                    <li><a href="/optiontrading">Option Trading</a></li>
+
+                    <li><a href="/impactontrader">Impact on Trader</a></li>
+                    <li><a href="/optiontradingindia">Option Trading In India</a></li>
+
+                </ul>
+            </li>
+            <li><a href="#"  data-aos="fade-up" data-aos-duration="2000" data-aos-delay="500" data-aos-easing="ease-in-out">Strategies</a>
+                <ul class="submenu">
+                    <li><a href="/stocktradingpattern">Trading Patterns</a></li>
+                    <li><a href="/analysis">Price Action</a></li>
+                    <li><a href="/topindicators"> Top Indicators</a></li>
+                    <li><a href="/intradaytradingtips">Intraday Trading Tips</a></li>
+
+
+                </ul>
+            </li>
+            <li><a href="#"  data-aos="fade-down" data-aos-duration="2000" data-aos-delay="500" data-aos-easing="ease-in-out">Mindset</a>
+              <ul class="submenu">
+                  <li><a href="/psych">Psychology</a></li>
+                  <li><a href="/Discipline">Discipline</a></li>
+                  <li><a href="/analysis">Candlestick Patterns</a></li>
+
+              </ul>
+          </li>
+            <li><a href="/contactus"  data-aos="fade-up" data-aos-duration="2000" data-aos-delay="500" data-aos-easing="ease-in-out">Contact Us</a></li>
+            <li><a href="{{ url_for('auth.login') }}" class="premium-button" class="newpre"  data-aos="fade-left" data-aos-duration="2000" data-aos-delay="500" data-aos-easing="ease-in-out">LOGIN/REGISTER</a></li>
+        </ul>
+        <div class="hamburger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+  </header>
+
+  <section class="hero-section">
+    <canvas id="background"></canvas>
+
+    <div class="hero">
+      <div class="computer-screen">
+        <img src="/static/assets/img/laptop.png" alt="Laptop" class="laptop-img"   data-aos="fade-down" data-aos-duration="2000" data-aos-delay="500" data-aos-easing="ease-in-out">
+      </div>
+        <div class="stock-container">
+          {% for stock, details in preclose_prices.items() %}
+          <div class="stock-item">
+            <h5>{{ stock }}</h5>
+            <a href="{{ url_for('auth.login') }}" class="text-decoration-none">
+              <i class="bi bi-graph-up fs-3"></i>
+            </a>
+            <p>Preclose</p>
+            <h2 class="text-success">{{ details['Close'] }}</h2>
+            <small class="text-muted">Date: {{ details['Date'] }}</small>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+    
+    <div class="hero-content">
+      <h1 data-aos="fade-left" data-aos-duration="2000" data-aos-delay="500" data-aos-easing="ease-in-out">
+        Smart Trading Begins with Smarter Learning.
+      </h1>
+      <p class="started" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="800" data-aos-easing="ease-in-out">
+        Empower yourself with the right knowledge, the right tools, and the right strategy.
+      </p>
+
+      <!-- Added the Login/Register link without changing design close-btn-->
+      <a class="close-btn premium-button" href="{{ url_for('auth.login') }}" >
+        get started for free
+     </a>
+    </div>
+  </section>
+
+  <style>
+    /* Step 1: Hero Section */
+    .laptop-img {
+      animation: floatUpDown 3s ease-in-out infinite;
+    }
+    
+    @keyframes floatUpDown {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px); /* Adjust the distance as needed */
+      }
+    }
+    
+
+
+    .started{
+      color: #333;
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: 500px;
+      position: relative;
+      padding: 0 50px;
+    }
+    
+    .hero-content {
+      width: 50%;
+    }
+    
+    .computer-screen {
+      position: absolute;
+      right: 5%;
+      width: 45%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: -60px;
+    }
+    
+    .laptop-img {
+      width: 100%;
+      max-width: 600px;
+      height: 400px;
+      margin-left: 100px;
+      border-radius: 10px;
+      filter: drop-shadow(0px 0px 15px rgba(0, 255, 255, 0.7)); /* Neon glow effect */
+      transition: filter 0.5s ease-in-out;
+    }
+    
+    .laptop-img:hover {
+      filter: drop-shadow(0px 0px 30px rgba(0, 255, 255, 1)); /* Stronger glow on hover */
+    }
+
+    
+    .stock-container {
+      position: relative;
+      top: 14%;
+      left: 40%;
+      width: 75%;
+      height: 55%;
+      color: white;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+    }
+
+    .stock-container {
+      transform: translate(0px, -150px);
+    }
+    
+    
+    
+    .stock-item {
+      position: absolute;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      text-align: center;
+    }
+    
+    .stock-item.active {
+      opacity: 50;
+    }
+    
+    
+
+  </style>
+
+  <!--adding our server-->
+
+
+  <div class="sub-title-container"  data-aos="fade-down" data-aos-duration="1000" data-aos-delay="100" data-aos-easing="ease-in-out">
+    <h1 class="sub-title">Market <span>Action</span></h1>
+  </div>
+    <!-- Market Action Table -->
+    <section class="name3" id="market-action">
+      <div class="container my-5">
+        <!-- Search Bar -->
+        <div class="search-bar-container" style="margin-bottom: 20px; text-align: right;">
+          <div class="search-bar" style="position: relative; display: inline-block;">
+            <!-- Search Icon -->
+            <i class="fa fa-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: gold;"></i>
+            <!-- Search Input -->
+            <input 
+              type="text" 
+              id="searchBar" 
+              placeholder="Search Symbol..." 
+              style="width: 300px; padding: 10px 10px 10px 40px; border: 1px solid #ccc; border-radius: 5px;">
+          </div>
+        </div>
+        
+        <div class="table-container">
+          <table class="table table-bordered custom-table">
+            <!-- Table Header -->
+            <thead class="sticky-header">
+              <tr>
+                <th  data-aos="fade-left" data-aos-duration="200" data-aos-delay="500" data-aos-easing="ease-in-out">Symbol Name</th>
+                <th  data-aos="fade-left" data-aos-duration="200" data-aos-delay="500" data-aos-easing="ease-in-out">Inside Bar</th>
+                <th  data-aos="fade-left" data-aos-duration="200" data-aos-delay="500" data-aos-easing="ease-in-out">Double Top/Bottom</th>
+                <th  data-aos="fade-left" data-aos-duration="200" data-aos-delay="500" data-aos-easing="ease-in-out">Head and Shoulders</th>
+                <th  data-aos="fade-left" data-aos-duration="200" data-aos-delay="500" data-aos-easing="ease-in-out">V Shape</th>
+              </tr>
+            </thead>
+            <!-- Table Body -->
+            <tbody id="marketData">
+              <script>
+                const stockPatterns = {{ stock_patterns | tojson | safe }}; // Convert Python dictionary to JavaScript
+                const stockNames = {{ stock_names | tojson | safe }}; // Get stock names from Python to JavaScript
+                const loginUrl = "{{ url_for('auth.login') }}"; // URL for the login route
+    
+                // Function to clean up and capitalize stock name
+                function cleanAndCapitalizeStockName(stockName) {
+                  const cleanedName = stockName
+                    .replace("NSE:", "")
+                    .replace("-INDEX", "")
+                    .replace("MCX:", "")
+                    .replace("-EQ", "")
+                    .replace(/"/g, "")
+                    .replace(/,/g, "")
+                    .toUpperCase(); // Convert to uppercase
+                  return cleanedName;
+                }
+    
+                // Function to create the stock symbol link with the login URL
+                function createStockLink(stockName, counts) {
+                  const capitalizedStockName = cleanAndCapitalizeStockName(stockName);
+                  // Extract patterns with counts greater than 0
+                  const patternsWithCounts = Object.entries(counts)
+                    .filter(([pattern, count]) => count > 0)
+                    .map(([pattern]) => pattern.replace(' Count', ''));
+                  // Build the query string with the symbol and patterns
+                  const queryParams = new URLSearchParams({
+                    symbol: stockName,
+                    patterns: patternsWithCounts.join(',')
+                  });
+                  // Return the link with the query string and append a graph icon
+                  return `<a href="${loginUrl}?${queryParams.toString()}">
+                            ${capitalizedStockName} <span class="graph-icon">&#128200;</span>
+                          </a>`;
+                }
+    
+                // Function to populate market data
+                function populateMarketData() {
+                  const marketData = document.getElementById('marketData');
+                  marketData.innerHTML = '';
+    
+                  stockNames.forEach(stockName => {
+                    const counts = stockPatterns[stockName];
+                    // Only add rows for stocks that have at least one count greater than zero
+                    if (Object.values(counts).some(count => count > 0)) {
+                      const row = `<tr>
+                        <td>${createStockLink(stockName, counts)}</td>
+                        <td>${counts['Inside Bar Count']}</td>
+                        <td>${counts['Double Patterns Count']}</td>
+                        <td>${counts['Head and Shoulders Count']}</td>
+                        <td>${counts['V Shape Count']}</td>
+                      </tr>`;
+                      marketData.insertAdjacentHTML('beforeend', row);
+                    }
+                  });
+                }
+    
+                // Initial call to populate market data
+                populateMarketData();
+    
+                // Attach an event listener to the search bar to filter table rows
+                document.getElementById('searchBar').addEventListener('keyup', function() {
+                  var filter = this.value.toUpperCase();
+                  var rows = document.querySelectorAll('#marketData tr');
+                  rows.forEach(function(row) {
+                    var firstCell = row.getElementsByTagName('td')[0];
+                    if (firstCell) {
+                      var textValue = firstCell.textContent || firstCell.innerText;
+                      row.style.display = (textValue.toUpperCase().indexOf(filter) > -1) ? '' : 'none';
+                    }
+                  });
+                });
+              </script>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    
+    
+
+    <style>
+
+      .sticky-header {
+        background: var(--table-header-bg);
+        color: var(--table-header-text);
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .sub-title-container {
+        text-align: center;
+        padding: 20px;
+        /* Create a gradient border effect */
+        background-image: linear-gradient(135deg, var(--accent-color), var(--text-color));
+        background-origin: border-box;
+        background-clip: content-box, border-box;
+        border: 5px solid transparent;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px var(--shadow-color);
+        margin-top: 100px;
+        margin-bottom: -20px;
+      }
+      
+      /* Styling for the subtitle itself */
+      .sub-title {
+        font-size: 3rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin: 0;
+        padding: 10px 20px;
+        background: var(--bg-color);
+        border-radius: 5px;
+        display: inline-block;
+        box-shadow: 0 2px 4px var(--shadow-color);
+      }
+      
+      /* The accent color for the span */
+      .sub-title span {
+        color: var(--accent-color);
+      }
+
+
+      /* Global Styles */
+
+      .graph-icon {
+        margin-left: 5px;
+        font-size: 1rem;       /* Adjust the size as needed */
+        vertical-align: middle;
+      }
+      
+      /* Subtitle Styling */
+   
+
+      /* Section & Container */
+      .name3 {
+        padding: 20px 0;
+        margin-top: 30px;
+        margin-bottom: 200px;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;  /* or any maximum width you prefer */
+        padding: 0 20px;    /* Adds 20px of space on each side */
+        margin: 0 auto;     /* Centers the container */
+        box-sizing: border-box; /* Ensures padding is included in the width */
+      }
+      
+      .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      /* Table Container with Custom Scrollbar (vertical only) */
+      .table-container {
+        margin: 20px 0;
+        max-height: 550px; /* Approximately 10 rows visible */
+        overflow-y: auto;
+        overflow-x: hidden; /* No horizontal scroll */
+        background-color: #1e1e1e;
+        border: 1px solid #333;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Apply oval (pill) styling to the Symbol Name link (first TD in each row) */
+table.custom-table tbody tr td:first-child a {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: transparent;
+  border: 1px solid rgb(99, 165, 182); /* Accent color */
+  border-radius: 50px;       /* Creates an oval/pill shape */
+  transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect for the Symbol Name oval */
+table.custom-table tbody tr td:first-child a:hover {
+  background-color:var(--table-hover);
+  color: #121212; /* Adjust as needed for contrast */
+  transform: scale(1.05);
+}
+
+      
+      /* Custom Scrollbar for WebKit Browsers */
+      .table-container::-webkit-scrollbar {
+        width: 10px;
+      }
+      .table-container::-webkit-scrollbar-track {
+        background:rgb(245, 240, 240);
+        border-radius: 10px;
+      }
+      .table-container::-webkit-scrollbar-thumb {
+        background: var(--table-hover);
+        border-radius: 10px;
+      }
+      
+      /* Table Styling */
+      table.custom-table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;  /* Ensures table does not exceed its container */
+      }
+      table.custom-table th,
+      table.custom-table td {
+        padding: 12px 15px;
+        border: 1px solid var(--table-border-color);
+        text-align: center;
+        word-wrap: break-word; /* Allow long content to break */
+        overflow-wrap: anywhere;
+      }
+      
+      /* Table Header with Gradient & Sticky Position */
+      table.custom-table th {
+        text-transform: uppercase;
+        font-weight: 600;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+      }
+      
+      /* Table Rows with Dark Theme & Animations */
+      table.custom-table tbody tr {
+        background-color: var(--table-firstline);
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        animation: fadeInUp 0.6s ease both;
+      }
+      table.custom-table tbody tr:nth-child(even) {
+        background-color: var(--table-secondline);
+      }
+      table.custom-table tbody tr:hover {
+        background-color: var(--table-rowhover);
+        transform: translateY(-2px);
+      }
+      
+      /* Fade-in & Slide-up Animation */
+      @keyframes fadeInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      /* Link Styling Within Table Cells */
+      table.custom-table a {
+        color: var(--symbol-text);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+      table.custom-table a:hover {
+        color: #ffffff;
+      }
+
+      
+      /* Responsive Design: Scale down table on mobile to avoid horizontal scrolling */
+      @media (max-width: 768px) {
+
+        .container {
+          width: 130%;
+          max-width: 100%;  /* Remove max-width constraint */
+          margin: 0;        /* Remove auto margins if not needed */
+          padding: 0;  
+        }
+        .sub-title {
+          font-size: 2rem;
+          margin: 30px 0;
+        }
+        table.custom-table th,
+        table.custom-table td {
+          padding: 10px;
+          font-size: 0.9rem;
+        }
+        .table-container {
+          max-height: 400px;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .container {
+          width: 100%;
+          padding: 0 10px;
+        }
+        table.custom-table th,
+        table.custom-table td {
+          padding: 8px;
+          font-size: 0.8rem;
+        }
+      }
+    </style>
+      
+    <section class="name2">
+      <div id="portfolio">
+        <div class="main-text">
+          <h2>Latest <span>features</span></h2>
+        </div>
+    
+        <!-- Slider Container -->
+        <div class="slider-container">
+          <!-- Left Navigation Button -->
+          <button id="prevBtn" class="slider-btn">&lt;</button>
+    
+          <!-- This wrapper hides overflowing cards -->
+          <div class="slider-wrapper">
+            <!-- Portfolio content – cards arranged in one horizontal row -->
+            <div class="portfolio-content">
+              <!-- Card 1 -->
+              <div class="row">
+                <img src="/static/assets/img/srzone.png" alt="SR Zones" />
+                <div class="layer">
+                  <h5>SR Zones</h5>
+                  <p>
+                    "SR Zones are key levels where prices reverse or consolidate, helping traders identify entry and exit points."
+                  </p>
+                  <a href="{{ url_for('auth.login') }}">
+                    <i class="fa-solid fa-up-right-from-square fa-beat"></i>
+                  </a>
+                </div>
+              </div>
+              <!-- Card 2 -->
+              <div class="row">
+                <img src="/static/assets/img/trend.png" alt="Trendlines" />
+                <div class="layer">
+                  <h5>Trendlines</h5>
+                  <p>
+                    "Trendlines highlight the market trend by connecting key price points, showing uptrends and downtrends, and helping predict price movements."
+                  </p>
+                  <a href="{{ url_for('auth.login') }}">
+                    <i class="fa-solid fa-up-right-from-square fa-beat"></i>
+                  </a>
+                </div>
+              </div>
+              <!-- Card 3 -->
+              <div class="row">
+                <img src="/static/assets/img/morningstar.png" alt="Morning and Evening Star" />
+                <div class="layer">
+                  <h5>Morning and Evening Star</h5>
+                  <p>
+                    "Morning Star signals a bullish reversal after a downtrend, while Evening Star indicates a bearish reversal after an uptrend."
+                  </p>
+                  <a href="{{ url_for('auth.login') }}">
+                    <i class="fa-solid fa-up-right-from-square fa-beat"></i>
+                  </a>
+                </div>
+              </div>
+              <!-- Card 4 -->
+              <div class="row">
+                <img src="/static/assets/img/parallel.png" alt="Morning and Evening Star" />
+                <div class="layer">
+                  <h5>Parallel Channels</h5>
+                  <p>
+                    Detect channels formed by parallel lines that contain the price action. This pattern allows 
+                    you to gauge the strength of a trend and predict potential breakouts or reversals when 
+                    prices hit the channel boundaries.                  </p>
+                  <a href="{{ url_for('auth.login') }}">
+                    <i class="fa-solid fa-up-right-from-square fa-beat"></i>
+                  </a>
+                </div>
+              </div>
+              <!-- Card 5 -->
+              <div class="row">
+                <img src="/static/assets/img/traingle.png" alt="Morning and Evening Star" />
+                <div class="layer">
+                  <h5>Triangles</h5>
+                  <p>
+                    Recognize triangular formations that occur when price ranges narrow over time. These 
+                    patterns often signal a continuation of the current trend or a potential reversal once the 
+                    price breaks out of the triangle.                   </p>
+                  <a href="{{ url_for('auth.login') }}">
+                    <i class="fa-solid fa-up-right-from-square fa-beat"></i>
+                  </a>
+                </div>
+              </div>
+              <!-- Card 6 (optional) -->
+              <div class="row">
+                <img src="/static/assets/img/trend.png" alt="Morning and Evening Star" />
+                <div class="layer">
+                  <h5>Trendlines</h5>
+                  <p>
+                    Draw straight lines connecting significant highs or lows to highlight the market's directional 
+                    bias. Trendlines are essential for understanding ongoing trends and spotting potential 
+                    reversals.                  </p>
+                  <a href="{{ url_for('auth.login') }}">
+                    <i class="fa-solid fa-up-right-from-square fa-beat"></i>
+                  </a>
+                </div>
+              </div>
+              <!-- Add more cards as needed -->
+              <div class="row">
+                <img src="/static/assets/img/vshape.png" alt="Morning and Evening Star" />
+                <div class="layer">
+                  <h5>V-Shape </h5>
+                  <p>
+                    Detect rapid reversals characterized by a steep decline followed by an equally steep 
+                    recovery. A V-Shape indicates that the market quickly corrected itself, often presenting a 
+                    sharp trading opportunity.                  </p>
+                  <a href="{{ url_for('auth.login') }}">
+                    <i class="fa-solid fa-up-right-from-square fa-beat"></i>
+                  </a>
+                </div>
+              </div>
+
+              <div class="row">
+                <img src="/static/assets/img/inside.png" alt="Morning and Evening Star" />
+                <div class="layer">
+                  <h5>Inside Bars                   </h5>
+                  <p>
+                    Recognize consolidation patterns where the current bar’s price range is entirely within the 
+                    previous bar’s range. Inside bars often precede breakouts, helping traders anticipate 
+                    significant moves.                  </p>
+                  <a href="{{ url_for('auth.login') }}">
+                    <i class="fa-solid fa-up-right-from-square fa-beat"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="row">
+                <img src="/static/assets/img/DoubleTop.png" alt="Morning and Evening Star" />
+                <div class="layer">
+                  <h5>Double Tops and Bottoms                   </h5>
+                  <p>
+                    Spot reversal patterns where the price tests a high or low level twice before reversing 
+direction. This pattern is a strong indicator that a trend reversal may be underway, signaling 
+traders to adjust their positions accordingly. </p>
+                  <a href="{{ url_for('auth.login') }}">
+                    <i class="fa-solid fa-up-right-from-square fa-beat"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="row">
+                <img src="/static/assets/img/moving.png" alt="Morning and Evening Star" />
+                <div class="layer">
+                  <h5>Moving Averages</h5>
+                  <p>
+                    Moving averages make it simpler to determine the trend's direction by smoothing down 
+                    price data into a single, flowing line.                   </p>
+                  <a href="{{ url_for('auth.login') }}">
+                    <i class="fa-solid fa-up-right-from-square fa-beat"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="row">
+                <img src="/static/assets/img/vol.png" alt="Morning and Evening Star" />
+                <div class="layer">
+                  <h5>Volatility</h5>
+                  <p>
+                    Volatility is a statistical measure of the dispersion of returns for a given security or market index. It is often measured from either the standard deviation or variance between those returns. In most cases, the higher the volatility, the riskier the security.                  </p>
+                  <a href="{{ url_for('auth.login') }}">
+                    <i class="fa-solid fa-up-right-from-square fa-beat"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+          <!-- Right Navigation Button -->
+          <button id="nextBtn" class="slider-btn">&gt;</button>
+        </div>
+      </div>
+    </section>
+    
+      <style>
+        /* ---------- Existing Section & Heading Styles ---------- */
+section.name2 {
+  background: rgb(245, 248, 248);
+  padding: 60px 0;
+  margin-bottom: 100px;
+  
+}
+
+#portfolio {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+
+
+.main-text {
+  text-align: center;
+  padding: 20px;
+  background: var(--bg-color);
+  box-shadow: 0 4px 8px var(--shadow-color);
+  border-radius: 10px;
+  margin-bottom: 200px;
+  /* Adding a gradient border effect via background-clip */
+  background-image: linear-gradient(135deg, var(--accent-color), var(--text-color));
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  border: 5px solid transparent;
+}
+
+/* Style the heading inside the main-text container */
+.main-text h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+  padding: 10px 20px;
+  background: var(--bg-color);
+  border-radius: 5px;
+  position: relative;
+  display: inline-block;
+  box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+/* The <span> inside the heading gets the accent color */
+.main-text h2 span {
+  color: var(--accent-color);
+}
+
+
+/* ---------- New Slider Container Styles ---------- */
+.slider-container {
+  position: relative;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.slider-wrapper {
+  overflow: hidden;
+}
+
+/* Portfolio content: force cards in one row */
+.portfolio-content {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 30px;
+  transition: transform 0.4s ease-in-out;
+}
+
+/* For desktop: show 2 cards per slide */
+.portfolio-content .row {
+  flex: 0 0 calc((100% - 30px) / 2); /* 30px = one gap between 2 items */
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  background: #fff;
+  
+  /* Increase size and add a border */
+  height: 400px;                
+  border: 2px solid rgb(0, 3, 7);
+}
+
+.portfolio-content .row:hover {
+  transform: scale(1.05);
+}
+
+/* Card image & overlay (your existing styles) */
+.portfolio-content .row img {
+  width: 100%;
+  height: 350px;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.portfolio-content .row:hover img {
+  transform: scale(1.1);
+}
+
+.portfolio-content .row .layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.65);
+  opacity: 0;
+  color: #fff;
+  transition: opacity 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+}
+
+.portfolio-content .row:hover .layer {
+  opacity: 1;
+}
+
+.portfolio-content .row .layer h5 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.portfolio-content .row .layer p {
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.portfolio-content .row .layer a {
+  font-size: 1.2rem;
+  color: #fff;
+  text-decoration: none;
+  border: 2px solid #fff;
+  padding: 8px 16px;
+  border-radius: 50px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.portfolio-content .row .layer a:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* ---------- Navigation Button Styles ---------- */
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #007bff;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+#prevBtn {
+  left: -50px; /* Adjust as needed */
+}
+
+#nextBtn {
+  right: -50px; /* Adjust as needed */
+}
+
+/* ---------- Mobile Responsive Adjustments ---------- */
+@media (max-width: 768px) {
+  .main-text h2 {
+    font-size: 2rem;
+  }
+  .portfolio-content {
+    gap: 20px;
+  }
+  /* On mobile: show only one card per slide */
+  .portfolio-content .row {
+    flex: 0 0 100%;
+  }
+  .slider-btn {
+    font-size: 1.5rem;
+    padding: 0.5rem;
+  }
+  #prevBtn {
+    left: -30px;
+  }
+  #nextBtn {
+    right: -30px;
+  }
+}
+
+      </style>
+  
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          const sliderWrapper = document.querySelector('.slider-wrapper');
+          const portfolioContent = document.querySelector('.portfolio-content');
+          const nextBtn = document.getElementById('nextBtn');
+          const prevBtn = document.getElementById('prevBtn');
+        
+          const rows = portfolioContent.querySelectorAll('.row');
+          const totalItems = rows.length;
+          
+          // Set visibleItems: 2 for desktop (>768px), 1 for mobile (<=768px)
+          let visibleItems = window.innerWidth <= 768 ? 1 : 2;
+          let currentPage = 0;
+          let totalPages = Math.ceil(totalItems / visibleItems);
+        
+          // Update the slider by aligning the left edge of the target card with the container
+          function updateSlider() {
+            // The target card index for this "page"
+            const targetIndex = currentPage * visibleItems;
+            if (rows[targetIndex]) {
+              // Get the left offset of that card relative to portfolioContent's container.
+              const offset = rows[targetIndex].offsetLeft;
+              portfolioContent.style.transform = `translateX(-${offset}px)`;
+            }
+          }
+        
+          // Next button: move one page forward (2 cards on desktop, 1 on mobile)
+          nextBtn.addEventListener('click', function() {
+            if (currentPage < totalPages - 1) {
+              currentPage++;
+              updateSlider();
+            }
+          });
+        
+          // Previous button: move one page backward
+          prevBtn.addEventListener('click', function() {
+            if (currentPage > 0) {
+              currentPage--;
+              updateSlider();
+            }
+          });
+        
+          // Update slider on window resize
+          window.addEventListener('resize', function() {
+            visibleItems = window.innerWidth <= 768 ? 1 : 2;
+            totalPages = Math.ceil(totalItems / visibleItems);
+            // If the currentPage is now out of bounds, adjust it.
+            if (currentPage >= totalPages) {
+              currentPage = totalPages - 1;
+            }
+            updateSlider();
+          });
+        });
+        </script>
+        
+        
+
+      <footer class="footer">
+        <div class="pattern-overlay"></div>
+        
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Navigation</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i>Home</a></li>
+                    <li><a href="/aboutus"><i class="fas fa-chevron-right"></i>About Us</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i>Trading Academy</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i>Open Account</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i>Market Analysis</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Client Services</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i>Beginner Center</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i>Advanced Tools</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i>Institutional Solutions</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i>Partner Program</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i>Investor Portal</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i>Beginner Center</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i>Advanced Tools</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i>Institutional Solutions</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i>Partner Program</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i>Investor Portal</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul class="footer-links">
+                    <li><a href="/beginersguide"><i class="fas fa-chevron-right"></i>beginers guide</a></li>
+                    <li><a href="/educationresorce"><i class="fas fa-chevron-right"></i>education resorce</a></li>
+                    <li><a href="/topindicators"><i class="fas fa-chevron-right"></i>top indicators</a></li>
+                    <li><a href="/technicalanalysis"><i class="fas fa-chevron-right"></i>technical analysis</a></li>
+                    <li><a href="/stocktradingpattern"><i class="fas fa-chevron-right"></i> stocktradingpattern</a></li>
+                    <li><a href="/Riskmanagement"><i class="fas fa-chevron-right"></i> Riskmanagement</a></li>
+                    <li><a href="/optiontradingindia"><i class="fas fa-chevron-right"></i>optiontradingindia</a></li>
+                    <li><a href="/optiontrading"><i class="fas fa-chevron-right"></i>optiontrading</a></li>
+                    <li><a href="/marketinsights"><i class="fas fa-chevron-right"></i> marketinsights</a></li>
+                    <li><a href="/intradaytradingtips"><i class="fas fa-chevron-right"></i> intradaytradingtips</a></li>
+                    <li><a href="/Discipline"><i class="fas fa-chevron-right"></i> Discipline</a></li>
+                    <li><a href="/analysis"><i class="fas fa-chevron-right"></i> Technical Analysis</a></li>
+
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Connect With Us</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-phone"></i> +91 88613 44044</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i>admin@spurzeetechnologies.in</a></li>
+                    <li><a href="https://www.google.com/maps/place/Spacio+workspace/@12.9449187,77.5658325,17z/data=!3m1!4b1!4m6!3m5!1s0x3bae1502dbeb7f31:0x2d5217972b05fc2b!8m2!3d12.9449135!4d77.5684074!16s%2Fg%2F11mpp1zx4h?entry=ttu&g_ep=EgoyMDI1MDIwNS4xIKXMDSoASAFQAw%3D%3D"><i class="fas fa-map-marker-alt"></i>Bengaluru Office</a></li>
+                    <li><a href="https://wa.me/+918861344044?text=Hi%2C%20I%20need%20help"><i class="fas fa-comments"></i>Live Chat</a></li>
+                    <li><a href="/contactus"><i class="fas fa-headset"></i>24/7 Support</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="social-section">
+            <h4 class="social-title">Follow Our Socials</h4>
+            <div class="social-links">
+                <a href="https://wa.me/+918861344044?text=Hi%2C%20I%20need%20help" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/spurzeetech?igsh=MW5ramcxdzdkNjZtYQ==" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/@SpurzeeTechnologies" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.linkedin.com/company/spurzee-technologies/?originalSubdomain=in" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-telegram"></i></a>
+                <a href="https://x.com/Spurzeetech" target="_blank"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>      
+
+        <div class="help-section">
+            <a href="/contactus" class="help-button">
+                <i class="fas fa-life-ring"></i>
+                Need Immediate Assistance?
+            </a>
+        </div>
+
+        <div class="footer-bottom">
+            <p> SpurzeeTechnologies • EWS.29-31, Ground Floor,
+              13th Cross, Hudco Colony,
+              Opp Kariyanna Building,
+              Shivamogga-577204</p>
+            <p>© 2025 SpurzeeTechnologies LLC. All Rights Reserved | <a href="#" style="color: var(--primary);">Privacy Policy</a> | <a href="#" style="color: var(--primary);">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    
+    <style>
+
+      .footer {
+          background: linear-gradient(145deg, #0b1a30, #0a1423);
+          color: #fff;
+          padding: 60px 20px 30px;
+          font-family: 'Inter', sans-serif;
+          position: relative;
+          overflow: hidden;
+      }
+
+      .footer:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background: linear-gradient(90deg, var(--primary), var(--accent));
+      }
+
+      .footer-container {
+          max-width: 1300px;
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+          gap: 40px;
+          padding-bottom: 50px;
+          border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+
+      .footer-section h4 {
+          color: var(--primary);
+          margin-bottom: 25px;
+          font-size: 1.3rem;
+          position: relative;
+          padding-bottom: 10px;
+      }
+
+      .footer-section h4:after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 40px;
+          height: 2px;
+          background: var(--accent);
+      }
+
+      .footer-links {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+      }
+
+      .footer-links li {
+          margin-bottom: 15px;
+          transform: translateX(0);
+          transition: all 0.3s ease;
+      }
+
+      .footer-links li:hover {
+          transform: translateX(10px);
+      }
+
+      .footer-links a {
+          color: #a8b2d1;
+          text-decoration: none;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          transition: all 0.3s ease;
+      }
+
+      .footer-links a:hover {
+          color: var(--primary);
+      }
+
+      .footer-links a i {
+          color: var(--accent);
+          font-size: 0.8rem;
+      }
+
+      .social-section {
+          text-align: center;
+          padding: 30px 0;
+      }
+
+      .social-title {
+          color: var(--primary);
+          margin-bottom: 25px;
+          font-size: 1.4rem;
+      }
+
+      .social-links {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          flex-wrap: wrap;
+      }
+
+      .social-links a {
+          width: 45px;
+          height: 45px;
+          border-radius: 50%;
+          background: rgba(255,255,255,0.1);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.2rem;
+          color: #fff;
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          position: relative;
+          overflow: hidden;
+      }
+
+      .social-links a:after {
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(45deg, var(--primary), var(--accent));
+          opacity: 0;
+          transition: all 0.3s ease;
+      }
+
+      .social-links a:hover:after {
+          opacity: 1;
+      }
+
+      .social-links a i {
+          position: relative;
+          z-index: 1;
+      }
+
+      .social-links a:hover {
+          transform: translateY(-5px) scale(1.1);
+      }
+
+      .help-section {
+          text-align: center;
+          padding: 40px 0;
+      }
+
+      .help-button {
+          background: linear-gradient(45deg, var(--primary), var(--accent));
+          color: #fff;
+          padding: 15px 40px;
+          border-radius: 30px;
+          text-decoration: none;
+          font-weight: 600;
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          transition: all 0.3s ease;
+          box-shadow: 0 10px 20px rgba(0,163,255,0.2);
+      }
+
+      .help-button:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 15px 25px rgba(0,163,255,0.3);
+      }
+
+      .footer-bottom {
+          text-align: center;
+          padding-top: 30px;
+          color: #8a99b5;
+          font-size: 0.9rem;
+      }
+
+      .pattern-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0.05;
+          background: repeating-linear-gradient(
+              45deg,
+              transparent,
+              transparent 10px,
+              var(--primary) 10px,
+              var(--primary) 20px
+          );
+          pointer-events: none;
+      }
+
+      @media (max-width: 768px) {
+          .footer-container {
+              grid-template-columns: 1fr;
+              text-align: center;
+              gap: 40px;
+          }
+
+          .footer-section h4:after {
+              left: 50%;
+              transform: translateX(-50%);
+          }
+
+          .footer-links li:hover {
+              transform: translateX(0);
+          }
+
+          .footer-links a {
+              justify-content: center;
+          }
+      }
+  </style>
+
+
+  
+
+
+  <script>
+    // Theme Toggle Logic
+    const toggleBtn = document.getElementById("toggleTheme");
+    const body = document.body;
+
+    // Check localStorage for theme preference
+    if (localStorage.getItem("theme") === "light-mode") {
+      body.classList.add("light-mode");
+    }
+
+    toggleBtn.addEventListener("click", () => {
+      body.classList.toggle("light-mode");
+      localStorage.setItem("theme", body.classList.contains("light-mode") ? "light-mode" : "dark-mode");
+    });
+
+    // Interactive Background
+    const canvas = document.getElementById("background");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = [];
+    let maxParticles = window.innerWidth < 768 ? 20 : 50;
+
+    class Particle {
+      constructor(x, y, size, color) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.color = color;
+        this.speedX = (Math.random() * 2 - 1) * 0.5;
+        this.speedY = (Math.random() * 2 - 1) * 0.5;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (this.x <= 0 || this.x >= canvas.width) this.speedX *= -1;
+        if (this.y <= 0 || this.y >= canvas.height) this.speedY *= -1;
+
+        for (let i = 0; i < particles.length; i++) {
+          const dx = particles[i].x - this.x;
+          const dy = particles[i].y - this.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          if (distance < 150) {
+            ctx.beginPath();
+            ctx.moveTo(this.x, this.y);
+            ctx.lineTo(particles[i].x, particles[i].y);
+            ctx.strokeStyle = getComputedStyle(document.body).getPropertyValue("--line-color");
+            ctx.globalAlpha = 0.2;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+            ctx.globalAlpha = 1;
+          }
+        }
+      }
+    }
+
+    function initParticles() {
+      particles.length = 0;
+      const particleColor = getComputedStyle(document.body).getPropertyValue("--text-color");
+      for (let i = 0; i < maxParticles; i++) {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        const size = Math.random() * 3 + 1;
+        particles.push(new Particle(x, y, size, particleColor));
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((particle) => {
+        particle.draw();
+        particle.update();
+      });
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      maxParticles = window.innerWidth < 768 ? 20 : 50;
+      initParticles();
+    });
+
+    initParticles();
+    animate();
+// Update mobile menu handling
+const handleMobileMenu = () => {
+    const hamburger = document.querySelector(".hamburger");
+    const navLinks = document.querySelector(".nav-links");
+    const overlay = document.querySelector(".mobile-menu-overlay");
+    const menuItems = document.querySelectorAll(".nav-links > li");
+
+    hamburger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        hamburger.classList.toggle("active");
+        navLinks.classList.toggle("active");
+        overlay.style.display = navLinks.classList.contains("active") ? "block" : "none";
+    });
+
+    // Handle menu items with submenus
+    document.querySelectorAll('.nav-links > li').forEach(item => {
+        const link = item.querySelector('a');
+        const submenu = item.querySelector('.submenu');
+
+        if(submenu) {
+            link.addEventListener('click', (e) => {
+                if(window.innerWidth <= 768) {
+                    e.preventDefault();
+                    item.classList.toggle('active');
+                    submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+                }
+            });
+        }
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if(window.innerWidth <= 768) {
+            if(!e.target.closest('.nav-links') && !e.target.closest('.hamburger')) {
+                hamburger.classList.remove("active");
+                navLinks.classList.remove("active");
+                overlay.style.display = "none";
+                document.querySelectorAll('.submenu').forEach(sub => sub.style.display = 'none');
+            }
+        }
+    });
+}
+
+// Initialize mobile menu
+handleMobileMenu();
+
+    // Header Scroll Logic
+    const header = document.querySelector(".main-header");
+    let lastScrollY = 0;
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > lastScrollY) {
+        header.classList.add("hide");
+      } else {
+        header.classList.remove("hide");
+      }
+      lastScrollY = window.scrollY;
+    });
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+      if (window.innerWidth < 768) {
+          document.documentElement.style.setProperty('--speed', '35s'); // Slower on mobile
+      }
+  });
+
+
+
+    AOS.init();
+
+
+
+
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      let items = document.querySelectorAll(".stock-item");
+      let index = 0;
+  
+      function showNextStock() {
+        items.forEach(item => item.classList.remove("active")); // Hide all
+        items[index].classList.add("active"); // Show one
+        index = (index + 1) % items.length; // Loop back after last item
+      }
+  
+      showNextStock(); // Initial call
+      setInterval(showNextStock, 1000); // Change stock every 1 second
+    });
+  </script>
+  
+
+    
+</body>
+</html>

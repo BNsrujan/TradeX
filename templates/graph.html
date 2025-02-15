@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stock Chart</title>
+    <script src="https://cdn.fyers.in/js/sdk/1.2.0/fyers-web-sdk-v3/index.min.js"></script>
+    <script src="https://unpkg.com/lightweight-charts@4.0.0/dist/lightweight-charts.standalone.production.js"></script>
+    <script src="{{ url_for('static', filename='index.js') }}" defer></script>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <style>
+    /* Styling for the control-panel to make it scrollable */
+
+    /* Optional: Customize the scrollbar style */
+    #control-panel::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    #control-panel::-webkit-scrollbar-thumb {
+      background-color: darkgray;
+      border-radius: 10px;
+    }
+
+    /* Styling for the scroll buttons */
+    .scroll-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 5px;
+      background-color: #f0f0f0;
+      border: none;
+      cursor: pointer;
+    }
+
+    .scroll-button svg {
+      width: 20px;
+      height: 20px;
+    }
+  </style>
+
+  <body>
+    <script>
+      // Make the symbol and patterns available to index.js
+      let symbolFromFlask = "{{ symbol }}";
+      let patternsFromFlask = {{ patterns | tojson | safe }};
+
+      // Debugging in the browser console
+      // console.log("Symbol passed to index.js:", symbolFromFlask);
+      // console.log("Patterns passed to index.js:", patternsFromFlask);
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const selectedStockElement = document.getElementById("selected-stock");
+
+        // If symbolFromFlask is present
+        if (symbolFromFlask) {
+          // Clean and normalize `symbolFromFlask`
+          let cleanedSymbol = symbolFromFlask
+            .replace("NSE:", "")
+            .replace("BSE:", "")
+            .replace("-INDEX", "")
+            .replace("MCX:", "")
+            .replace("-EQ", "")
+            .replace(/"/g, "")
+            .replace(/,/g, "")
+            .trim();
+
+          // Update the selected stock element
+          selectedStockElement.textContent = cleanedSymbol || "Nifty 50";
+
+          // Add the stock to the first row of the watchlist
+          const stockTableBody = document.getElementById("stock-table").getElementsByTagName("tbody")[0];
+
+          // Check if the stock already exists in the watchlist
+          let stockExists = false;
+          let rows = document.getElementsByClassName("stock-row");
+          for (let i = 0; i < rows.length; i++) {
+            if (rows[i].getAttribute("data-symbol") === symbolFromFlask) {
+              stockExists = true;
+              break;
+            }
+          }
+
+          // If the stock doesn't exist, add it as the first row
+          if (!stockExists) {
+            const newRow = document.createElement("tr");
+            newRow.classList.add("stock-row", "selected");
+            newRow.setAttribute("data-symbol", symbolFromFlask);
+            newRow.setAttribute("onclick", "selectStock(this)");
+
+            // Create the cell for the stock name (you can replace it with the actual name if available)
+            const cell = document.createElement("td");
+            cell.textContent = cleanedSymbol; // You can replace this with the stock name (e.g., ABB)
+            newRow.appendChild(cell);
+
+            // Add the delete button
+            const deleteCell = document.createElement("td");
+            const deleteButton = document.createElement("button");
+            deleteButton.classList.add("delete-button");
+            deleteButton.setAttribute("aria-label", "Delete stock");
+            deleteButton.textContent = "🗑";
+            deleteCell.appendChild(deleteButton);
+            newRow.appendChild(deleteCell);
+
+            // Add the new row to the top of the table body
+            stockTableBody.insertBefore(newRow, stockTableBody.firstChild);
+
+            // Now select the newly added stock row
+            selectStock(newRow);
+          }
+        } else {
+          // Fallback to default if `symbolFromFlask` is not defined or empty
+          selectedStockElement.textContent = "Nifty 50";
+        }
+      });
+    </script>
+
+    <div id="topBar">
+      <div class="top-bar-left">
+        <div class="settings-dropdown">
+          <button id="settings-button" class="top-bar-button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <!-- Outer circle for the account icon -->
+              <circle cx="12" cy="10" r="4"></circle>
+              <!-- Head of the person -->
+              <path d="M12 14c-4 0-6 2-6 2v2h12v-2s-2-2-6-2z"></path>
+              <!-- Body of the person -->
+            </svg>
+          </button>
+          <span class="account-label">Account</span>
+          <div class="settings-content">
+            <a href="/logout" id="logout-button">Log out</a>
+          </div>
+        </div>
+
+        <button id="search-button" class="top-bar-button">
+          <span class="top-search-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              x="0px"
+              y="0px"
+              width="20"
+              height="20"
+              viewBox="0 0 50 50"
+              style="margin-bottom: -2px; margin-right: 3px"
+            >
+              <path
+                d="M 21 3 C 11.621094 3 4 10.621094 4 20 C 4 29.378906 11.621094 37 21 37 C 24.710938 37 28.140625 35.804688 30.9375 33.78125 L 44.09375 46.90625 L 46.90625 44.09375 L 33.90625 31.0625 C 36.460938 28.085938 38 24.222656 38 20 C 38 10.621094 30.378906 3 21 3 Z M 21 5 C 29.296875 5 36 11.703125 36 20 C 36 28.296875 29.296875 35 21 35 C 12.703125 35 6 28.296875 6 20 C 6 11.703125 12.703125 5 21 5 Z"
+              ></path>
+            </svg>
+          </span>
+          <span style="text-transform: capitalize" id="selected-stock">
+            Nifty 50
+          </span>
+        </button>
+        <select id="interval-select" class="top-bar-select">
+          <option value="5" selected>5</option>
+          <option value="15">15</option>
+          <option value="30">30</option>
+          <option value="60">1H</option>
+          <option value="240">4H</option>
+          <option value="1440">1D</option>
+        </select>
+
+        <div class="patterns-row">
+          <div class="dropdown">
+            <!-- Main SR Zones Button -->
+            <div id="srzones" class="option" data-value="srzones">SR Zones</div>
+
+            <!-- First-level Dropdown Content: Default and Customized SR Zones -->
+            <div class="content" id="srzones-content">
+              <!-- Default SR Zones Button -->
+              <div id="default-srzones" data-value="default-srzones">
+                Default SR Zones
+              </div>
+
+              <!-- Customized SR Zones Button and Inputs -->
+              <div id="custom-srzones" data-value="custom-srzones">
+                Customized SR Zones
+              </div>
+
+              <!-- Second-level Content: No of Lines and Start Date -->
+              <div id="custom-srzones-content" class="input-container">
+                <!-- No of Lines Input -->
+                <div class="input-group">
+                  <label for="num-sr-lines">No of Lines:</label>
+                  <input
+                    type="number"
+                    id="num-sr-lines"
+                    placeholder="Enter No of SR Lines"
+                    value="8"
+                    min="4"
+                    max="15"
+                  />
+                </div>
+
+                <!-- Start Date Input -->
+                <div class="input-group">
+                  <label for="sr-date">Select Date:</label>
+                  <input type="date" id="sr-date" />
+                </div>
+
+                <!-- Error Message -->
+                <div class="error-container">
+                  <span id="sr-error-msg"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <style>
+            /* Dropdown Container */
+            .dropdown {
+              position: relative;
+              display: inline-block;
+            }
+
+            /* First-level Dropdown Content */
+            #srzones-content {
+              display: none;
+              position: absolute;
+              background-color: #fff;
+              min-width: 200px;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+              z-index: 1;
+              margin-top: 4px;
+            }
+
+            /* Style for Default and Customized SR Zones buttons */
+            #default-srzones,
+            #custom-srzones {
+              padding: 8px 12px;
+              cursor: pointer;
+              background-color: #fff;
+              transition: background-color 0.2s;
+            }
+
+            #default-srzones:hover,
+            #custom-srzones:hover {
+              background-color: #f5f5f5;
+            }
+
+            /* Second-level Content for Customized SR Zones */
+            #custom-srzones-content {
+              padding: 12px;
+              border-top: 1px solid #eee;
+            }
+
+            /* Input Group Styling */
+            .input-group {
+              margin-bottom: 12px;
+            }
+
+            .input-group label {
+              display: block;
+              margin-bottom: 4px;
+              color: #333;
+              font-size: 14px;
+            }
+
+            /* Input Styling */
+            .input-group input[type="number"],
+            .input-group input[type="date"] {
+              width: 100%;
+              padding: 6px 8px;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+              font-size: 14px;
+            }
+
+            /* Error Message Styling */
+            .error-container {
+              color: #ff0000;
+              font-size: 12px;
+              margin-top: 4px;
+            }
+
+            /* Active state */
+            .option.active {
+              background-color: #f0eef1;
+            }
+          </style>
+          <div class="dropdown">
+            <div id="trliness" class="option" data-value="trliness">
+              Trend Lines
+            </div>
+            <div class="content" id="extra-buttons">
+              <button id="trlines-btn" data-value="trlines">
+                Default Trendlines
+              </button>
+              <button id="parallel-channel-btn" data-value="parallel_channels">
+                Wedges / Parallel Channel
+              </button>
+              <button id="triangles-btn">Triangles</button>
+              <button id="rectangle-btn" style="display: none">
+                Rectangle / Flag
+              </button>
+              <button id="diamond-btn" style="display: none">
+                Diamond Pattern
+              </button>
+            </div>
+          </div>
+          <!-- <div class="option" data-value="double-tops">Double tops</div> -->
+          <div class="dropdown">
+            <div id="mw-hns-vshape" class="option" data-value="mw-hns-vshape">
+              M/W/Hns/Vshape
+            </div>
+            <div class="content" id="extra-options">
+              <!-- <button id="double-tops-btn" data-value="double-tops">Double Tops</button> -->
+              <button id="double-tops-btn" data-value="double-tops">
+                Double Tops/Bottom
+              </button>
+              <button
+                id="triple-tops-btn"
+                data-value="triple-tops"
+                style="display: none"
+              >
+                Triple Tops/Bottom
+              </button>
+              <button id="hns-btn" data-value="head-and-shoulders">
+                Head & Shoulders
+              </button>
+              <button id="vshape-btn" data-value="vshape">VShape</button>
+              <!-- <button id="vshape-btn" data-value="vshape">Vshape</button> -->
+            </div>
+          </div>
+          <!-- <div class="option" data-value="ibarss">Inside Bars</div> -->
+          <div class="dropdown">
+            <div id="miscellaneous" class="option" data-value="mis">
+              Miscellaneous
+            </div>
+            <div class="content" id="extra-optionss">
+              <button id="inside-bars" data-value="ibarss">Inside Bars</button>
+              <button id="boxx" data-value="box">Box</button>
+
+              <button
+                id="cup-handle"
+                data-value="cupandhandle"
+                style="display: none"
+              >
+                Cup and Handle
+              </button>
+            </div>
+          </div>
+
+          <div class="dropdown">
+            <!-- Dropdown Toggle Button -->
+            <div class="option" data-value="ema" onclick="toggleDropdown()">
+              EMA
+            </div>
+
+            <!-- Dropdown Content -->
+            <div
+              class="dropdown-content"
+              id="ema-dropdown"
+              style="display: none"
+            >
+              <h4>Customized EMA</h4>
+              <label for="num-ema-lines"
+                >Enter EMA Periods (comma-separated):</label
+              >
+              <input
+                type="text"
+                id="ema-periods"
+                placeholder="e.g., 5,10,20"
+                value="20"
+              />
+              <button id="submitema" data-value="Submit">Submit</button>
+            </div>
+          </div>
+
+          <div class="dropdown">
+            <div id="Strategies" class="option" data-value="Strategies">
+              Strategies
+            </div>
+            <div class="content" id="extra-options">
+              <button
+                id="bolingerbandButton"
+                data-value="bolingerband"
+                class="pattern-button"
+              >
+                Bollinger Band
+              </button>
+              <button
+                id="consecutivecandlesButton"
+                data-value="consecutive_candles"
+                class="pattern-button"
+              >
+                crow setup
+              </button>
+              <!--               <button id="vcp" data-value="vcp">VCP</button> -->
+              <button id="dc" data-value="dc">Donchian Channel</button>
+            </div>
+          </div>
+          <!-- <div class="option" data-value="head-and-shoulders">
+            Head & Shoulders
+          </div> -->
+          <div class="dropdown">
+            <div id="candle-stick" class="option" data-value="candle-stick">
+              Candle Stick
+            </div>
+            <div class="content" id="extra-options">
+              <button
+                id="morn-even"
+                data-value="morn-even"
+                class="pattern-button"
+              >
+                Morning/Evening star
+              </button>
+              <button id="engulf" data-value="engulf">Engulfing</button>
+            </div>
+          </div>
+          <!-- <div class="option" data-value="cupandhandle">Cup and Handle</div> -->
+
+          <!-- <div class="option" data-value="triple-tops">Triple tops</div> -->
+          <!-- <div class="option" data-value="ema">EMA</div> -->
+
+          <div class="option" data-value="volatility" id="volatilityButton">
+            Volatility
+          </div>
+
+          <script>
+            function toggleDropdown() {
+              const dropdown = document.getElementById("ema-dropdown");
+              dropdown.style.display =
+                dropdown.style.display === "none" ? "block" : "none";
+            }
+          </script>
+
+          <style>
+            .dropdown {
+              position: relative;
+              display: inline-block;
+            }
+
+            .dropdown-content {
+              position: absolute;
+              background-color: white;
+              padding: 4px;
+              box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+              min-width: 100px;
+              max-width: 150px;
+              z-index: 1;
+            }
+          </style>
+        </div>
+
+        <!-- <script>
+          document
+            .getElementById("trlines")
+            .addEventListener("click", function () {
+              var buttonsDiv = document.getElementById("extra-buttons");
+              buttonsDiv.style.display =
+                buttonsDiv.style.display === "none" ? "block" : "none";
+            });
+
+          // Function to enable or disable buttons
+          function toggleButtonState(buttonId, isEnabled) {
+            var button = document.getElementById(buttonId);
+            button.disabled = !isEnabled;
+          }
+
+          // Function to add checkmark on button click
+          const buttons = document.querySelectorAll(".content button");
+          buttons.forEach((button) => {
+            button.addEventListener("click", function () {
+              buttons.forEach((btn) =>
+                btn.classList.remove("checked", "active")
+              );
+              this.classList.add("checked", "active");
+            });
+          });
+
+          // Example usage
+
+          toggleButtonState("parallel-channel-btn", true); // Disabled
+          toggleButtonState("triangles-btn", true);
+          toggleButtonState("rectangle-btn", true); // Disabled
+          toggleButtonState("diamond-btn", true);
+        </script> -->
+        <button id="refresh-button">
+          <div class="svg-box">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#000"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M23 4v6h-6" />
+              <path d="M1 20v-6h6" />
+              <path
+                d="M3.51 9a9 9 0 0 1 14.32-4.19L23 10m-2 5a9 9 0 0 1-14.32 4.19L1 14"
+              />
+            </svg>
+          </div>
+        </button>
+      </div>
+      <!--<div class="option" data-value="ema">EMA</div>
+            <div class="option" data-value="trlines">Trend Lines</div>
+            <div class="option" data-value="ibarss">Ibars</div>
+            <div class="option" data-value="head-and-shoulders">Head and Shoulders</div>
+            <div class="option" data-value="cupandhandle">Cup and Handle</div>
+            <div class="option" data-value="double-tops">Double Top</div>
+            <div class="option" data-value="vshape">VShape</div>
+            <div class="option" data-value="triangle">Triangle</div>
+            <div class="option" data-value="wedge">Wedge</div>-->
+      <!--<div class="option" data-value="flag">Flag</div>
+          </div>
+        </div>
+        <button id="refresh-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M12 4V1L8 5l4 4V6c4.41 0 8 3.59 8 8s-3.59 8-8 8-8-3.59-8-8H4c0 5.52 4.48 10 10 10s10-4.48 10-10S14.52 4 9 4H12z"/>
+          </svg>
+        </button>
+      </div>-->
+
+      <div class="top-bar-right">
+        <button id="fullscreen-button" class="top-bar-button top-bar-fullscren">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="14px"
+            viewBox="0 0 14 14"
+            width="14px"
+          >
+            <path
+              fill="#000000"
+              d="M2,9 L0,9 L0,14 L5,14 L5,12 L2,12 L2,9 L2,9 Z M0,5 L2,5 L2,2 L5,2 L5,0 L0,0 L0,5 L0,5 Z M12,12 L9,12 L9,14 L14,14 L14,9 L12,9 L12,12 L12,12 Z M9,0 L9,2 L12,2 L12,5 L14,5 L14,0 L9,0 L9,0 Z"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <script
+    disable-devtool-auto
+    disable-menu='true'
+    disable-select='true'
+    disable-copy='true'
+    disable-cut='true'
+    disable-paste='true'
+    src="https://cdn.jsdelivr.net/npm/disable-devtool"
+  ></script>
+
+    <style>
+      #topBar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        /* Add any other existing styles */
+      }
+
+      .top-bar-left,
+      .top-bar-right {
+        display: flex;
+        align-items: center;
+      }
+
+      .account-label {
+        display: block;
+        margin-top: 3px;
+        /* Adjusts the space between the button and the text */
+        font-size: 12px;
+        /* Adjust font size as needed */
+        color: #291313;
+        margin-left: -50px;
+        font-weight: bold;
+        /* Set text color */
+      }
+
+      .settings-dropdown {
+        position: relative;
+        display: inline-block;
+        margin-right: 10px;
+        text-align: center;
+        /* Add space between settings button and search button */
+      }
+
+      #settings-button {
+        background-color: #b6aef3;
+        /* Light blue background */
+        border: none;
+        border-radius: 50%;
+        padding: 5px;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+        display: flex;
+        align-items: center;
+        margin-left: -40px;
+        justify-content: center;
+      }
+
+      #search-button {
+        margin-left: -18px;
+      }
+
+      .settings-content {
+        display: none;
+        left: 2%;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 100px;
+        margin-left: -65px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 100;
+      }
+
+      .settings-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      .settings-content a:hover {
+        background-color: #f1f1f1;
+      }
+
+      .settings-dropdown:hover .settings-content {
+        display: block;
+      }
+    </style>
+
+    <script>
+      document
+        .getElementById("logout-button")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          if (confirm("Are you sure you want to log out?")) {
+            window.location.href = "/logout";
+          }
+        });
+    </script>
+
+    <div id="hover-info"></div>
+    <div id="spinner" class="spinner">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <div id="container">
+      <div id="tvchart"></div>
+    </div>
+    <div id="main-container">
+      <div id="control-panel">
+        <div class="header-container">
+          <h3>Watch List</h3>
+          <!-- Add the "+" icon here -->
+          <button id="add-button" class="add-button">+</button>
+        </div>
+        <table id="stock-table">
+          <thead>
+            <tr>
+              <th>Symbol</th>
+              <!-- <th>Last</th>
+          <th>Chg</th>
+          <th>Chg%</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              class="stock-row selected"
+              data-symbol="NSE:NIFTY50-INDEX"
+              onclick="selectStock(this)"
+            >
+              <td>Nifty 50</td>
+              <!-- <td class="last-price"></td>
+          <td class="change"></td>
+          <td class="change-percentage"></td> -->
+              <td>
+                <button class="delete-button" aria-label="Delete stock">
+                  🗑
+                </button>
+              </td>
+            </tr>
+
+            <tr
+              class="stock-row"
+              data-symbol="NSE:NIFTYBANK-INDEX"
+              onclick="selectStock(this)"
+            >
+              <td>Banknifty</td>
+              <!-- <td class="last-price"></td>
+          <td class="change"></td>
+          <td class="change-percentage"></td> -->
+              <td>
+                <button class="delete-button" aria-label="Delete stock">
+                  🗑
+                </button>
+              </td>
+            </tr>
+            <tr
+              class="stock-row"
+              data-symbol="NSE:MIDCPNIFTY-INDEX"
+              onclick="selectStock(this)"
+            >
+              <td>Midcap</td>
+              <!-- <td class="last-price"></td>
+          <td class="change"></td>
+          <td class="change-percentage"></td> -->
+              <td>
+                <button class="delete-button" aria-label="Delete stock">
+                  🗑
+                </button>
+              </td>
+            </tr>
+            <tr
+              class="stock-row"
+              data-symbol="NSE:FINNIFTY-INDEX"
+              onclick="selectStock(this)"
+            >
+              <td>Finnifty</td>
+              <!-- <td class="last-price"></td>
+          <td class="change"></td>
+          <td class="change-percentage"></td> -->
+              <td>
+                <button class="delete-button" aria-label="Delete stock">
+                  🗑
+                </button>
+              </td>
+            </tr>
+            <tr
+              class="stock-row"
+              data-symbol="NSE:NIFTYIT-INDEX"
+              onclick="selectStock(this)"
+            >
+              <td>Nifty It</td>
+              <!-- <td class="last-price"></td>
+          <td class="change"></td>
+          <td class="change-percentage"></td> -->
+              <td>
+                <button class="delete-button" aria-label="Delete stock">
+                  🗑
+                </button>
+              </td>
+            </tr>
+            <tr
+              class="stock-row"
+              data-symbol="NSE:NIFTYINFRA-INDEX"
+              onclick="selectStock(this)"
+            >
+              <td>Nifty infra</td>
+              <!-- <td class="last-price"></td>
+          <td class="change"></td>
+          <td class="change-percentage"></td> -->
+              <td>
+                <button class="delete-button" aria-label="Delete stock">
+                  🗑
+                </button>
+              </td>
+            </tr>
+            <tr
+              class="stock-row"
+              data-symbol="NSE:HDFCBANK-EQ"
+              onclick="selectStock(this)"
+            >
+              <td>HDFC BANK</td>
+              <!-- <td class="last-price"></td>
+          <td class="change"></td>
+          <td class="change-percentage"></td> -->
+              <td>
+                <button class="delete-button" aria-label="Delete stock">
+                  🗑
+                </button>
+              </td>
+            </tr>
+            <tr
+              class="stock-row"
+              data-symbol="NSE:RELIANCE-EQ"
+              onclick="selectStock(this)"
+            >
+              <td>Reliance</td>
+              <!-- <td class="last-price"></td>
+          <td class="change"></td>
+          <td class="change-percentage"></td> -->
+              <td>
+                <button class="delete-button" aria-label="Delete stock">
+                  🗑
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="new-container">
+        <p><span></span><span id="last-price"></span></p>
+        <div class="change-container">
+          <p><span></span><span id="change"></span></p>
+          <p><span></span><span id="change-percentage"></span></p>
+        </div>
+      </div>
+    </div>
+
+    <div id="search-popup" class="popup">
+      <div class="popup-content">
+        <span class="close-button">&times;</span>
+        <div class="pop-up-search-group">
+          <svg viewBox="50 50 50 50" aria-hidden="true" class="icon">
+            <g>
+              <path
+                d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"
+              ></path>
+            </g>
+          </svg>
+          <input
+            id="search-input"
+            class="input"
+            type="search"
+            placeholder="Search"
+          />
+        </div>
+        <div id="search-results"></div>
+      </div>
+    </div>
+  </body>
+</html>
+<style>
+  /* Container that holds both the watchlist and the graph */
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    /* Disable scroll for the entire website */
+    width: 100vw;
+    height: 100vh;
+  }
+
+  #container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    /* Full viewport width */
+    overflow: hidden;
+    /* Prevent horizontal scrolling */
+  }
+
+  /* Watchlist container */
+  #control-panel {
+    width: 11vw;
+
+    max-width: 300px;
+    overflow-y: auto;
+    /* Enable vertical scrolling if content overflows */
+    background-color: #f5f5f5;
+    max-height: 400px;
+    overflow-x: hidden;
+    height: 400px;
+    /* Limit the height */
+    padding: 0;
+    border: 1px solid #efe4e4;
+
+    box-shadow: 0 4px 8px rgba(7, 2, 2, 0.1);
+    /* Optional shadow */
+  }
+
+  /* #new-container {
+    width: 25vw;
+    
+    background-color: #e0e0e0; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-top: 3px;
+    height: 110px;
+} */
+  /* #new-container {
+  font-family: Arial, sans-serif;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  width: 300px;
+}
+
+#new-container h3 {
+  margin-top: 0;
+  font-size: 1.2em;
+  color: #333;
+}
+
+#new-container p {
+  margin: 5px 0;
+  font-size: 1em;
+  color: #555;
+}
+
+#new-container p span {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+#new-container p span:last-child {
+  margin-right: 0;
+} */
+  /* #new-container {
+    text-align: center;
+    margin-top: 4px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    width: 300px;
+   
+    height:110;
+}
+
+#new-container p {
+    margin: 10px 0;
+} */
+  /* #new-container {
+  align-items: center;
+  justify-content: center;
+  
+  display: flex;
+  font-family: Arial, sans-serif;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  width: 320px;
+}
+
+#new-container h3 {
+  margin-top: 0;
+  font-size: 1.2em;
+  color: #333;
+}
+
+#new-container p {
+  margin: 5px 0;
+  font-size: 1em;
+  color: #555;
+}
+
+#new-container p span {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+#new-container p span:last-child {
+  margin-right: 0;
+}
+#last-price {
+    font-size: 30px;
+    font-weight: bold;
+    color: #ef5c66;
+   
+}
+.change-container {
+   
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+
+#change, #change-percentage {
+    font-size: 24px;
+    color: #666;
+   
+} */
+  #new-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    width: 330px;
+    margin: 0 auto;
+    height: 70px;
+    /* Fixed height with units */
+    max-height: 70px;
+    /* Ensure max height is fixed */
+    overflow-y: hidden;
+    /* Prevent vertical overflow */
+    overflow-x: hidden;
+    /* Prevent horizontal overflow */
+  }
+
+  #new-container p {
+    margin: 10px 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  #last-price {
+    font-size: 30px;
+    /* Larger font size for the last price */
+    font-weight: bold;
+    color: #ea4747;
+  }
+
+  .change-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    /* Adjust the gap between the elements as needed */
+    margin-top: 1px;
+  }
+
+  #change,
+  #change-percentage {
+    font-size: 24px;
+    color: #9f71fc;
+  }
+
+  #main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Align items to the start of the container */
+  }
+
+  /*list header with sticky position */
+  .header-container {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    /* Set background to avoid transparency */
+    z-index: 1000;
+    /* High z-index to make sure it stays above stock table */
+    padding: 0;
+    /* Remove padding */
+    margin: 0;
+    /* Remove margin */
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    /* Align Watchlist title and + button */
+    align-items: center;
+    height: 40px;
+    /* Fixed height to ensure consistency */
+  }
+
+  /* Watchlist title styling */
+  .header-container h3 {
+    margin: 0;
+    padding-left: 10px;
+    /* Optional left padding for title */
+    font-size: 16px;
+  }
+
+  /* Add button next to Watch List */
+  .add-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin-right: 170px;
+    /* Right margin to space from the edge */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Stock table header with sticky position */
+  #stock-table thead th {
+    position: sticky;
+    top: 40px;
+    /* Just below the Watchlist header */
+    background-color: white;
+    /* Ensure no transparency */
+    z-index: 900;
+    /* Lower than header-container but above stock list */
+    padding: 8px;
+    margin: 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  /* Graph container */
+  #tvchart {
+    width: 95%;
+    /* Adjust percentage for graph section */
+    overflow: hidden;
+  }
+
+  /* Stock table styling */
+  #stock-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+  }
+
+  /* Table cell styles */
+  #stock-table th,
+  #stock-table td {
+    padding: 10.5px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    margin: 0;
+  }
+
+  /* Highlight selected row */
+  .selected {
+    background-color: #f1eded;
+  }
+</style>

@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Option Trading &amp; Indicators</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* Global reset and box sizing */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+    }
+    /* Container using Flexbox */
+    .container {
+      display: flex;
+      flex-wrap: nowrap;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Merriweather', serif;
+      color: #0f172a;
+      margin: 1.5rem 0;
+    }
+    .left-content {
+      width: 70%;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    .right-sidebar {
+      width: 30%;
+      padding: 20px;
+      position: sticky;
+      top: 20px;
+      align-self: flex-start;
+    }
+    /* Table styling for sidebar links */
+    .right-sidebar table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .right-sidebar td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+      background-color: #f8f8f8;
+    }
+    .right-sidebar td a {
+      text-decoration: none;
+      color: #333;
+      display: block;
+    }
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      body {
+        font-size: 14px;
+      }
+      .container {
+        flex-wrap: nowrap;
+      }
+      .left-content, .right-sidebar {
+        width: 70%;
+      }
+      .right-sidebar {
+        width: 30%;
+      }
+    }
+    @media (max-width: 480px) {
+      body {
+        font-size: 12px;
+      }
+    }
+    .share-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #007bff;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 16px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .share-options {
+      display: none;
+      position: fixed;
+      bottom: 60px;
+      right: 20px;
+      background: white;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .share-options a {
+      display: block;
+      text-decoration: none;
+      color: #333;
+      padding: 8px;
+    }
+    .share-options a:hover {
+      background: #f1f1f1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Left Content (70% Width) -->
+    <div class="left-content">
+      <h1>Option Trading &amp; Indicators</h1>
+      <p>
+        A dynamic and adaptable method of engaging in the financial markets, option trading provides chances to profit from changes in the market without actually holding the underlying assets. But big opportunities also bring great complexity. A thorough awareness of several technical indicators, techniques, and rules is necessary to successfully navigate the world of options. Our goal at Spurzee Technologies is to provide you with the best option trading indicators and methods so you may successfully manage risk and make well-informed decisions.
+      </p>
+      
+      <p><strong>This Thorough Tutorial Will Cover the Following Important Topics:</strong></p>
+      <ol>
+        <li>The Foundations of Trading Options</li>
+        <li>Technical Indicators' Importance in Options</li>
+        <li>An In-Depth Analysis of the Top Option Trading Indicators</li>
+        <li>Developing a Successful Option Trading Plan</li>
+        <li>Crucial Guidelines for Trading Options</li>
+        <li>How to Improve Your Trading Decisions by Combining Indicators</li>
+      </ol>
+      
+      <h2>Understanding Options and Their Trading Dynamics</h2>
+      <p>
+        Financial derivatives known as options grant traders the right, but not the responsibility, to purchase or sell an underlying asset on or before a given date at a fixed price. There are two main types of them:
+      </p>
+      <ul>
+        <li><strong>Call options:</strong> These allow the holder to purchase an asset at a certain price. Calls are usually bought by traders who anticipate an increase in the asset's price.</li>
+        <li><strong>Put options:</strong> These allow the holder to sell an asset at a predetermined price. These are typically employed when a trader expects the price of the asset to drop.</li>
+      </ul>
+      
+      <h2>Why Trade Options?</h2>
+      <p>
+        Compared to conventional stock trading, options have a number of benefits, including:
+      </p>
+      <ul>
+        <li><strong>Leverage:</strong> With options, you can manage a sizable position with a comparatively modest initial investment.</li>
+        <li><strong>Flexibility:</strong> You can earn from both rising and declining markets with options.</li>
+        <li><strong>Risk management:</strong> By hedging current positions, options can lower the total risk of a portfolio.</li>
+        <li><strong>Income Generation:</strong> You can increase the amount of money you make from your investments by using strategies like covered calls.</li>
+      </ul>
+      <p>
+        Options are a desirable instrument because of these advantages, but a methodical approach is necessary due to the intricacy of option pricing and market dynamics. Technical indicators and a well-thought-out approach are essential in this situation.
+      </p>
+      
+      <h2>Best Option Trading Indicators</h2>
+      <p>
+        Here, we’ll discuss some of the most effective indicators that traders rely on for option trading. Each indicator has its strengths and can be used in various market conditions.
+      </p>
+      
+      <h3>1. Moving Averages</h3>
+      <p>
+        Moving averages make it simpler to determine the trend's direction by smoothing down price data into a single, flowing line.
+      </p>
+      <p><strong>How It Aids in Trading Options:</strong></p>
+      <ul>
+        <li><strong>Finding Trends:</strong> Aids in identifying if the market is moving sideways, upward, or downward.</li>
+        <li><strong>Points of Entry and Exit:</strong> Possible purchase or sell opportunities may be indicated by a crossover of the short-term and long-term moving averages.</li>
+      </ul>
+      <p><strong>Popular Variants:</strong></p>
+      <ul>
+        <li>Simple Moving Average (SMA)</li>
+        <li>Exponential Moving Average (EMA)</li>
+      </ul>
+
+      <div class="computer-screen">
+        <img src="/static/assets/img/moving.png" alt="Laptop" class="laptop-img"   data-aos="fade-down" data-aos-duration="2000" data-aos-delay="500" data-aos-easing="ease-in-out">
+      </div>     
+     </dl>
+      
+      <h3>2. Relative Strength Index (RSI)</h3>
+      <p>
+        On a scale of 0 to 100, the RSI is a momentum oscillator that gauges the rate and direction of price changes.
+      </p>
+      <p><strong>How It Aids in Trading Options:</strong></p>
+      <ul>
+        <li><strong>Conditions of Overbought/Oversold:</strong> Overbought situations are indicated by an RSI above 70, and oversold conditions are suggested by an RSI below 30.</li>
+        <li><strong>Signals for Reversal:</strong> Excessive RSI values can help with option entry and exit timing by indicating possible trend reversals.</li>
+      </ul>
+      
+      <h3>3. Bollinger Bands</h3>
+      <p>
+        A middle band, typically a moving average, and two outside bands, which stand for standard deviations from the middle band, make up a Bollinger Band.
+      </p>
+      <p><strong>How It Aids in Trading Options:</strong></p>
+      <ul>
+        <li><strong>Measurement of Volatility:</strong> Bands that are expanding signify higher volatility, whereas those that are shrinking suggest lesser volatility.</li>
+        <li><strong>Identification of Breakouts:</strong> Possible breakouts or reversals may be indicated by price movements that touch or surpass the bands.</li>
+      </ul>
+      
+      <div class="computer-screen">
+        <img src="/static/assets/img/boll.png" alt="Laptop" class="laptop-img"   data-aos="fade-down" data-aos-duration="2000" data-aos-delay="500" data-aos-easing="ease-in-out">
+      </div>     
+     </dl>
+
+      <h3>4. MACD (Moving Average Convergence Divergence)</h3>
+      <p>
+        A trend-following momentum indicator, MACD displays the correlation between two moving averages of the price of a security.
+      </p>
+      <p><strong>How It Aids in Trading Options:</strong></p>
+      <ul>
+        <li><strong>Reversals of Trends:</strong> Bullish or bearish reversals may be indicated by crossovers between the signal line and the MACD line.</li>
+        <li><strong>Momentum Confirmation:</strong> A weakening trend may be indicated by the gap between price movement and MACD.</li>
+      </ul>
+      
+      <h3>5. Volume Indicators</h3>
+      <p>
+        Volume indicators look at the number of shares or contracts traded over a given time period to assess the strength of a price movement.
+      </p>
+      <p><strong>How It Helps in Options Trading:</strong></p>
+      <ul>
+        <li><strong>Pattern Verification:</strong> Growing volume can confirm the strength of a move during an uptrend or fall.</li>
+        <li><strong>Divergence Signals:</strong> Option traders may adjust their positions in response to a potential price and volume reversal.</li>
+      </ul>
+      
+      <h3>6. Implied Volatility (IV)</h3>
+      <p>
+        Implied volatility, or the market's expectation of future volatility, is a crucial factor in option pricing.
+      </p>
+      <p><strong>How It Helps in Options Trading:</strong></p>
+      <ul>
+        <li><strong>Option Premiums:</strong> In general, a high IV corresponds to higher option premiums, which could influence how you buy or sell options.</li>
+        <li><strong>Market Mood:</strong> By leveraging a sharp shift in IV to signal shifts in market mood, you can better time your transactions.</li>
+      </ul>
+      
+      <h2>Essential Option Trading Rules</h2>
+      <p>
+        Following a few basic trading guidelines is essential for success in the intricate world of options. These guidelines aid in capital protection and discipline.
+      </p>
+      <ol>
+        <li>
+          <strong>Always Have a Plan:</strong> It would be like sailing without a compass to enter an option trade without a clear plan. Establish distinct entry and exit points, define your approach, and follow through on your plan. Steer clear of making snap decisions based on feelings or market noise.
+        </li>
+        <li>
+          <strong>Control Your Hazard:</strong> Effective risk management is essential for profitable trading. You should only risk a little portion of your capital on each trade. To reduce possible losses and make sure your trading choices are in line with your risk tolerance, use stop-loss orders.
+        </li>
+        <li>
+          <strong>Keep Up to Date:</strong> Stay up to date on macroeconomic statistics, earnings reports, and market developments that may have an effect on the underlying asset. Being knowledgeable enables you to predict changes in the market and modify your approach as necessary.
+        </li>
+        <li>
+          <strong>Stress Regularity:</strong> Hitting a home run on every deal is not the goal of successful option trading. It's all about limiting losses and generating steady, modest earnings. Even during times of recession, stay true to your plan and evaluate your performance frequently so you can grow from your errors.
+        </li>
+        <li>
+          <strong>Steer clear of overtrading:</strong> Entering several transactions at once might be alluring, particularly in a volatile market. Overtrading, however, may result in poor decision-making and higher transaction costs. Concentrate on excellent configurations that satisfy your predetermined standards.
+        </li>
+      </ol>
+      
+      <h2>Final Thoughts</h2>
+      <p>
+        With its flexibility and potential for large rewards, option trading is a valuable weapon in a trader's toolbox. Nonetheless, the prudent use of technical indicators and methodical trading techniques are essential for success. You may create a strong trading framework that adjusts to different market conditions by comprehending and using the top option trading indicators, including volume indicators, moving averages, RSI, Bollinger Bands, MACD, and more.
+      </p>
+      <p>
+        At Spurzee Technologies, we work hard to make option trading easier by giving you access to the most cutting-edge charting tools and one-click pattern recognition. Our platform is made to assist you in managing risk, making well-informed decisions, and taking advantage of market opportunities, regardless of your level of experience with options trading.
+      </p>
+    </div>
+    
+    <!-- Right Sidebar: Sticky Table with Links -->
+    <div class="right-sidebar">
+      <table>
+        <tr>
+            <td><a href="/beginersguide">beginers guide</a></td>
+          </tr>
+
+          <tr>
+            <td><a href="/Riskmanagement">Risk Management</a></td>
+          </tr>
+          <tr>
+              <td><a href="/intradaytradingtips">Intraday Trading Tips</a></td>
+            </tr>
+            <tr>
+              <td><a href="/optiontradingindia">Option Trading In India</a></td>
+            </tr>
+            <tr>
+              <td><a href="/technicalanalysis">Technical Analysis Tools</a></td>
+            </tr>
+            <tr>
+              <td><a href="/educationresorce">Stock Market Education</a></td>
+            </tr>
+            <tr>
+              <td><a href="/marketinsights">Stock Market Insights</a></td>
+            </tr>
+            <tr>
+              <td><a href="/stocktradingpattern">stock trading patten</a></td>
+            </tr>
+            <tr>
+              <td><a href="/stocktradingpattern">Top trading Indicators</a></td>
+            </tr>
+            <tr>
+                <td><a href="/Discipline">Discipline</a></td>
+              </tr>
+      </table>
+      <button class="share-button" onclick="toggleShareOptions()">Share</button>
+      <div class="share-options" id="shareOptions">
+        <a href="#" onclick="shareOn('whatsapp')">WhatsApp</a>
+        <a href="#" onclick="shareOn('facebook')">Facebook</a>
+        <a href="#" onclick="shareOn('twitter')">Twitter (X)</a>
+      </div>
+    </div>
+  </div>
+  
+
+
+
+  <style>
+
+    .computer-screen {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%; /* Full width */
+      max-width: 1200px; /* Increased max width */
+      margin: auto; /* Center it */
+      padding: 20px; /* Add some spacing */
+  }
+  
+  .laptop-img {
+      width: 100%; /* Responsive */
+      height: auto; /* Maintain aspect ratio */
+      max-width: 1000px; /* Increased max width */
+      max-height: 800px; /* Increased max height */
+      object-fit: contain; /* Ensure full visibility */
+  }
+
+    :root {
+        --primary: #00a3ff;
+        --accent: #ff6b6b;
+    }
+
+    .footer {
+        background: linear-gradient(145deg, #0b1a30, #0a1423);
+        color: #fff;
+        padding: 60px 20px 30px;
+        font-family: 'Inter', sans-serif;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .footer:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    .footer-container {
+        max-width: 1300px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 40px;
+        padding-bottom: 50px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .footer-section h4 {
+        color: var(--primary);
+        margin-bottom: 25px;
+        font-size: 1.3rem;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    .footer-section h4:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 2px;
+        background: var(--accent);
+    }
+
+    .footer-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .footer-links li {
+        margin-bottom: 15px;
+        transform: translateX(0);
+        transition: all 0.3s ease;
+    }
+
+    .footer-links li:hover {
+        transform: translateX(10px);
+    }
+
+    .footer-links a {
+        color: #a8b2d1;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .footer-links a:hover {
+        color: var(--primary);
+    }
+
+    .footer-links a i {
+        color: var(--accent);
+        font-size: 0.8rem;
+    }
+
+    .social-section {
+        text-align: center;
+        padding: 30px 0;
+    }
+
+    .social-title {
+        color: var(--primary);
+        margin-bottom: 25px;
+        font-size: 1.4rem;
+    }
+
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .social-links a {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        color: #fff;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .social-links a:after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, var(--primary), var(--accent));
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+
+    .social-links a:hover:after {
+        opacity: 1;
+    }
+
+    .social-links a i {
+        position: relative;
+        z-index: 1;
+    }
+
+    .social-links a:hover {
+        transform: translateY(-5px) scale(1.1);
+    }
+
+    .help-section {
+        text-align: center;
+        padding: 40px 0;
+    }
+
+    .help-button {
+        background: linear-gradient(45deg, var(--primary), var(--accent));
+        color: #fff;
+        padding: 15px 40px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 20px rgba(0,163,255,0.2);
+    }
+
+    .help-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 25px rgba(0,163,255,0.3);
+    }
+
+    .footer-bottom {
+        text-align: center;
+        padding-top: 30px;
+        color: #8a99b5;
+        font-size: 0.9rem;
+    }
+
+    .pattern-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.05;
+        background: repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            var(--primary) 10px,
+            var(--primary) 20px
+        );
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+        .footer-container {
+            grid-template-columns: 1fr;
+            text-align: center;
+            gap: 40px;
+        }
+
+        .footer-section h4:after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .footer-links li:hover {
+            transform: translateX(0);
+        }
+
+        .footer-links a {
+            justify-content: center;
+        }
+    }
+
+    .breadcrumb-container {
+        width: 100%;
+        padding: 10px 20px;  /* Adjust padding as needed */
+      }
+      
+      .breadcrumb {
+        font-size: 0.9rem;
+        color: #fcf7f7;
+        text-align: left;
+      }
+        
+      .breadcrumb a {
+        color: var(--primary, #f4f4f8);
+        text-decoration: none;
+        font-size: 30px;
+      }
+        
+      .breadcrumb a:hover {
+        text-decoration: underline;
+      }
+      
+    
+</style>
+
+
+<footer class="footer">
+    <div class="pattern-overlay"></div>
+    
+    <div class="footer-container">
+      <div class="footer-section">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="/home"><i class="fas fa-chevron-right"></i>Home</a></li>
+          <li><a href="/aboutus"><i class="fas fa-chevron-right"></i>About Us</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i>Trading Academy</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i>Open Account</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i>Market Analysis</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Client Services</h4>
+        <ul class="footer-links">
+          <li><a href="#"><i class="fas fa-chevron-right"></i>Beginner Center</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i>Advanced Tools</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i>Institutional Solutions</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i>Partner Program</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i>Investor Portal</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i>Beginner Center</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i>Advanced Tools</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i>Institutional Solutions</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i>Partner Program</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i>Investor Portal</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Resources</h4>
+        <ul class="footer-links">
+            <li><a href="/beginersguide"><i class="fas fa-chevron-right"></i>beginers guide</a></li>
+            <li><a href="/educationresorce"><i class="fas fa-chevron-right"></i>education resorce</a></li>
+            <li><a href="/topindicators"><i class="fas fa-chevron-right"></i>top indicators</a></li>
+            <li><a href="/technicalanalysis"><i class="fas fa-chevron-right"></i>technical analysis</a></li>
+            <li><a href="/stocktradingpattern"><i class="fas fa-chevron-right"></i> stocktradingpattern</a></li>
+            <li><a href="/Riskmanagement"><i class="fas fa-chevron-right"></i> Riskmanagement</a></li>
+            <li><a href="/optiontradingindia"><i class="fas fa-chevron-right"></i>optiontradingindia</a></li>
+            <li><a href="/optiontrading"><i class="fas fa-chevron-right"></i>optiontrading</a></li>
+            <li><a href="/marketinsights"><i class="fas fa-chevron-right"></i> marketinsights</a></li>
+            <li><a href="/intradaytradingtips"><i class="fas fa-chevron-right"></i> intradaytradingtips</a></li>
+            <li><a href="/analysis"><i class="fas fa-chevron-right"></i> Technical Analysis</a></li>
+
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Connect With Us</h4>
+        <ul class="footer-links">
+            <li><a href="#"><i class="fas fa-phone"></i> +91 88613 44044</a></li>
+            <li><a href="#"><i class="fas fa-envelope"></i>admin@spurzeetechnologies.in</a></li>
+            <li><a href="https://www.google.com/maps/place/Spacio+workspace/@12.9449187,77.5658325,17z/data=!3m1!4b1!4m6!3m5!1s0x3bae1502dbeb7f31:0x2d5217972b05fc2b!8m2!3d12.9449135!4d77.5684074!16s%2Fg%2F11mpp1zx4h?entry=ttu&g_ep=EgoyMDI1MDIwNS4xIKXMDSoASAFQAw%3D%3D"><i class="fas fa-map-marker-alt"></i>Bengaluru Office</a></li>
+            <li><a href="https://wa.me/+918861344044?text=Hi%2C%20I%20need%20help"><i class="fas fa-comments"></i>Live Chat</a></li>
+            <li><a href="/contactus"><i class="fas fa-headset"></i>24/7 Support</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="social-section">
+      <h4 class="social-title">Follow Our Socials</h4>
+      <div class="social-links">
+        <a href="https://wa.me/+918861344044?text=Hi%2C%20I%20need%20help" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/spurzeetech?igsh=MW5ramcxdzdkNjZtYQ==" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com/@SpurzeeTechnologies" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.linkedin.com/company/spurzee-technologies/?originalSubdomain=in" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-telegram"></i></a>
+        <a href="https://x.com/Spurzeetech" target="_blank"><i class="fab fa-twitter"></i></a>
+    </div>
+    </div>      
+
+    <div class="help-section">
+      <a href="/contactus" class="help-button">
+        <i class="fas fa-life-ring"></i>
+        Need Immediate Assistance?
+      </a>
+    </div>
+
+    <div class="footer-bottom">
+      <p>Trading Hub • 500 Wall Street • New York, NY 10005</p>
+      <p>© 2025 SpurzeeTechnologies LLC. All Rights Reserved | <a href="#" style="color: var(--primary);">Privacy Policy</a> | <a href="#" style="color: var(--primary);">Terms of Service</a></p>
+    </div>
+  </footer>
+
+
+  <script>
+    function toggleShareOptions() {
+      const shareOptions = document.getElementById("shareOptions");
+      shareOptions.style.display = shareOptions.style.display === "block" ? "none" : "block";
+    }
+    
+    function shareOn(platform) {
+      const pageUrl = encodeURIComponent(window.location.href);
+      let shareLink = "";
+      if (platform === "whatsapp") {
+        shareLink = `https://api.whatsapp.com/send?text=${pageUrl}`;
+      } else if (platform === "facebook") {
+        shareLink = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
+      } else if (platform === "twitter") {
+        shareLink = `https://twitter.com/intent/tweet?url=${pageUrl}`;
+      }
+      window.open(shareLink, '_blank');
+    }
+  </script>
+</body>
+</html>

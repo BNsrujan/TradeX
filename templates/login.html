@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Roboto", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 400px;
+        padding: 30px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #333;
+      }
+
+      form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .form-group {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .form-group input:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        outline: none;
+      }
+
+      .form-group button {
+        width: 100%;
+        padding: 15px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 18px;
+        transition: background-color 0.3s ease;
+      }
+
+      .form-group button:hover {
+        background-color: #0056b3;
+      }
+
+      .form-group a {
+        color: #007bff;
+        text-decoration: none;
+        font-size: 14px;
+      }
+
+      .error-message {
+        color: red;
+        text-align: center;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h2>Login to your account</h2>
+      <form method="POST" action="/login">
+        <div class="form-group">
+          <input type="email" name="email" placeholder="Email" required />
+        </div>
+        <div class="form-group">
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            required
+          />
+        </div>
+        <input type="hidden" name="symbol" id="symbol-input" />
+        <div class="form-group">
+          <button type="submit">Login</button>
+        </div>
+        {% if login_status == 0 %}
+        <p class="error-message">Invalid email or password.</p>
+        {% endif %}
+      </form>
+      <div class="form-group">
+        <center>
+          Don't have an Account?
+          <br />
+          <a href="/signup">Create one.</a>
+        </center>
+      </div>
+
+      <div id="stock-symbol" style="display: none" style="text-align: center; margin-top: 20px">
+        <!-- This is where the stock symbol will be displayed after login -->
+        <p id="symbol-info">Stock Symbol: <span id="symbol-name"></span></p>
+      </div>
+    </div>
+
+    <script>
+      // Extract the 'symbol' query parameter from the URL or elsewhere
+      const urlParams = new URLSearchParams(window.location.search);
+      const symbol = urlParams.get("symbol");
+
+      // If a symbol is found, display it and set it in the hidden input field
+      if (symbol) {
+        document.getElementById("symbol-name").innerText = symbol; // Show the symbol on the page
+        document.getElementById("symbol-input").value = symbol; // Set the symbol in the hidden field
+        console.log("Symbol set in hidden input:", symbol); // Log to check if the symbol is correctly set
+      }
+    </script>
+  </body>
+</html>

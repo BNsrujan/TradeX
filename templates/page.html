@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Smooth Scroll</title>
+    <style>
+        html {
+            scroll-behavior: auto; /* Disable browser's default smooth scrolling */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #333;
+            color: white;
+            padding: 10px 20px;
+            z-index: 1000;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        section {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            border-bottom: 2px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="#section1">Section 1</a>
+        <a href="#section2">Section 2</a>
+        <a href="#section3">Section 3</a>
+    </nav>
+
+    <section id="section1" style="background: #f4f4f4;">Section 1</section>
+    <section id="section2" style="background: #ddd;">Section 2</section>
+    <section id="section3" style="background: #bbb;">Section 3</section>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const target = document.querySelector(this.getAttribute('href'));
+                const targetPosition = target.offsetTop;
+                const startPosition = window.pageYOffset;
+                const distance = targetPosition - startPosition;
+                const duration = 5000; // 5 seconds
+                let start = null;
+
+                function step(timestamp) {
+                    if (!start) start = timestamp;
+                    const progress = timestamp - start;
+                    const easing = easeInOutCubic(progress / duration);
+                    const scrollAmount = easing * distance;
+                    window.scrollTo(0, startPosition + scrollAmount);
+
+                    if (progress < duration) {
+                        window.requestAnimationFrame(step);
+                    } else {
+                        window.scrollTo(0, targetPosition);
+                    }
+                }
+
+                function easeInOutCubic(t) {
+                    return t < 0.5
+                        ? 4 * t * t * t
+                        : 1 - Math.pow(-2 * t + 2, 3) / 2;
+                }
+
+                window.requestAnimationFrame(step);
+            });
+        });
+    </script>
+</body>
+</html>

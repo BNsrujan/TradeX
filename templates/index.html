@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Stock Graph</title>
+  <script src="https://cdn.jsdelivr.net/npm/js-datepicker@5.18.2/dist/datepicker.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/js-datepicker@5.18.2/dist/datepicker.min.css" rel="stylesheet">
+  <script src='https://cdn.plot.ly/plotly-2.32.0.min.js'></script>
+  <style>
+    body,
+    html {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+    }
+
+    .container {
+      display: flex;
+      height: 100%;
+      width: 100%;
+    }
+
+    .graph-container {
+      width: 80%;
+      flex-grow: 1;
+      height: 100%;
+    }
+
+    .graph-update-form {
+      width: 20%;
+      flex-grow: 1;
+      height: 100%;
+      margin-right: 1%;
+    }
+
+    #graph {
+      width: 100%;
+      height: 100%;
+      /* Adjusted to cover the entire container */
+    }
+
+    #updateFormWrapper {
+      padding: 20px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #updateFormWrapper input[type="text"],
+    #updateFormWrapper select,
+    #updateFormWrapper input[type="submit"] {
+      width: 100%;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    .switch {
+      position: relative;
+      margin-left: 25px;
+      margin-top: 5px;
+      display: inline-block;
+      width: 40px;
+      height: 20px;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 15px;
+      width: 15px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+    }
+
+    input:checked+.slider {
+      background-color: #2196F3;
+    }
+
+    input:focus+.slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked+.slider:before {
+      transform: translateX(18px);
+    }
+
+    .slider.round {
+      border-radius: 25px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
+
+    #watchlist-dropdown select {
+      width: calc(100% - 25px);
+      height: 100%;
+    }
+
+    #watchlist-dropdown button {
+      height: 33px;
+      width: 33px;
+      font-size: 20px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #stockPopup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      z-index: 1;
+      width: 400px;
+    }
+
+    #stockList {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    #stockList li {
+      padding: 5px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    #stockList li button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #addToWatchlistButton {
+      display: none;
+    }
+
+    #watchlist-dropdown {
+      width: 108%;
+    }
+
+    .popup-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .popup-header h2 {
+      margin: 0;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    .narrow-input {
+      width: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="graph-container">
+      <div id="graph"></div>
+    </div>
+    <div class="graph-update-form">
+      <div id="stockPopup" class="hidden">
+        <div class="popup-header">
+          <h2>Available Stocks</h2>
+          <button onclick="closeStockPopup()">Close</button>
+        </div>
+        <div>
+          <input type="text" id="newStockInput" placeholder="Enter custom stock symbol">
+          <button onclick="submitStock()">Submit</button>
+        </div>
+        <ul id="stockList"></ul>
+        <button id="addToWatchlistButton">Add to Watchlist</button>
+      </div>
+      <div id="updateFormWrapper">
+        <form id="updateForm">
+
+          <div id="watchlist-dropdown" style="display: flex; align-items: center;">
+            <button id="add2watchlist" onclick="showStocks()">+</button>
+            <select id="watchlist-stocks" name="watchlist-stocks" style="flex: 1;"></select>
+            <button id="removewatchlist" onclick="removeStocks()">-</button>
+          </div>
+          <input type="text" id="start_date" name="start_date" data-toggle="datepicker" value="2024-03-01">
+          <input type="text" id="end_date" name="end_date" data-toggle="datepicker" value="{{end_date}}">
+
+          <select id="interval" name="interval">
+            {% for interval in time_intervals %}
+            <option value="{{ interval.value }}">{{ interval.label }}</option>
+            {% endfor %}
+          </select>
+
+          <table>
+            <tr>
+              <td>EMA</td>
+              <td style="text-align: right;">
+                <label class="switch">
+                  <input type="checkbox" style="display: none;" id="emaCheckbox">
+                  <span class="slider round"></span>
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>EMA value</td>
+              <td style="text-align: right;">
+                <input type="number" id="emaval" name="emaval" value="20" class="narrow-input">
+              </td>
+            </tr>
+            <tr>
+              <td>S/R</td>
+              <td style="text-align: right;">
+                <label class="switch">
+                  <input type="checkbox" style="display: none;" id="sr">
+                  <span class="slider round"></span>
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>No. of S/R's</td>
+              <td style="text-align: right;">
+                <input type="number" id="nsr" name="nsr" min="3" max="8" class="narrow-input">
+              </td>
+            </tr>
+            <tr>
+              <td>TrendLines</td>
+              <td style="text-align: right;">
+                <label class="switch">
+                  <input type="checkbox" style="display: none;" id="tr">
+                  <span class="slider round"></span>
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>Double Top</td>
+              <td style="text-align: right;">
+                <label class="switch">
+                  <input type="checkbox" style="display: none;" id="dt">
+                  <span class="slider round"></span>
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>Triple Top</td>
+              <td style="text-align: right;">
+                <label class="switch">
+                  <input type="checkbox" style="display: none;" id="tt">
+                  <span class="slider round"></span>
+                </label>
+              </td>
+            </tr>
+            <!-- <tr style="display: none;"> -->
+            <tr>
+              <td>No. of candles</td>
+              <td style="text-align: right;">
+                <input type="number" id="ndt" name="ndt" value="20" class="narrow-input">
+              </td>
+            </tr>
+            <tr>
+              <td>Threshold</td>
+              <td style="text-align: right;">
+                <input type="number" id="thr" name="thr" value="0.15" step="0.01" class="narrow-input">
+              </td>
+            </tr>
+            <tr>
+              <td>InsideBars</td>
+              <td style="text-align: right;">
+                <label class="switch">
+                  <input type="checkbox" style="display: none;" id="ib">
+                  <span class="slider round"></span>
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>Morning/Evening Star</td>
+              <td style="text-align: right;">
+                <label class="switch">
+                  <input type="checkbox" style="display: none;" id="mestar">
+                  <span class="slider round"></span>
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>5-EMA</td>
+              <td style="text-align: right;">
+                <label class="switch">
+                  <input type="checkbox" style="display: none;" id="e5">
+                  <span class="slider round"></span>
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>BOX</td>
+              <td style="text-align: right;">
+                <label class="switch">
+                  <input type="checkbox" style="display: none;" id="box">
+                  <span class="slider round"></span>
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>Threshold</td>
+              <td style="text-align: right;">
+                <input type="number" id="bth" name="bth" value="5" min="2" max="10" class="narrow-input">
+              </td>
+            </tr>
+            <tr>
+              <td>No. of candles</td>
+              <td style="text-align: right;">
+                <input type="number" id="nbc" name="nbc" value="20" class="narrow-input">
+              </td>
+            </tr>
+            <tr>
+              <td>Head and Shoulder</td>
+              <td style="text-align: right;">
+                <label class="switch">
+                  <input type="checkbox" style="display: none;" id="hsind">
+                  <span class="slider round"></span>
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>V shape</td>
+              <td style="text-align: right;">
+                <label class="switch">
+                  <input type="checkbox" style="display: none;" id="vshape">
+                  <span class="slider round"></span>
+                </label>
+              </td>
+            </tr>
+          </table>
+
+          <input type="submit" value="Update Graph">
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    var graphData = {{ graph | safe }};
+    graphData.config = { 'responsive': true, 'scrollZoom': true }
+    var emaVisible = false;
+    var srVisible = false;
+    var trVisible = false;
+    Plotly.newPlot('graph', graphData);
+
+    document.getElementById('updateForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var formData = new FormData(this);
+      formData.append('emaVisible', document.getElementById('emaCheckbox').checked);
+      formData.append('srVisible', document.getElementById('sr').checked);
+      formData.append('trVisible', document.getElementById('tr').checked);
+      formData.append('dtop', document.getElementById('dt').checked);
+      formData.append('ttop', document.getElementById('tt').checked);
+      formData.append('ibars', document.getElementById('ib').checked);
+      formData.append('ema5', document.getElementById('e5').checked);
+      formData.append('box', document.getElementById('box').checked);
+      formData.append('hsind', document.getElementById('hsind').checked);
+      formData.append('vshape', document.getElementById('vshape').checked);
+      formData.append('mestar', document.getElementById('mestar').checked);
+      for (let pair of formData.entries()) {
+        // Print key-value pairs to the console
+        console.log(pair[0] + ': ' + pair[1]);
+      }
+
+      fetch('/update_graph', {
+        method: 'POST',
+        body: formData
+      })
+        .then(response => response.json())
+        .then(data => Plotly.newPlot('graph', data));
+    });
+
+    const showStocksButton = document.getElementById('add2watchlist');
+    const stockPopup = document.getElementById('stockPopup');
+    const stockList = document.getElementById('stockList');
+    const addToWatchlistButton = document.getElementById('addToWatchlistButton');
+    const watchlistStocksSelect = document.getElementById('watchlist-stocks');
+
+    // Function to show the popup
+    function showStockPopup() {
+      stockPopup.classList.remove('hidden');
+      fetchStocks();
+    }
+
+    // Function to close the popup
+    function closeStockPopup() {
+      stockPopup.classList.add('hidden');
+    }
+    // Function to fetch and populate the stock list
+    async function fetchStocks() {
+      try {
+        const response = await fetch('/get_50_stocks'); // Replace with your API endpoint
+        if (!response.ok) {
+          throw new Error(`Error fetching stocks: ${response.statusText}`);
+        }
+        const stocks = await response.json();
+        populateStockList(stocks);
+      } catch (error) {
+        console.error('Error fetching stocks:', error);
+
+      }
+    }
+
+    // Function to populate the stock list with add buttons
+    function populateStockList(stocks) {
+      stockList.innerHTML = "";
+
+      stocks.forEach(stock => {
+        const listItem = document.createElement('li');
+        listItem.textContent = stock.value;
+        const addButton = document.createElement('button');
+        addButton.textContent = '+';
+        addButton.addEventListener('click', () => {
+          addToWatchlist(stock.value);
+          closeStockPopup();
+        });
+
+        // Check if the stock exists in watchlist and disable button
+        const isDuplicate = Array.from(watchlistStocksSelect.options).some(option => option.value === stock.label);
+        if (isDuplicate) {
+          addButton.disabled = true;
+          addButton.title = 'Already in watchlist';
+        }
+        listItem.appendChild(addButton);
+        stockList.appendChild(listItem);
+      });
+
+    }
+    function addDefaultStocksToWatchlist() {
+      const defaultStocks = ['NSE:ASIANPAINT-EQ', 'NSE:NIFTY50-INDEX', 'NSE:NIFTYBANK-INDEX']; // default stocks
+      defaultStocks.forEach(stock => {
+        addToWatchlist(stock);
+      });
+    }
+
+    function addToWatchlist(stock) {
+      console.log(`Adding ${stock} to watchlist`);
+      const option = document.createElement('option');
+      option.value = stock;
+      option.textContent = stock;
+      watchlistStocksSelect.appendChild(option);
+    }
+
+    showStocksButton.addEventListener('click', showStockPopup);
+    addToWatchlistButton.addEventListener('click', () => {
+    });
+    window.addEventListener('load', addDefaultStocksToWatchlist);
+
+    //remove stock from watchlist 
+    function removeStocks() {
+      var x = document.getElementById("watchlist-stocks");
+      x.remove(x.selectedIndex);
+    }
+
+    function submitStock() {
+      const newStockInput = document.getElementById('newStockInput').value.trim();
+      if (newStockInput !== '') {
+        fetch('/submit_stock', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ newStockInput: newStockInput }),
+        })
+          .then(response => response.json())
+          .then(data => {
+            // Handle the response from the backend
+            if (data.status === 1) {
+              // Backend indicates success
+              alert('Custom Stock added successfully');
+              addToWatchlist(newStockInput);
+              newStockInput.value = '';
+            } else {
+              alert('Invalid Stock Symbol')
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      }
+    }
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Market Action</title>
+
+    <!-- Bootstrap and Font Awesome CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.2/font/bootstrap-icons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.2/font/bootstrap-icons.min.css"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/styles2.css" />
+    <link href="/static/assets/css/main.css" rel="stylesheet" />
+
+    <style>
+      /* Add any additional inline CSS styles if needed */
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+      <div class="container">
+        <a
+          href="{{ url_for('auth.login') }}"
+          class="navbar-brand d-flex align-items-center"
+        >
+          <img src="/static/assets/img/logo.png" alt="" />
+          <span class="fw-bold fs-4 text-black"
+            >Spurzee <br />
+            Technologies</span
+          >
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#main-nav"
+          aria-controls="main-nav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Links -->
+        <div class="collapse navbar-collapse justify-content-end" id="main-nav">
+          <ul class="navbar-nav align-items-center gap-3">
+            <li class="nav-item">
+              <a class="nav-link" href="#home">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/analysis">Price Action</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/faq">FAQ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact Us</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="btn btn-outline-primary btn-md fw-semibold"
+                href="{{ url_for('auth.login') }}"
+                >Login/Register</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- NIFTY Cards Section -->
+    <main>
+      <section class="c shadow-bg">
+        <div class="container-xxl">
+          <div class="card-container">
+            <!-- NIFTY 50 Card -->
+            <div class="card shadow-sm border-0 mx-auto">
+              <div class="card-body">
+                <div
+                  class="d-flex justify-content-between align-items-center mb-3"
+                >
+                  <h5 class="card-title mb-0">NIFTY 50</h5>
+                  <a
+                    href="{{ url_for('auth.login') }}"
+                    class="text-decoration-none"
+                  >
+                    <i class="bi bi-graph-up fs-3"></i>
+                  </a>
+                </div>
+                <div class="row">
+                  <p>Preclose</p>
+                  <h2 class="text-success mb-1 col-6">19,511.05</h2>
+                  <small class="text-success text-end col-6 pt-2"
+                    >+128.20 (0.79%)</small
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- NIFTY BANK Card -->
+            <div class="card shadow-sm border-0 mx-auto">
+              <div class="card-body">
+                <div
+                  class="d-flex justify-content-between align-items-center mb-3"
+                >
+                  <h5 class="card-title mb-0">NIFTY BANK</h5>
+                  <a
+                    href="{{ url_for('auth.login') }}"
+                    class="text-decoration-none"
+                  >
+                    <i class="bi bi-graph-up fs-3"></i>
+                  </a>
+                </div>
+                <div class="row">
+                  <p>Preclose</p>
+                  <h2 class="text-danger mb-1 col-6">41,273.05</h2>
+                  <small class="text-danger text-end col-6 pt-2"
+                    >-72.80 (0.14%)</small
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- NIFTY IT Card -->
+            <div class="card shadow-sm border-0 mx-auto">
+              <div class="card-body">
+                <div
+                  class="d-flex justify-content-between align-items-center mb-3"
+                >
+                  <h5 class="card-title mb-0">NIFTY IT</h5>
+                  <a
+                    href="{{ url_for('auth.login') }}"
+                    class="text-decoration-none"
+                  >
+                    <i class="bi bi-graph-up fs-3"></i>
+                  </a>
+                </div>
+                <div class="row">
+                  <p>Preclose</p>
+                  <h2 class="text-success mb-1 col-6">28,473.25</h2>
+                  <small class="text-success text-end pt-2 col-6"
+                    >+150.50 (0.67%)</small
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Get Started Section with Chart -->
+      <section id="chart-section" class="container">
+        <div id="centered-container">
+          <div class="row">
+            <div class="col-md-6">
+              <p id="intro-paragraph">
+                Welcome to our learning platform, designed to offer a seamless
+                and intuitive experience for all users, from novices to
+                experienced traders.
+              </p>
+            </div>
+            <div class="col-md-6 text-right">
+              <a
+                href="{{ url_for('auth.login') }}"
+                class="btn btn-outline-dark btn-lg"
+                >Get Started for Free</a
+              >
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h2 class="text-center mb-4">Stock Market Chart</h2>
+              <div
+                id="chart-container"
+                style="position: relative; width: 100%; overflow: hidden"
+              >
+                <a href="{{ url_for('auth.login') }}">
+                  <img
+                    src="/static/assets/img/trendlines.png"
+                    alt="Trading Strategies"
+                    class="image-hover"
+                    style="
+                      width: 100%;
+                      height: auto;
+                      border: 2px solid #ddd;
+                      border-radius: 5px;
+                    "
+                  />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Market Action Table -->
+      <section>
+        <div class="container my-5">
+          <h2 class="text-center mb-4 fw-bold display-3">Market Action</h2>
+          <div style="max-height: 400px; overflow-y: auto">
+            <table class="table table-bordered custom-table">
+              <thead>
+                <tr>
+                  <th>Symbol Name</th>
+                  <th>Double Top</th>
+                  <th>Inside Bar</th>
+                  <th>Cup and Handle</th>
+                  <th>Head and Shoulders</th>
+                  <th>V Shape</th>
+                  <th>Double Bottom</th>
+                </tr>
+              </thead>
+              <tbody id="marketData">
+                <script>
+                  const stockPatterns = {{ stock_patterns | tojson | safe }}; // Convert Python dictionary to JavaScript
+                  const stockNames = {{ stock_names | tojson | safe }}; // Get stock names from Python to JavaScript
+                  const loginUrl = "{{ url_for('auth.login') }}"; // URL for the login route
+
+                  // Function to clean up and capitalize stock name
+                  function cleanAndCapitalizeStockName(stockName) {
+                    const cleanedName = stockName
+                      .replace("NSE:", "")
+                      .replace("-INDEX", "")
+                      .replace("MCX:", "")
+                      .replace("-EQ", "")
+                      .replace(/"/g, "")
+                      .replace(/,/g, "")
+                      .toUpperCase(); // Convert to uppercase
+
+                    return cleanedName; // Return the fully capitalized name
+                  }
+
+                  // Function to create the stock symbol link with the login URL
+                  // Function to create the stock symbol link with the login URL
+                  // Function to create the stock symbol link with the login URL
+                  function createStockLink(stockName, counts) {
+                      const capitalizedStockName = cleanAndCapitalizeStockName(stockName); // Clean and capitalize the stock name
+
+                      // Extract patterns with counts greater than 0
+                      const patternsWithCounts = Object.entries(counts)
+                          .filter(([pattern, count]) => count > 0) // Only include patterns with count > 0
+                          .map(([pattern]) => pattern.replace(' Count', '')); // Remove " Count" suffix for cleaner names
+
+                      // Build the query string with the symbol and patterns
+                      const queryParams = new URLSearchParams({
+                        // Return actual stock symbol with NSE n all included
+                          symbol: stockName,
+                          patterns: patternsWithCounts.join(',') // Join patterns into a comma-separated string
+                      });
+
+                      // Return the link with the query string
+                      return `<a href="${loginUrl}?${queryParams.toString()}">${capitalizedStockName}</a>`;
+                  }
+
+                  // Function to populate market data
+                  function populateMarketData() {
+                      const marketData = document.getElementById('marketData');
+                      marketData.innerHTML = '';
+
+                      stockNames.forEach(stockName => {
+                          const capitalizedStockName = cleanAndCapitalizeStockName(stockName); // Clean and capitalize the stock name
+                          const counts = stockPatterns[stockName];
+
+                          // Only add rows for stocks that have at least one count greater than zero
+                          if (Object.values(counts).some(count => count > 0)) {
+                              const row = `<tr>
+                                <td>${createStockLink(stockName, counts)}</td> <!-- Use link for stock symbol -->
+                                <td>${counts['Double Top Count']}</td>
+                                <td>${counts['Inside Bar Count']}</td>
+                                <td>${counts['Cup and Handle Count']}</td>
+                                <td>${counts['Head and Shoulders Count']}</td>
+                                <td>${counts['V Shape Count']}</td>
+                                <td>${counts['Double Bottom Count']}</td>
+                              </tr>`;
+                              marketData.insertAdjacentHTML('beforeend', row);
+                          }
+                      });
+                  }
+
+                  // Initial call to populate market data
+                  populateMarketData();
+                </script>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Us Section -->
+
+      <!-- Contact Us Section -->
+      <section
+        id="contact"
+        class="contact section"
+        style="background-color: #f5f6f8"
+      >
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Contact Us</h2>
+          <p>
+            Please reach out to us in case of any queries, and our hands-on
+            support team will get back to you as soon as possible.
+          </p>
+        </div>
+
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <div class="row gy-4" style="display: flex; align-items: flex-start">
+            <!-- Left Section: Contact Details -->
+            <div
+              class="col-lg-6"
+              style="border-right: 1px solid #dcdcdc; padding-right: 40px"
+            >
+              <div class="contact-info">
+                <!-- WhatsApp Contact -->
+                <div class="contact-item" style="margin-bottom: 30px">
+                  <i
+                    class="bi bi-whatsapp"
+                    style="color: #25d366; font-size: 2rem; margin-right: 15px"
+                  ></i>
+                  <div>
+                    <h4>Contact Us on WhatsApp</h4>
+                    <!-- Link with auto message -->
+                    <p>
+                      <a
+                        href="https://wa.me/+918861344044?text=Hi%20I%20Need%20Help"
+                        target="_blank"
+                        style="color: #25d366; text-decoration: none"
+                      >
+                        +91 88613 44044
+                      </a>
+                    </p>
+                  </div>
+                </div>
+                <hr />
+
+                <!-- Gmail Contact -->
+                <div class="contact-item" style="margin-bottom: 30px">
+                  <i
+                    class="bi bi-envelope-fill"
+                    style="color: #d44638; font-size: 2rem; margin-right: 15px"
+                  ></i>
+                  <div>
+                    <h4>Email Us</h4>
+                    <p>
+                      <a
+                        href="mailto:support@springpad.in"
+                        style="color: #d44638; text-decoration: none"
+                      >
+                        admin@spurzeetechnologies.in
+                      </a>
+                    </p>
+                  </div>
+                </div>
+                <hr />
+
+                <!-- Address -->
+
+                <!-- Social Media -->
+                <div style="margin-top: 20px">
+                  <h4>Follow us</h4>
+                  <a
+                    href="https://www.linkedin.com/company/spurzee-technologies/?originalSubdomain=in"
+                    ><i
+                      class="bi bi-linkedin"
+                      style="font-size: 2rem; margin-right: 15px"
+                    ></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Address -->
+
+            <!-- Right Section: Contact Form -->
+            <div class="col-lg-6">
+              <div
+                class="contact-form"
+                style="
+                  background-color: #ffffff;
+                  padding: 20px;
+                  border-radius: 8px;
+                "
+              >
+                <!-- Flash messages -->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %} {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %} {% endif %} {% endwith %}
+
+                <form
+                  action="/home"
+                  method="post"
+                  class="php-email-form"
+                  data-aos="fade-up"
+                  data-aos-delay="200"
+                >
+                  <div class="row gy-4">
+                    <div class="col-md-6">
+                      <label for="name-field" class="form-label"
+                        >Your Name <span style="color: red">*</span></label
+                      >
+                      <input
+                        type="text"
+                        name="name"
+                        id="name-field"
+                        class="form-control"
+                        placeholder="Name"
+                        required
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="email-field" class="form-label"
+                        >Your Email <span style="color: red">*</span></label
+                      >
+                      <input
+                        type="email"
+                        class="form-control"
+                        name="email"
+                        id="email-field"
+                        placeholder="Email"
+                        required
+                      />
+                    </div>
+                    <div class="col-md-12">
+                      <label for="subject-field" class="form-label"
+                        >Subject <span style="color: red">*</span></label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="subject"
+                        id="subject-field"
+                        placeholder="Subject"
+                        required
+                      />
+                    </div>
+                    <div class="col-md-12">
+                      <label for="message-field" class="form-label"
+                        >Message <span style="color: red">*</span></label
+                      >
+                      <textarea
+                        class="form-control"
+                        name="message"
+                        rows="10"
+                        id="message-field"
+                        placeholder="Message"
+                        required
+                      ></textarea>
+                    </div>
+                    <div class="col-md-12 text-center">
+                      <button
+                        type="submit"
+                        class="btn btn-primary"
+                        style="background-color: #003366; border-color: #003366"
+                      >
+                        Send
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Footer -->
+    <footer>
+      <div class="container card-footer">
+        <div class="footer-section">
+          <h2 class="footer-heading">Useful Links</h2>
+          <ul class="footer-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="/Price_Action">Price Action</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Spurzee Technologies. All rights reserved.</p>
+      </div>
+    </footer>
+    <script>
+      window.onload = function () {
+        const chart = LightweightCharts.createChart(
+          document.getElementById("chart"),
+          {
+            width: document.getElementById("chart").clientWidth,
+            height: 300,
+            layout: {
+              backgroundColor: "#FFFFFF",
+              textColor: "#000",
+            },
+            grid: {
+              vertLines: {
+                color: "#e1e1e1",
+              },
+              horzLines: {
+                color: "#e1e1e1",
+              },
+            },
+          }
+        );
+
+        const candleSeries = chart.addCandlestickSeries();
+
+        // Sample Data
+        candleSeries.setData([
+          {
+            time: "2018-12-22",
+            open: 75.16,
+            high: 82.84,
+            low: 36.16,
+            close: 45.72,
+          },
+          {
+            time: "2018-12-23",
+            open: 45.12,
+            high: 53.9,
+            low: 45.12,
+            close: 48.09,
+          },
+          {
+            time: "2018-12-24",
+            open: 60.71,
+            high: 60.71,
+            low: 53.39,
+            close: 59.29,
+          },
+          {
+            time: "2018-12-25",
+            open: 68.26,
+            high: 68.26,
+            low: 59.04,
+            close: 60.5,
+          },
+          {
+            time: "2018-12-26",
+            open: 67.71,
+            high: 105.85,
+            low: 66.67,
+            close: 91.04,
+          },
+          {
+            time: "2018-12-27",
+            open: 91.04,
+            high: 121.4,
+            low: 82.7,
+            close: 111.4,
+          },
+          {
+            time: "2018-12-28",
+            open: 111.51,
+            high: 142.83,
+            low: 103.34,
+            close: 131.25,
+          },
+          {
+            time: "2018-12-29",
+            open: 131.33,
+            high: 151.17,
+            low: 77.68,
+            close: 96.43,
+          },
+          {
+            time: "2018-12-30",
+            open: 106.33,
+            high: 110.2,
+            low: 90.39,
+            close: 98.1,
+          },
+          {
+            time: "2018-12-31",
+            open: 109.87,
+            high: 114.69,
+            low: 85.66,
+            close: 111.26,
+          },
+        ]);
+
+        // Resize Observer to make chart responsive
+        const resizeObserver = new ResizeObserver((entries) => {
+          for (let entry of entries) {
+            const { width, height } = entry.contentRect;
+            chart.resize(width, height);
+          }
+        });
+        resizeObserver.observe(document.getElementById("chart"));
+      };
+    </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HoA3e6Q7GTPxLNH+5mFaBQ3tf6I28Tc3FtdCqxe7rKpFI8CFSrRKE6YzBUu4xk7w"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lightweight-charts@3.5.0/dist/lightweight-charts.standalone.production.js"></script>
+  </body>
+</html>

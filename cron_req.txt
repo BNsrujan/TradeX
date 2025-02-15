@@ -1,0 +1,7 @@
+fyers-apiv3
+pyotp
+requests
+pandas
+pytz
+mysql-connector-python
+plotly

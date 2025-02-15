@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stock Market Insights &amp; Tools</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* Global reset and box sizing */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+    }
+    /* Container using Flexbox */
+    .container {
+      display: flex;
+      flex-wrap: nowrap;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    h1, h2, h3 {
+      font-family: 'Merriweather', serif;
+      color: #0f172a;
+      margin: 1.5rem 0;
+    }
+    .left-content {
+      width: 70%;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    .right-sidebar {
+      width: 30%;
+      padding: 20px;
+      position: sticky;
+      top: 20px;
+      align-self: flex-start;
+    }
+    /* Table styling */
+    .right-sidebar table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .right-sidebar td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+      background-color: #f8f8f8;
+    }
+    .right-sidebar td a {
+      text-decoration: none;
+      color: #333;
+      display: block;
+    }
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      body {
+        font-size: 14px;
+      }
+      .container {
+        flex-wrap: nowrap;
+      }
+      .left-content, .right-sidebar {
+        width: 70%;
+      }
+      .right-sidebar {
+        width: 30%;
+      }
+    }
+    @media (max-width: 480px) {
+      body {
+        font-size: 12px;
+      }
+    }
+    .share-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #007bff;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 16px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .share-options {
+      display: none;
+      position: fixed;
+      bottom: 60px;
+      right: 20px;
+      background: white;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .share-options a {
+      display: block;
+      text-decoration: none;
+      color: #333;
+      padding: 8px;
+    }
+    .share-options a:hover {
+      background: #f1f1f1;
+    }
+    /* Description list styling */
+    dl {
+      margin: 0;
+      padding: 0;
+    }
+    dt {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    dd {
+      margin-left: 20px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Left Content (70% Width) -->
+    <div class="left-content">
+      <h1>Stock Market Insights &amp; Tools</h1>
+      
+      <p>
+        Greetings from Spurzee Technologies' Stock Market Insights &amp; Tools, your one-stop shop for all the trading tools and market data you require to make wise decisions each and every day. Our platform offers a variety of free intraday trading tools, a strong charting platform designed specifically for the Indian stock market, and clear, succinct, and actionable market information—regardless of your level of experience. Let's examine how our products can assist you in accurately and confidently navigating the challenges of trading.
+      </p>
+      
+      <h2>Daily Market Insights: Stay Ahead of the Curve</h2>
+      <p>
+        Timing is crucial in the hectic world of stock trading. Our daily market insights provide you with a competitive advantage by offering the most pertinent information before you step onto the trading floor. We dissect market patterns, point out noteworthy shifts, and provide knowledgeable analysis on market developments, economic metrics, and world events that may affect your investments.
+      </p>
+      <ul>
+        <li><strong>Timely Updates:</strong> Each trading day starts with a new analysis of market patterns to keep you up to date.</li>
+        <li><strong>Clear Explanations:</strong> We break down complicated market dynamics into simple language so you understand what’s happening and why.</li>
+        <li><strong>Practical Advice:</strong> In addition to our news analysis, we offer helpful recommendations to guide you on when to buy, hold, or sell.</li>
+      </ul>
+      <p>
+        By monitoring the market, you can adjust your strategies to adapt to fluctuations. Our insights result from thorough investigation, professional evaluation, and a dedication to providing traders with timely and appropriate information.
+      </p>
+      
+      <h2>Free Intraday Trading Tools for the Indian Market</h2>
+      <p>
+        Trading intraday can be challenging when every second counts. With our free, high-quality intraday trading tools designed especially for the Indian stock market, Spurzee Technologies empowers you through an intuitive and user-friendly interface. Our suite of tools assists you in managing your trades, identifying crucial entry and exit points, and analyzing market movements in real time.
+      </p>
+      
+      <h3>Key Features of Our Intraday Trading Tools</h3>
+      <ol>
+        <li>
+          <strong>Real-Time Data:</strong> Stay informed with the latest trade volumes, price fluctuations, and market trends—ensuring you’re always ready to make quick, informed decisions.
+        </li>
+        <li>
+          <strong>User-Friendly Interface:</strong> Our platform’s simplicity lets you navigate tools, charts, and technical indicators without requiring extensive training.
+        </li>
+        <li>
+          <strong>One-Click Pattern Recognition:</strong> Easily apply a variety of technical patterns—such as support and resistance levels, trendlines, parallel channels, and traditional patterns like morning and evening stars—to identify trading opportunities and decode market signals.
+        </li>
+        <li>
+          <strong>Fast Analysis and Decision Making:</strong> Combine several technical patterns in one platform to evaluate market conditions quickly, refine your tactics, and manage risk effectively so you never miss a trading opportunity.
+        </li>
+      </ol>
+      <p>
+        Our intraday trading tools give you immediate access to the power of real-time analysis, helping you navigate the market confidently—whether you’re tracking a single asset or multiple stocks. With Spurzee Technologies, you trade more intelligently and effectively, getting closer to well-informed trading decisions with each click.
+      </p>
+      
+      <h2>The Power of Our Charting Platform</h2>
+      <p>
+        In stock trading, a well-designed chart can communicate complex data at a glance—a picture is truly worth a thousand words. Our cutting-edge charting software is built with traders in mind, providing a full range of tools to visualize and analyze market data.
+      </p>
+      
+      <h3>Features of Our Charting Platform</h3>
+      <ul>
+        <li><strong>Interactive Charts:</strong> Zoom, pan, and examine historical data with charts that vividly depict market patterns.</li>
+        <li><strong>Technical Indicators:</strong> Identify trends and reversals using indicators like Moving Averages, RSI, MACD, and more.</li>
+        <li><strong>Tools for Drawing:</strong> Easily draw trend lines, support and resistance levels, and chart patterns to understand market movements.</li>
+        <li><strong>Various Time Frames:</strong> Switch between time frames—from minutes to months—to gain a thorough understanding of both short-term and long-term trends.</li>
+        <li><strong>Customizable Views:</strong> Tailor the chart display to highlight the information that matters most to you, whether you prefer a data-rich interface or a minimalist design.</li>
+      </ul>
+      <p>
+        Our charting technology not only delivers comprehensive visual information but also enhances your overall trading strategy by fusing real-time data with advanced analytical tools.
+      </p>
+      
+      <h3>The Power of Our Charting Platform – Advanced Patterns</h3>
+      <p>
+        To streamline your analysis, our charting platform offers one-click identification of various technical patterns. Below is an in-depth look at these patterns:
+      </p>
+      <dl>
+        <dt>1. SR Zones (Support &amp; Resistance Zones)</dt>
+        <dd>Identify key levels where the price historically reverses or consolidates to help determine entry and exit points.</dd>
+        <div class="computer-screen">
+          <img src="/static/assets/img/srzone.png" alt="Laptop" class="laptop-img"   data-aos="fade-down" data-aos-duration="2000" data-aos-delay="500" data-aos-easing="ease-in-out">
+        </div>     
+       </dl>
+
+        <dt>2. Trendlines</dt>
+        <dd>Draw straight lines connecting significant highs or lows to highlight the market's directional bias and spot potential reversals.</dd>
+        <div class="computer-screen">
+          <img src="/static/assets/img/trend.png" alt="Laptop" class="laptop-img"   data-aos="fade-down" data-aos-duration="2000" data-aos-delay="500" data-aos-easing="ease-in-out">
+        </div>     
+       </dl>
+
+        <dt>3. Parallel Channels</dt>
+        <dd>Detect channels that contain price action, allowing you to gauge trend strength and predict breakouts or reversals when prices reach channel boundaries.</dd>
+        <div class="computer-screen">
+          <img src="/static/assets/img/parallel.png" alt="Laptop" class="laptop-img"   data-aos="fade-down" data-aos-duration="2000" data-aos-delay="500" data-aos-easing="ease-in-out">
+        </div>     
+       </dl>
+
+        <dt>4. Triangles</dt>
+        <dd>Recognize triangular formations where price ranges narrow over time, often signaling trend continuation or an impending breakout.</dd>
+        <div class="computer-screen">
+          <img src="/static/assets/img/traingle.png" alt="Laptop" class="laptop-img"   data-aos="fade-down" data-aos-duration="2000" data-aos-delay="500" data-aos-easing="ease-in-out">
+        </div>     
+       </dl>
+
+        <dt>5. Double Tops and Bottoms</dt>
+        <dd>Spot reversal patterns where the price tests a high or low level twice before changing direction—an indicator that a trend reversal might be underway.</dd>
+        <div class="computer-screen">
+          <img src="/static/assets/img/doublet.png" alt="Laptop" class="laptop-img"   data-aos="fade-down" data-aos-duration="2000" data-aos-delay="500" data-aos-easing="ease-in-out">
+        </div>     
+       </dl>
+
+        <dt>6. V-Shape</dt>
+        <dd>Detect rapid reversals marked by a steep decline followed by an equally steep recovery, often presenting a sharp trading opportunity.</dd>
+        <div class="computer-screen">
+          <img src="/static/assets/img/vshape.png" alt="Laptop" class="laptop-img"   data-aos="fade-down" data-aos-duration="2000" data-aos-delay="500" data-aos-easing="ease-in-out">
+        </div>     
+       </dl>
+
+        <dt>7. Inside Bars</dt>
+        <dd>Recognize consolidation patterns where the current bar’s range is completely within the previous bar’s range, often preceding significant moves.</dd>
+        <div class="computer-screen">
+          <img src="/static/assets/img/inside.png" alt="Laptop" class="laptop-img"   data-aos="fade-down" data-aos-duration="2000" data-aos-delay="500" data-aos-easing="ease-in-out">
+        </div>     
+       </dl>
+
+        <dt>8. Bollinger Bands</dt>
+        <dd>Visualize volatility with bands that expand and contract based on market fluctuations, helping you identify overbought or oversold conditions.</dd>
+        <div class="computer-screen">
+          <img src="/static/assets/img/boll.png" alt="Laptop" class="laptop-img"   data-aos="fade-down" data-aos-duration="2000" data-aos-delay="500" data-aos-easing="ease-in-out">
+        </div>     
+       </dl>
+
+        <dt>9. Morning and Evening Stars</dt>
+        <dd>Detect candlestick reversal patterns where the Morning Star signals a bullish reversal and the Evening Star indicates a bearish reversal.</dd>
+        <div class="computer-screen">
+          <img src="/static/assets/img/mstar.png" alt="Laptop" class="laptop-img"   data-aos="fade-down" data-aos-duration="2000" data-aos-delay="500" data-aos-easing="ease-in-out">
+        </div>     
+       </dl>
+      
+      <h2>Conclusion</h2>
+      <p>
+        The right information and tools can make all the difference in today's fast-paced, turbulent market. At Spurzee Technologies, our mission is to equip you with all the resources—from our extensive charting platform to free intraday trading tools and daily market insights—that you need to succeed in the Indian stock market. Experience a new level of clarity, accuracy, and trading success by beginning your journey with us today. Welcome to a more intelligent and perceptive approach to trading.
+      </p>
+    </div>
+    
+    <!-- Right Sidebar: Sticky Table with Links -->
+    <div class="right-sidebar">
+      <table>
+        <tr>
+          <td><a href="/beginersguide">beginers guide</a></td>
+        </tr>
+        <tr>
+          <td><a href="/optiontrading">option trading</a></td>
+        </tr>
+        <tr>
+          <td><a href="/Riskmanagement">Risk Management</a></td>
+        </tr>
+        <tr>
+            <td><a href="/intradaytradingtips">Intraday Trading Tips</a></td>
+          </tr>
+          <tr>
+            <td><a href="/optiontradingindia">Option Trading In India</a></td>
+          </tr>
+          <tr>
+            <td><a href="/technicalanalysis">Technical Analysis Tools</a></td>
+          </tr>
+          <tr>
+            <td><a href="/educationresorce">Stock Market Education</a></td>
+          </tr>
+
+          <tr>
+            <td><a href="/stocktradingpattern">stock trading patten</a></td>
+          </tr>
+          <tr>
+            <td><a href="/stocktradingpattern">Top trading Indicators</a></td>
+          </tr>
+          <tr>
+            <td><a href="/Discipline">Discipline</a></td>
+          </tr>
+      </table>
+      <button class="share-button" onclick="toggleShareOptions()">Share</button>
+      <div class="share-options" id="shareOptions">
+        <a href="#" onclick="shareOn('whatsapp')">WhatsApp</a>
+        <a href="#" onclick="shareOn('facebook')">Facebook</a>
+        <a href="#" onclick="shareOn('twitter')">Twitter (X)</a>
+      </div>
+    </div>
+  </div>
+
+
+  <style>
+
+    .computer-screen {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%; /* Full width */
+      max-width: 1200px; /* Increased max width */
+      margin: auto; /* Center it */
+      padding: 20px; /* Add some spacing */
+  }
+  
+  .laptop-img {
+      width: 100%; /* Responsive */
+      height: auto; /* Maintain aspect ratio */
+      max-width: 1000px; /* Increased max width */
+      max-height: 800px; /* Increased max height */
+      object-fit: contain; /* Ensure full visibility */
+  }
+  
+
+    :root {
+        --primary: #00a3ff;
+        --accent: #ff6b6b;
+    }
+
+    .footer {
+        background: linear-gradient(145deg, #0b1a30, #0a1423);
+        color: #fff;
+        padding: 60px 20px 30px;
+        font-family: 'Inter', sans-serif;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .footer:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    .footer-container {
+        max-width: 1300px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 40px;
+        padding-bottom: 50px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .footer-section h4 {
+        color: var(--primary);
+        margin-bottom: 25px;
+        font-size: 1.3rem;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    .footer-section h4:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 2px;
+        background: var(--accent);
+    }
+
+    .footer-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .footer-links li {
+        margin-bottom: 15px;
+        transform: translateX(0);
+        transition: all 0.3s ease;
+    }
+
+    .footer-links li:hover {
+        transform: translateX(10px);
+    }
+
+    .footer-links a {
+        color: #a8b2d1;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .footer-links a:hover {
+        color: var(--primary);
+    }
+
+    .footer-links a i {
+        color: var(--accent);
+        font-size: 0.8rem;
+    }
+
+    .social-section {
+        text-align: center;
+        padding: 30px 0;
+    }
+
+    .social-title {
+        color: var(--primary);
+        margin-bottom: 25px;
+        font-size: 1.4rem;
+    }
+
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .social-links a {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        color: #fff;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .social-links a:after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, var(--primary), var(--accent));
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+
+    .social-links a:hover:after {
+        opacity: 1;
+    }
+
+    .social-links a i {
+        position: relative;
+        z-index: 1;
+    }
+
+    .social-links a:hover {
+        transform: translateY(-5px) scale(1.1);
+    }
+
+    .help-section {
+        text-align: center;
+        padding: 40px 0;
+    }
+
+    .help-button {
+        background: linear-gradient(45deg, var(--primary), var(--accent));
+        color: #fff;
+        padding: 15px 40px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 20px rgba(0,163,255,0.2);
+    }
+
+    .help-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 25px rgba(0,163,255,0.3);
+    }
+
+    .footer-bottom {
+        text-align: center;
+        padding-top: 30px;
+        color: #8a99b5;
+        font-size: 0.9rem;
+    }
+
+    .pattern-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.05;
+        background: repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            var(--primary) 10px,
+            var(--primary) 20px
+        );
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+        .footer-container {
+            grid-template-columns: 1fr;
+            text-align: center;
+            gap: 40px;
+        }
+
+        .footer-section h4:after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .footer-links li:hover {
+            transform: translateX(0);
+        }
+
+        .footer-links a {
+            justify-content: center;
+        }
+    }
+
+    .breadcrumb-container {
+        width: 100%;
+        padding: 10px 20px;  /* Adjust padding as needed */
+      }
+      
+      .breadcrumb {
+        font-size: 0.9rem;
+        color: #fcf7f7;
+        text-align: left;
+      }
+        
+      .breadcrumb a {
+        color: var(--primary, #f4f4f8);
+        text-decoration: none;
+        font-size: 30px;
+      }
+        
+      .breadcrumb a:hover {
+        text-decoration: underline;
+      }
+      
+    
+</style>
+
+
+<footer class="footer">
+    <div class="pattern-overlay"></div>
+    
+    <div class="footer-container">
+      <div class="footer-section">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="/home"><i class="fas fa-chevron-right"></i>Home</a></li>
+          <li><a href="/aboutus"><i class="fas fa-chevron-right"></i>About Us</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i>Trading Academy</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i>Open Account</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i>Market Analysis</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Client Services</h4>
+        <ul class="footer-links">
+          <li><a href="#"><i class="fas fa-chevron-right"></i>Beginner Center</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i>Advanced Tools</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i>Institutional Solutions</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i>Partner Program</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i>Investor Portal</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i>Beginner Center</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i>Advanced Tools</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i>Institutional Solutions</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i>Partner Program</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i>Investor Portal</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Resources</h4>
+        <ul class="footer-links">
+            <li><a href="/beginersguide"><i class="fas fa-chevron-right"></i>beginers guide</a></li>
+            <li><a href="/educationresorce"><i class="fas fa-chevron-right"></i>education resorce</a></li>
+            <li><a href="/topindicators"><i class="fas fa-chevron-right"></i>top indicators</a></li>
+            <li><a href="/technicalanalysis"><i class="fas fa-chevron-right"></i>technical analysis</a></li>
+            <li><a href="/stocktradingpattern"><i class="fas fa-chevron-right"></i> stocktradingpattern</a></li>
+            <li><a href="/Riskmanagement"><i class="fas fa-chevron-right"></i> Riskmanagement</a></li>
+            <li><a href="/optiontradingindia"><i class="fas fa-chevron-right"></i>optiontradingindia</a></li>
+            <li><a href="/optiontrading"><i class="fas fa-chevron-right"></i>optiontrading</a></li>
+            <li><a href="/marketinsights"><i class="fas fa-chevron-right"></i> marketinsights</a></li>
+            <li><a href="/intradaytradingtips"><i class="fas fa-chevron-right"></i> intradaytradingtips</a></li>
+            <li><a href="/analysis"><i class="fas fa-chevron-right"></i> Technical Analysis</a></li>
+
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Connect With Us</h4>
+        <ul class="footer-links">
+            <li><a href="#"><i class="fas fa-phone"></i> +91 88613 44044</a></li>
+            <li><a href="#"><i class="fas fa-envelope"></i>admin@spurzeetechnologies.in</a></li>
+            <li><a href="https://www.google.com/maps/place/Spacio+workspace/@12.9449187,77.5658325,17z/data=!3m1!4b1!4m6!3m5!1s0x3bae1502dbeb7f31:0x2d5217972b05fc2b!8m2!3d12.9449135!4d77.5684074!16s%2Fg%2F11mpp1zx4h?entry=ttu&g_ep=EgoyMDI1MDIwNS4xIKXMDSoASAFQAw%3D%3D"><i class="fas fa-map-marker-alt"></i>Bengaluru Office</a></li>
+            <li><a href="https://wa.me/+918861344044?text=Hi%2C%20I%20need%20help"><i class="fas fa-comments"></i>Live Chat</a></li>
+            <li><a href="/contactus"><i class="fas fa-headset"></i>24/7 Support</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="social-section">
+      <h4 class="social-title">Follow Our Socials</h4>
+      <div class="social-links">
+        <a href="https://wa.me/+918861344044?text=Hi%2C%20I%20need%20help" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/spurzeetech?igsh=MW5ramcxdzdkNjZtYQ==" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com/@SpurzeeTechnologies" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.linkedin.com/company/spurzee-technologies/?originalSubdomain=in" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" target="_blank"><i class="fab fa-telegram"></i></a>
+        <a href="https://x.com/Spurzeetech" target="_blank"><i class="fab fa-twitter"></i></a>
+    </div>
+    </div>      
+
+    <div class="help-section">
+      <a href="/contactus" class="help-button">
+        <i class="fas fa-life-ring"></i>
+        Need Immediate Assistance?
+      </a>
+    </div>
+
+    <div class="footer-bottom">
+      <p>Trading Hub • 500 Wall Street • New York, NY 10005</p>
+      <p>© 2025 SpurzeeTechnologies LLC. All Rights Reserved | <a href="#" style="color: var(--primary);">Privacy Policy</a> | <a href="#" style="color: var(--primary);">Terms of Service</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleShareOptions() {
+      const shareOptions = document.getElementById("shareOptions");
+      shareOptions.style.display = shareOptions.style.display === "block" ? "none" : "block";
+    }
+    
+    function shareOn(platform) {
+      const pageUrl = encodeURIComponent(window.location.href);
+      let shareLink = "";
+      
+      if (platform === "whatsapp") {
+        shareLink = `https://api.whatsapp.com/send?text=${pageUrl}`;
+      } else if (platform === "facebook") {
+        shareLink = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
+      } else if (platform === "twitter") {
+        shareLink = `https://twitter.com/intent/tweet?url=${pageUrl}`;
+      }
+      
+      window.open(shareLink, '_blank');
+    }
+  </script>
+</body>
+</html>

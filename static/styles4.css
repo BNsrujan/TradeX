@@ -1,0 +1,232 @@
+/* General Reset */
+
+/* subpages of analysis */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+    font-size: 16px;
+}
+
+/* Container */
+.container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Header Styling */
+header {
+    background: #3d4d6a;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 4px 2px -2px gray;
+}
+
+header h1 {
+    margin-bottom: 10px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #96a155;
+}
+
+/* Main Content Styling */
+main {
+    padding: 20px 0;
+}
+
+section {
+    margin-bottom: 20px; /* Reduced space between sections */
+    padding: 20px; /* Added padding inside sections for better spacing */
+    border-radius: 8px; /* Optional: Rounded corners */
+    background-color: rgba(184, 211, 240, 0.02); /* Very light blue */
+    transition: background-color 0.3s ease-in-out; /* Smooth transition on hover */
+}
+
+section h2 {
+    color: #3d4d6a;
+    margin-bottom: 15px; /* Reduced space below headings */
+    border-bottom: 2px solid #3d4d6a;
+    padding-bottom: 10px;
+}
+
+section p {
+    margin-bottom: 15px; /* Reduced space below paragraphs */
+    line-height: 1.8;
+}
+
+section img {
+    width: 100%;
+    height: auto;
+    margin: 15px 0; /* Reduced space around images */
+    border: 2px solid #3d4d6a;
+    border-radius: 5px;
+}
+
+/* Pattern Sections Styling */
+.pattern-container {
+    background-color: #e9f4ff;
+    padding: 15px; /* Reduced padding inside container */
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px; /* Reduced space below pattern containers */
+    margin-left: auto; /* Center the container horizontally */
+    margin-right: auto; /* Center the container horizontally */
+    width: 90%; /* Adjust the width to leave space on the sides */
+    max-width: 1200px; /* Limit the maximum width for larger screens */
+}
+
+.pattern-container h3 {
+    color: #3d4d6a;
+    margin-bottom: 10px; /* Reduced space below headings */
+    border-bottom: 2px solid #3d4d6a;
+    padding-bottom: 8px;
+}
+
+.pattern-container p {
+    margin-bottom: 10px; /* Reduced space below paragraphs */
+}
+
+/* List Styling */
+ul {
+    margin-left: 20px;
+    margin-bottom: 15px; /* Reduced space below lists */
+}
+
+ul li {
+    margin-bottom: 8px; /* Reduced space between list items */
+}
+
+/* Footer Styling */
+footer {
+    background: #3d4d6a;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+    bottom: 0;
+    box-shadow: 0 -4px 2px -2px gray;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 10px;
+    }
+
+    nav ul li {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    footer {
+        position: static;
+    }
+}
+
+/* Image Hover Effect */
+.image-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Optional: Add a box-shadow for a more pronounced effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.image-hover:hover {
+    transform: scale(1.05); /* Slightly increase size */
+    /* Optional: Enhance box-shadow on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Centered Text Styling */
+.center {
+    text-align: center;
+    color: #3d4d6a;
+}
+
+/* General Menu Styling */
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center; /* Center the menu items */
+    background-color: #3d4d6a; /* Background color of the menu */
+}
+
+nav ul li {
+    margin: 0 15px; /* Space between menu items */
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff; /* Text color */
+    font-weight: bold;
+    padding: 5px 5px; /* Space around text */
+    display: block;
+    transition: transform 0.5s ease, box-shadow 0.5s ease; /* Smooth transition */
+}
+
+/* Hover Effect */
+nav ul li a:hover {
+    transform: translateY(-2px); /* Move the item up */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for lift effect */
+    background-color: #2b5480; /* Optional: Change background color on hover */
+}
+
+
+
+
+.header-logo {
+    position: absolute;
+    top: 20px; /* Adjust based on padding and desired position */
+    left: 20px; /* Adjust based on padding and desired position */
+}
+
+.header-logo img {
+    height: 80px; /* Adjust based on your logo size */
+    width: auto; /* Maintain aspect ratio */
+}  
+
+
+
+.styled-heading {
+    color: white !important; /* Make the text white */
+    font-family: 'Arial', sans-serif; /* Use a clean, professional font */
+    font-weight: 700; /* Make it bold */
+    font-size: 2.5rem; /* Adjust the font size */
+    text-align: center; /* Center the text */
+    text-transform: uppercase; /* Make the text uppercase for emphasis */
+    letter-spacing: 2px; /* Add spacing between letters for a modern look */
+    margin-top: 20px;
+}

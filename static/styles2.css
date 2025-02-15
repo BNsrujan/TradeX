@@ -1,0 +1,907 @@
+/* my page */
+
+/*updated page stylesheet*/
+
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+}
+
+/* Navbar Styles */
+.navbar {
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #f8f9fa 100%
+  ); /* Gradient background for depth */
+  border-bottom: 2px solid #e0e0e0; /* Light border for separation */
+  padding: 20px 0; /* Enhanced padding for better spacing */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Deep shadow for a floating effect */
+  position: relative; /* Ensure navbar is positioned correctly for absolute children */
+  z-index: 1000; /* Ensure it stays on top */
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  color: #333;
+  text-decoration: none;
+  gap: 10px;
+  transition: transform 0.3s ease; /* Smooth scale transition */
+}
+
+.navbar-brand img {
+  height: 90px; /* Adjust logo size */
+  width: auto;
+  transition: transform 0.3s ease; /* Smooth scale transition */
+}
+
+.navbar-brand:hover img {
+  transform: scale(1.1); /* Slightly scale up on hover */
+}
+
+.navbar-brand span {
+  font-size: 1.6rem; /* Adjust font size */
+  font-weight: 700; /* Bold text */
+  margin-left: 0.75rem; /* Space between logo and text */
+  color: #333;
+  line-height: 1.2; /* Improve readability */
+}
+
+.navbar-toggler {
+  border: none; /* Remove default border */
+  background: none;
+  padding: 0;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,..."); /* Custom icon or SVG */
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem; /* Space between nav items */
+}
+
+/* Menu Styling */
+.navbar-nav .nav-link {
+  color: #333; /* Default text color */
+  text-decoration: none;
+  font-size: 1rem; /* Font size */
+  font-weight: 500; /* Font weight */
+  position: relative;
+  padding-bottom: 5px;
+  transition: color 0.3s ease-in-out; /* Smooth color transition */
+}
+
+.navbar-nav .nav-link::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background-color: #007bff; /* Professional blue underline color */
+  left: 0;
+  bottom: 0;
+  transition: width 0.4s ease; /* Smooth underline expansion */
+}
+
+.navbar-nav .nav-link:hover::after {
+  width: 100%; /* Full width underline on hover */
+}
+
+.navbar-nav .nav-link:hover {
+  color: #007bff; /* Highlight color when hovering over menu */
+}
+
+/* Login/Register Button */
+.btn-outline-primary {
+  border-color: #007bff; /* Professional blue border */
+  color: #007bff; /* Professional blue text color */
+  font-weight: 600; /* Semi-bold text for emphasis */
+  text-transform: uppercase; /* Uppercase text for a modern look */
+  letter-spacing: 0.5px; /* Slightly increased letter spacing */
+  padding: 0.75rem 1.5rem; /* Generous padding for a prominent look */
+  border-radius: 50px; /* Rounded button corners for a sleek appearance */
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease,
+    transform 0.3s ease; /* Smooth transitions */
+}
+
+.btn-outline-primary:hover {
+  background-color: #007bff; /* Blue background on hover */
+  color: #ffffff; /* White text color on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow for a floating effect */
+  transform: translateY(-4px); /* Slight lift effect on hover */
+}
+
+.btn-outline-primary:focus,
+.btn-outline-primary:active {
+  background-color: #0056b3; /* Darker blue for focus and active states */
+  border-color: #0056b3; /* Darker blue border */
+  color: #ffffff; /* White text color */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Consistent shadow */
+  outline: none; /* Remove default focus outline */
+}
+
+/* Main Buttons */
+/* Get Started Button */
+.btn-outline-dark {
+  border-color: #007bff; /* Professional blue border */
+  color: #007bff; /* Professional blue text color */
+  font-weight: 600; /* Semi-bold text for emphasis */
+  text-transform: uppercase; /* Uppercase text for a modern look */
+  letter-spacing: 0.5px; /* Slightly increased letter spacing */
+  padding: 0.75rem 1.5rem; /* Generous padding for a prominent look */
+  border-radius: 50px; /* Rounded button corners for a sleek appearance */
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease,
+    transform 0.3s ease; /* Smooth transitions */
+  position: relative; /* Positioning for the arrow effect */
+  outline: none; /* Remove default outline */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow for a floating effect */
+}
+
+/* Button Arrow Effect */
+.btn-outline-dark::after {
+  content: "→"; /* Arrow symbol */
+  position: absolute;
+  right: 15px; /* Adjust positioning as needed */
+  font-size: 1.5rem; /* Increase arrow size */
+  color: #ffffff; /* White arrow color on hover */
+  opacity: 0; /* Hide arrow by default */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+}
+
+/* Button Hover Effect */
+.btn-outline-dark:hover {
+  background-color: #007bff; /* Blue background on hover */
+  color: #ffffff; /* White text color on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Enhanced shadow for a floating effect */
+  transform: translateY(-4px); /* Slight lift effect on hover */
+}
+
+/* Arrow Visibility on Hover */
+.btn-outline-dark:hover::after {
+  opacity: 1; /* Show arrow on hover */
+  transform: translateX(10px); /* Slightly move arrow to the right */
+}
+
+/* Focus and Active States */
+.btn-outline-dark:focus,
+.btn-outline-dark:active {
+  background-color: #0056b3; /* Darker blue for focus and active states */
+  border-color: #0056b3; /* Darker blue border */
+  color: #ffffff; /* White text color */
+  box-shadow: 0 6px 12px #6ae0e033; /* Consistent shadow */
+  outline: none; /* Remove default focus outline */
+}
+
+/* Custom Table */
+section {
+  padding-bottom: 10px;
+  margin-bottom: 0;
+}
+
+.custom-table th,
+.custom-table td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.custom-table thead {
+  background-color: #e9ecef;
+}
+
+.custom-table tbody tr {
+  transition: background-color 0.3s ease;
+}
+
+.custom-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Market Button Active */
+.tab-buttons {
+  background-color: #f8f9fa;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.25rem;
+  margin: 0.2rem;
+  cursor: pointer;
+}
+
+.tab-buttons.active {
+  background-color: #dee2e6;
+  border: 1px solid #ced4da;
+}
+
+/* Footer */
+footer {
+  background-color: #343a40;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .navbar-brand span {
+    font-size: 1.5rem;
+  }
+
+  .custom-table {
+    font-size: 0.9rem;
+  }
+
+  .tab-buttons {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+/* above padding for the card */
+.container-xxl {
+  padding: 30px 15px;
+}
+
+.card-container {
+  position: relative;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Card Styles CARD SIZE ALOS*/
+.card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); /* Increased shadow */
+  position: relative;
+  width: 300px; /* Adjust width as needed */
+  height: 150px; /* Adjust height as needed */
+  transform: skew(-20deg); /* Parallelogram effect */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0.3s ease;
+}
+
+/* Increase shadow on hover */
+.card:hover {
+  z-index: 2;
+  transform: skew(-20deg) scale(1.05); /* Increase size on hover */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); /* Increased shadow on hover */
+}
+
+/* Adjust other cards on hover */
+.card-container:hover .card:not(:hover) {
+  transform: skew(-20deg) scale(0.95); /* Decrease size of non-hovered cards */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); /* Shadow on non-hovered cards */
+}
+
+.card-body {
+  padding: 5.5rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transform: skew(20deg); /* Reverse skew to align content */
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.card-body h2 {
+  font-size: 2rem;
+  margin-bottom: 0rem;
+}
+
+.card-body small {
+  font-size: 1.1rem;
+}
+
+.text-success {
+  color: #28a745;
+}
+
+.text-danger {
+  color: #dc3545;
+}
+
+.fs-3 {
+  font-size: 1.5rem;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.mb-3 {
+  margin-bottom: 1rem;
+}
+
+.text-decoration-none {
+  text-decoration: none;
+}
+
+@keyframes spinSideways {
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(180deg); /* Rotate halfway */
+  }
+  100% {
+    transform: rotateY(360deg); /* Complete the rotation */
+  }
+}
+
+/* newww added after */
+
+/* Background for the section with shadow-like effect */
+.shadow-bg {
+  background-color: #f7f9fc; /* Light greyish-blue background for a clean, professional look */
+  padding: 40px 0; /* Padding around the section */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  border-radius: 10px; /* Rounded corners for smooth appearance */
+}
+
+/* Card container alignment */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(320px, 1fr)
+  ); /* Responsive grid for cards */
+  gap: 0px; /* Space between the cards */
+}
+
+/* Card shadow and padding */
+.card {
+  padding: 10px;
+  background-color: #ffffff; /* White background for cards */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Light card shadow */
+  margin-bottom: 0px;
+}
+
+/* Typography and spacing */
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* Styling for icons and text inside the card */
+.text-success,
+.text-danger {
+  font-weight: 600;
+}
+
+/* Responsive design */
+@media (max-width: 767px) {
+  .shadow-bg {
+    padding: 20px 0; /* Adjust padding for smaller screens */
+  }
+}
+
+.navbar-brand:hover.rotating-logo {
+  transition: transform 0.3s ease, transform 0.3s ease; /* Smooth transformation */
+  width: 300px; /* Adjust this value to increase or decrease the size */
+  height: auto; /* Keeps the image's aspect ratio */
+}
+
+.rotating-logo:hover {
+  animation: spinSideways 1.5s ease-in-out; /* Apply animation on hover */
+  transform: scale(3); /* Increase size on hover */
+  transform-style: preserve-3d; /* Ensure 3D effects are applied */
+  perspective: 1000px; /* Provide depth for the 3D effect */
+}
+
+/* get started */
+
+/* Increase the size of the span element */
+.navbar-brand .fs-4 {
+  font-size: 2.5rem; /* Adjust size as needed */
+  font-weight: 700; /* Make the text bold */
+  color: #333; /* Adjust text color */
+  transition: transform 0.5s ease; /* Smooth transition for scaling */
+}
+
+/* Image rotation effect */
+.navbar-brand img {
+  transition: transform 0.5s ease; /* Smooth transition for rotation */
+}
+
+/* Define the pendulum swing animation */
+@keyframes pendulum {
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(180deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+
+/* Apply animation on hover */
+.navbar-brand:hover img {
+  animation: pendulum 1s ease forwards; /* Apply the pendulum animation */
+}
+
+/* Ensure text scaling on hover */
+.navbar-brand:hover .fs-4 {
+  transform: scale(1.1); /* Slightly increase text size */
+}
+
+/* Section Background */
+#intro {
+  background: linear-gradient(135deg, #f0f4f8 0%, #ffffff 100%);
+  padding: 60px 0;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading Styles */
+#intro h1 {
+  font-size: 2.5rem; /* Larger Heading */
+  color: #333333;
+  letter-spacing: 1.5px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  background: black; /* Gradient text effect */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; /* Ensures the gradient is applied to the text */
+}
+
+/* Paragraph Styles */
+#intro p {
+  font-size: 1.3rem; /* Increased font size for paragraph */
+  color: #555555;
+  line-height: 1.8;
+  font-weight: 500;
+  margin-bottom: 25px;
+  background-color: #f7f9fc;
+  padding: 15px;
+  border-left: 5px solid #007bff;
+  border-radius: 5px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Highlights (Track your stock) */
+#intro .fs-2 {
+  font-size: 2.5;
+  color: black;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* List Icon and Text Styles */
+#intro i {
+  color: #007bff;
+}
+
+#intro p.text-secondary {
+  color: #444;
+  font-size: 1.1rem;
+}
+
+/* Get Started Button Styling */
+.btn-outline-dark {
+  position: relative;
+  padding: 12px 30px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border: 2px solid #007bff;
+  color: #007bff;
+  background-color: transparent;
+  transition: all 0.3s ease-in-out;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+/* Button Hover Effect */
+.btn-outline-dark:hover {
+  background-color: #007bff;
+  color: #ffffff;
+  box-shadow: 0 10px 20px rgba(0, 123, 255, 0.5);
+  transform: translateY(-4px);
+}
+
+/* Arrow Effect on Hover */
+.btn-outline-dark::after {
+  content: "→";
+  position: absolute;
+  right: 15px;
+  font-size: 1.5rem;
+  color: #ffffff;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.btn-outline-dark:hover::after {
+  opacity: 1;
+  transform: translateX(10px);
+}
+
+/* Chart Area Styling */
+#chart {
+  border-radius: 0px;
+  background-color: #f0f4f8;
+}
+
+/* alighn the chart */
+
+/* Custom CSS */
+#chart-section {
+  width: 100%;
+  padding: 30px 0;
+  margin: 10;
+  margin-bottom: 0;
+}
+
+.container {
+  padding: 10;
+}
+
+#chart-container {
+  position: relative;
+  height: auto; /* Remove fixed height */
+  width: 100%;
+  overflow: hidden; /* Optional: Hide overflow if needed */
+}
+
+#chart-container img {
+  width: 100%;
+  height: auto;
+  max-height: 800px; /* Ensure image doesn't exceed 800px in height */
+  object-fit: cover; /* Ensure it covers the container properly */
+}
+
+#chart {
+  width: 100%;
+  height: 100%;
+}
+
+#chart-section p {
+  font-size: 1.4rem; /* Increased font size for paragraph */
+  color: #555555;
+  line-height: 1.6;
+  font-weight: 500;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  background-color: #f7f9fc;
+  padding: 15px;
+  border-left: 5px solid #007bff;
+  border-radius: 5px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  animation: fadeInUp 2s ease-out; /* Add animation */
+}
+/* Increase the size of the h1 */
+#chart-section h1 {
+  font-size: 2.5rem; /* Increase font size for h1 */
+  margin-bottom: 20px; /* Add more space below the h1 */
+  font-family: "Roboto", sans-serif; /* Keep a professional font */
+  letter-spacing: 1px; /* Adjust letter spacing for better readability */
+  animation: fadeInUp 2s ease-out; /* Add animation */
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Increase the size of the button */
+#chart-section a.btn {
+  margin-top: 25px; /* Space above the button */
+  font-size: 1.25rem; /* Increase font size for the button */
+  padding-left: 25px; /* Increase padding for more space inside the button */
+  padding-right: 25px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  position: relative; /* Required for positioning animation */
+  animation: float 3s ease-in-out infinite; /* Apply animation */
+}
+
+/* Keyframes for floating animation */
+@keyframes float {
+  0% {
+    transform: translateY(0); /* Initial position */
+  }
+  50% {
+    transform: translateY(-10px); /* Move up */
+  }
+  100% {
+    transform: translateY(0); /* Return to initial position */
+  }
+}
+
+/* Styling for the Stock Market Chart h2 */
+h2.text-center.mb-4 {
+  font-family: "Helvetica Neue", Arial, sans-serif; /* Professional, modern font */
+  font-size: 1.5rem; /* Slightly larger size to stand out */
+  font-weight: 700; /* Bold font for emphasis */
+  color: #2c3e50; /* Dark blue-gray color for modern appeal */
+  text-transform: uppercase; /* Makes the text all uppercase for a formal look */
+  letter-spacing: 1px; /* Adds spacing between letters for readability */
+  margin-bottom: 0px; /* Adds some space below the heading */
+}
+
+/*Reducing the padding */
+
+/* Reduce the padding and margin around the section */
+.c {
+  padding: 0 !important; /* Remove padding from the section */
+  margin: 0 !important; /* Remove margin from the section */
+}
+
+/* Reduce the padding and margin of the card container */
+.card-container {
+  padding: 0 !important; /* Remove padding inside card container */
+  margin: 0 !important; /* Remove margin inside card container */
+}
+
+/* Reduce the size of the cards */
+.card {
+  padding: 10px !important; /* Decrease padding inside each card */
+  margin-top: 0px;
+  margin-bottom: 0px !important; /* Reduce space between cards */
+  max-width: 300px; /* Set a maximum width for cards */
+}
+
+/* Adjust the card body size and spacing */
+.card-body {
+  padding: 20px !important; /* Reduce padding inside card body */
+}
+
+/* Reduce the size of the headings and text inside the cards */
+.card-title {
+  font-size: 1.2rem !important; /* Smaller font for card title */
+  margin-bottom: 1.5rem !important; /* Reduce margin */
+}
+
+.card h2 {
+  font-size: 1.5rem !important; /* Reduce the size of the number (e.g., 19,511.05) */
+}
+
+.card small {
+  font-size: 0.85rem !important; /* Reduce the size of the small text */
+}
+
+/* Reduce the size of the icon in the card */
+.bi-graph-up {
+  font-size: 2rem !important; /* Make the graph icon smaller */
+}
+
+/* Reduce the spacing between card header and content */
+.d-flex.justify-content-between {
+  margin-bottom: 0.1rem !important; /* Reduce space between heading and content */
+}
+
+/* stype for p*/
+
+/* Targeting <p> tag within the .row class */
+.row p {
+  color: #007bff; /* Professional blue color */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Professional font */
+  font-size: 1rem; /* Adjust font size if needed */
+  margin: 0; /* Remove default margin */
+  padding: 0;
+  padding-left: 10px; /* Remove default padding */
+}
+
+/* footer*/
+.footer-section {
+  text-align: center; /* Center the content */
+}
+
+.footer-links {
+  list-style-type: none; /* Remove bullet points */
+  padding: 0;
+  margin: 0;
+  display: flex; /* Use flexbox to align items horizontally */
+  justify-content: center; /* Center the links horizontally */
+}
+
+.footer-links li {
+  margin: 0 15px; /* Add space between the list items */
+}
+
+.footer-links li a {
+  text-decoration: none; /* Remove underline from links */
+  color: #ebd9d9; /* Set the link color */
+  font-size: 16px;
+}
+
+.footer-links li a:hover {
+  color: #007bff; /* Add hover effect for links */
+}
+
+/* Reduced Height for Contact Section */
+.contact {
+  background: linear-gradient(135deg, #fafdfd, #f8f9fa);
+  padding: 20px 0; /* Reduced padding for top and bottom */
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: -5px; /* Reduced bottom margin */
+}
+
+.section-title h2 {
+  font-size: 24px; /* Reduced font size */
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: -5px;
+  margin-top: 0px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  animation: fadeInDown 1s ease-in-out;
+}
+
+.section-title p {
+  font-size: 14px; /* Reduced font size */
+  color: #7f8c8d;
+  margin-bottom: 0px;
+  animation: fadeInDown 1.2s ease-in-out;
+}
+
+.php-email-form {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 30px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.php-email-form:hover {
+  transform: translateY(-5px); /* Slight hover effect */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.form-control {
+  background-color: #f9f9f9;
+  border: 2px solid #dfe3e8;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+  margin-bottom: 1px; /* Reduced margin between inputs */
+}
+
+.form-control:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.2);
+}
+
+button[type="submit"] {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px; /* Reduced padding */
+  font-size: 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  margin-top: 10px; /* Reduced margin top */
+}
+
+/* Minimize Space Below the Submit Button */
+button[type="submit"]:hover {
+  background-color: #2980b9;
+  transform: scale(1.05);
+}
+
+/* Minimized Space Below Messages */
+.php-email-form .loading,
+.php-email-form .error-message,
+.php-email-form .sent-message {
+  margin-top: 5px; /* Reduced margin-top */
+  font-size: 14px;
+  color: #555;
+}
+
+/* Hide messages unless active */
+.loading,
+.error-message,
+.sent-message {
+  display: none;
+}
+
+/* Placeholder Animation */
+.form-control::placeholder {
+  color: #888;
+  font-size: 14px;
+  transition: all 0.3s ease-in-out;
+}
+
+.form-control:focus::placeholder {
+  transform: translateY(-10px);
+  opacity: 0;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* end of contact us*/
+
+/* Align the text in the "Get Started" section to the left */
+#chart-section .col-md-6 {
+  text-align: left !important;
+}
+
+/* get dtrated button positoning */
+
+#chart-section .btn {
+  position: relative;
+  right: 10px; /* Move to the right */
+  top: 0px;
+}
+
+/* Optional: Style the heading and paragraph */
+#main-heading {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#intro-paragraph {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* Optional: Style the button */
+#chart-section .btn {
+  background-color: #f4f7f8;
+  color: #007bff;
+  border-color: #007bff;
+}
+
+#chart-section .btn:hover {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}

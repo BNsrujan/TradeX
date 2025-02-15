@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional FAQ Section</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles2.css">
+
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        /* Header section with logo and company name */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #2c3e50; /* Professional dark background */
+            color: white;
+        }
+        .header img {
+            height: 80px; /* Adjust logo size */
+        }
+        .header span {
+            font-size: 30px;
+            font-weight: bold;
+        }
+        .header span small {
+            display: block;
+            font-size: 30px;
+        }
+
+        /* Center FAQ title */
+        .section-title h2 {
+            font-size: 36px;
+            font-weight: 700;
+            text-align: center;
+            margin: 40px 0;
+            color: #2c3e50;
+        }
+        
+        /* Accordion styles */
+        .accordion-button {
+            background-color: #2c3e50; /* Professional dark blue */
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 10px;
+            text-align: left;
+            width: 100%;
+            outline: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        .accordion-button:hover,
+        .accordion-button:focus {
+            background-color: #34495e;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .accordion-button.active {
+            background-color: #1abc9c;
+        }
+        .accordion-content {
+            padding: 0;
+            background-color: #ecf0f1;
+            overflow: hidden;
+            height: 0;
+            transition: height 0.4s ease, padding 0.4s ease;
+            border: 1px solid #d0d0d0;
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+        }
+        .accordion-content.open {
+            padding: 10px 20px;
+            height: auto;
+        }
+        .accordion-content p {
+            margin: 0;
+            padding: 10px 0;
+            color: #2c3e50;
+        }
+        .accordion-item {
+            margin-bottom: 20px; /* Space between each accordion */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+        }
+
+        /* Centering content */
+        section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 0 20px;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+        
+        .company-name {
+            color: white;
+        }
+        
+    </style>
+</head>
+<body>
+
+<!-- Header section with logo and company name -->
+<header class="header">
+<a href="/home">
+    <div>
+        <img src="/static/assets/img/logo.png" alt="Spurzee Logo">
+        <span class="company-name">Spurzee Technologies</span>
+    </div>
+</a>
+</header>
+
+<section id="faq" class="about section">
+    <div class="container">
+        <!-- Section Title -->
+        <div class="section-title">
+            <h2>Frequently Asked Questions</h2>
+        </div>
+
+        <!-- FAQ Accordion -->
+        <div>
+            <div class="accordion-item">
+                <button class="accordion-button">Mission</button>
+                <div class="accordion-content">
+                    <p>Our mission is to empower traders through a free, user-friendly platform that enhances understanding of essential trading concepts and facilitates informed decision-making.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-button">End Goal</button>
+                <div class="accordion-content">
+                    <p>Our goal is to equip traders with the knowledge and skills for confident trading decisions.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-button">Values</button>
+                <div class="accordion-content">
+                    <p>Our values center on integrity, transparency, and empowerment.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-button">Why We Exist</button>
+                <div class="accordion-content">
+                    <p>We exist to empower traders through comprehensive resources and tools.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-button">Services</button>
+                <div class="accordion-content">
+                    <p>We provide comprehensive resources and user-friendly tools to enhance traders' understanding.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer section with rights reserved text -->
+<footer>
+    <p>&copy; 2024 Spurzee Technologies. All rights reserved.</p>
+</footer>
+
+<script>
+    const accordions = document.querySelectorAll('.accordion-button');
+
+    accordions.forEach(accordion => {
+        accordion.addEventListener('click', function() {
+            this.classList.toggle('active');
+
+            const content = this.nextElementSibling;
+            if (content.style.height === '0px' || !content.style.height) {
+                content.style.height = content.scrollHeight + 'px';
+                content.classList.add('open');
+            } else {
+                content.style.height = '0px';
+                content.classList.remove('open');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

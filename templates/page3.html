@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support and Resistance Tutorial</title>
+    <link rel="stylesheet" href="styles1.css"> <!-- Link to your CSS file -->
+    <!-- AOS Library -->
+    <head>
+        <!-- AOS Library CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    
+        <!-- Your CSS file -->
+    
+        <!-- AOS Library JS -->
+        <link href="/static/assets/css/main.css" rel="stylesheet">
+        <link rel="stylesheet" href="/static/styles4.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    </head>
+    
+<body>
+    
+    <header data-aos="fade-down">
+        <div class="header-logo">
+            <a href="/home"> <img src="/static/assets/img/logo.png" alt="Logo"></a>
+        </div>
+        <div class="container">
+
+            <h1 class="styled-heading">Double top and Double bottm</h1>
+            
+        </div>
+    </header>
+    <main>
+
+
+            <!-- Double Top and Double Bottom -->
+            <section id="doubletop" data-aos="fade-up">
+                <div class="pattern-container">
+                    <h3>Double Top </h3>
+                    <img src="static/assets/img/DoubleTop.png" alt="Trading Strategies" class="image-hover" style="width: 50%; height: auto; margin-bottom: 15px; border: 2px solid #ddd; border-radius: 5px; display: block; margin-left: auto; margin-right: auto;">
+
+                    <p><strong>Description:</strong></p>
+                    <ul>
+                        <li><strong>Double Top:</strong>
+                            Double Tops are bearish reversal patterns often seen in stock charts, signaling a potential downward trend after hitting a peak twice.</li>
+                        <li>For example, if a stock like Apple reaches $150 twice but fails to break above it, forming a "double top," traders might anticipate a drop in price once the stock breaks below the support level, say $140. This indicates weakening bullish momentum and the potential start of a bearish trend.</li>    
+                    </ul>
+                    <p><strong>Impact on Price:</strong> After breaking the support (double top) or resistance (double bottom), the price tends to continue in the breakout direction.</p>
+                </div>
+            </section>
+
+             <!-- Double Top and Double Bottom -->
+             <section id="doubletop" data-aos="fade-up">
+                <div class="pattern-container">
+                    <h3> Double Bottom</h3>
+                    <img src="static/assets/img/DoubleBottom.png" alt="Trading Strategies" class="image-hover" style="width: 50%; height: auto; margin-bottom: 15px; border: 2px solid #ddd; border-radius: 5px; display: block; margin-left: auto; margin-right: auto;">
+
+                    <p><strong>Description:</strong></p>
+                    <ul>
+                        <li><strong>Double Bottom:</strong> , on the other hand, are bullish reversal patterns that occur when a stock hits a low point twice, indicating strong support.</li>
+                    <li>example is seen in a company like Tesla, where its price drops to $600 twice, but a breakout above a resistance level at $650 suggests a strong recovery and the start of a new bullish trend. This pattern is often used to identify buying opportunities as the market sentiment shifts upward.</li>    
+                    </ul>
+                    <p><strong>Impact on Price:</strong> After breaking the support (double top) or resistance (double bottom), the price tends to continue in the breakout direction.</p>
+                </div>
+            </section>
+
+
+</main>
+
+<footer>
+    <div class="container" data-aos="fade-down">
+        <p>&copy; 2024 Copyright SpurzeeTechnologies. All rights reserved.</p>
+    </div>
+</footer>
+
+
+
+
+<script>
+    // Initialize AOS
+    AOS.init({
+        duration: 500, // Animation duration in milliseconds
+        offset: 50,    // Offset (in px) from the original trigger point
+        easing: 'ease-in-out', // Animation easing
+        once: true      // Whether animation should happen only once
+    });
+</script>
+
+
+
+
+
+</body>
+</html>
